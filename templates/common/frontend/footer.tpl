@@ -57,7 +57,9 @@
 					{$alternatePageHeader}
 				{else}
 					<a href="{$homeUrl}" class="is_img" rel="home">
-						<img src="{$baseUrl}/templates/images/structure/logo.png" alt="{$applicationName|escape}" title="{$applicationName|escape}" width="180" height="90" />
+						{* hack: show Quest logo in site footer *}
+						{*<img src="{$baseUrl}/templates/images/structure/logo.png" alt="{$applicationName|escape}" title="{$applicationName|escape}" width="180" height="90" />*}
+						<img src="{$baseUrl}/public/journals/1/pageHeaderLogoImage_en_US.png" alt="{$applicationName|escape}" title="{$applicationName|escape}" width="180" height="90" />
 					</a>
 				{/if}
 			</div>
