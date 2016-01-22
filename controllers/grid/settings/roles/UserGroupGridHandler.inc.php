@@ -59,8 +59,8 @@ class UserGroupGridHandler extends GridHandler {
 	 * @copydoc PKPHandler::authorize()
 	 */
 	function authorize($request, &$args, $roleAssignments) {
-		import('lib.pkp.classes.security.authorization.PkpContextAccessPolicy');
-		$this->addPolicy(new PkpContextAccessPolicy($request, $roleAssignments));
+		import('lib.pkp.classes.security.authorization.ContextAccessPolicy');
+		$this->addPolicy(new ContextAccessPolicy($request, $roleAssignments));
 
 		$operation = $request->getRequestedOp();
 		$workflowStageRequiredOps = array('assignStage', 'unassignStage');
@@ -105,7 +105,6 @@ class UserGroupGridHandler extends GridHandler {
 
 		// Basic grid configuration.
 		$this->setTitle('grid.roles.currentRoles');
-		$this->setInstructions('settings.roles.gridDescription');
 
 		// Add grid-level actions.
 		$router = $request->getRouter();

@@ -192,7 +192,7 @@
 	<message key="common.preview">Preview</message>
 	<message key="common.publisher">Publisher</message>
 	<message key="common.quality">Quality</message>
-	<message key="common.queue.long.active">Active</message>
+	<message key="common.queue.long.active">All Active</message>
 	<message key="common.re">Re:</message>
 	<message key="common.readMore">Read More</message>
 	<message key="common.readMoreWithTitle">Read more about {$title}</message>
@@ -242,7 +242,6 @@
 	<message key="common.uploadFailed">The file could not be uploaded or revised.</message>
 	<message key="common.fileUpload.maxFileSizeStatus"><![CDATA[This server allows a file size upload maximum of {$fileSize}.  If required, please contact <a href="mailto:{$supportEmail}">{$supportName}</a> for assistance.]]></message>
 	<message key="common.invalidFileType">No file uploaded or invalid file type!</message>
-	<message key="common.pageHeader.altText">Page Header</message>
 	<message key="common.homepageImage.altText">Homepage Image</message>
 	<message key="common.up">Up</message>
 	<message key="common.url">URL</message>
@@ -316,8 +315,6 @@
 	<message key="form.invalidImage">An invalid image was uploaded. Accepted formats are .png, .gif, or .jpg.</message>
 	<message key="help.contents">Contents</message>
 	<message key="help.help">Help</message>
-	<message key="help.toggleInlineHelpOn">Help On</message>
-	<message key="help.toggleInlineHelpOff">Help Off</message>
 	<message key="help.helpIndex">Help Index</message>
 	<message key="help.matchesFound">{$matches} matches found</message>
 	<message key="help.noMatchingTopics">No matching help topics were found.</message>
@@ -383,8 +380,8 @@
 	<message key="navigation.home">Home</message>
 	<message key="navigation.infoForReaders">For Readers</message>
 	<message key="navigation.infoForReaders.long">Information For Readers</message>
-	<message key="navigation.items">{$from} - {$to} of {$total} Items</message>
-	<message key="navigation.items.shownTotal">{$shown} of {$total} Items</message>
+	<message key="navigation.items">{$from} - {$to} of {$total} items</message>
+	<message key="navigation.items.shownTotal">{$shown} of {$total} items</message>
 	<message key="navigation.login">Login</message>
 	<message key="navigation.nextPage"><![CDATA[&gt;&gt;]]></message>
 	<message key="navigation.nextStep">Next Step</message>

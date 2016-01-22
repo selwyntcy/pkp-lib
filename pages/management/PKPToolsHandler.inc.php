@@ -1,13 +1,13 @@
 <?php
 
 /**
- * @file pages/management/ToolsHandler.inc.php
+ * @file pages/management/PKPToolsHandler.inc.php
  *
  * Copyright (c) 2013-2015 Simon Fraser University Library
  * Copyright (c) 2003-2015 John Willinsky
  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
  *
- * @class ToolsHandler
+ * @class PKPToolsHandler
  * @ingroup pages_management
  *
  * @brief Handle requests for Tool pages.
@@ -18,15 +18,15 @@ import('lib.pkp.pages.management.ManagementHandler');
 
 define('IMPORTEXPORT_PLUGIN_CATEGORY', 'importexport');
 
-class ToolsHandler extends ManagementHandler {
+class PKPToolsHandler extends ManagementHandler {
 	/**
 	 * Constructor.
 	 */
-	function ToolsHandler() {
+	function PKPToolsHandler() {
 		parent::Handler();
 		$this->addRoleAssignment(
 			ROLE_ID_MANAGER,
-			array('tools', 'importexport')
+			array('tools', 'statistics', 'importexport')
 		);
 	}
 
@@ -246,7 +246,7 @@ class ToolsHandler extends ManagementHandler {
 
 				// Give a chance for subclasses to set the row values.
 				if ($returner = $this->getReportRowValue($key, $record)) {
-					$row = $returner;
+					$row[] = $returner;
 					continue;
 				}
 

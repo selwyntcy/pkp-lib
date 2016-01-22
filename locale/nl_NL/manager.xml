@@ -147,7 +147,6 @@
 	<message key="manager.setup.layout.unselected">Niet geselecteerd</message>
 	<message key="manager.setup.loggingAndAuditing">Logboek en controle</message>
 	<message key="manager.setup.pageHeaderLogoImageInvalid">Onbruikbaar bestandsformaat voor het paginakop-logo. Bruikbaar zijn .gif, .jpg of .png.</message>
-	<message key="manager.setup.pageHeaderTitleImageInvalid">Onbruikbaar bestandsformaat voor de pagina-koptitel. Bruikbaar zijn .gif, .jpg of .png.</message>
 	<message key="manager.setup.selectOne">Kies er een</message>
 	<message key="manager.statistics"><![CDATA[Statistieken & rapporten]]></message>
 	<message key="manager.statistics.statistics.count.value">{$count} ({$percentage}%)</message>
@@ -176,7 +175,6 @@
 	<message key="manager.setup.filter.grid.filterTemplateRequired">Kies een van de transformaties uit het menu.</message>
 	<message key="manager.setup.filter.grid.confirmDelete">Wilt u het {$filterName} filter echt verwijderen?</message>
 	<message key="manager.emails.form.emailKeyRequired">Er is een unieke e-mail sleutel nodig voor de e-mail</message>
-	<message key="manager.reviewerSearch.advancedSearch">Geavanceerd zoeken naar reviewer</message>
 	<message key="manager.reviewerSearch.searchByName">Zoek een reviewer op naam</message>
 	<message key="manager.reviewerSearch.doneAmount">Aantal voltooide reviews</message>
 	<message key="manager.reviewerSearch.avgAmount">Gemiddeld aantal dagen per review</message>
@@ -224,7 +222,6 @@
 	<message key="manager.emails.enable.message">U staat op het punt deze e-mail in te schakelen. Wilt u deze bewerking bevestigen?</message>
 	<message key="manager.emails.resetAll.message">Als u de sjablonen herstelt gaan alle modificaties aan de sjablonen verloren. Wilt deze bewerking bevestigen?</message>
 	<message key="manager.navigation">Navigatie</message>
-	<message key="manager.reviewerSearch.advancedSearch.short">Geavanceerd zoeken</message>
 	<message key="manager.reviewerSearch.searchByName.short">Zoeken op naam</message>
 	<message key="manager.setup.layout.blockManagement">Beheer van de sidebar</message>
 	<message key="plugins.categories.metadata">Metadata plugins</message>

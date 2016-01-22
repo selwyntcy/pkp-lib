@@ -428,7 +428,6 @@
 	<message key="submission.coverage.chron">Cobertura cronológica ou histórica</message>
 	<message key="submission.coverage.geo">Cobertura geográfica</message>
 	<message key="submission.coverage.sample">Cobertura da amostra</message>
-	<message key="submission.editorial">Editorial</message>
 	<message key="submission.event.submissionSubmitted">Submissão inicial concluída.</message>
 	<message key="submission.event.fileUploaded">Um arquivo "{$originalFilename}" foi carregado para a submissão {$submissionId} por {$username}.</message>
 	<message key="submission.event.fileRevised">Revisão "{$name}" (ID do arquivo {$fileId} -{$revision}) foi carregado.</message>
@@ -451,7 +450,6 @@
 	<message key="submission.submit.fileInformation">Informações do Arquivo</message>
 	<message key="submission.submit.fileAdded">Arquivo Adicionado</message>
 	<message key="submission.submit.newFile">Enviar um Novo Arquivo</message>
-	<message key="submission.submit.errorDeletingAuthor">Ocorreu um erro ao remover o autor.</message>
 	<message key="submission.submit.metadataForm">Refinamentos Adicionais</message>
 	<message key="submission.submit.metadataForm.tip">Adicione informações adicionais para sua submissão. Pressione 'Enter' depois de cada termo.</message>
 	<message key="submission.submit.submissionLocale">Idioma da Submissão</message>

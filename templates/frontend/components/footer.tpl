@@ -1,5 +1,5 @@
 {**
- * templates/common/frontend/footer.tpl
+ * templates/frontend/components/footer.tpl
  *
  * Copyright (c) 2014-2015 Simon Fraser University Library
  * Copyright (c) 2003-2015 John Willinsky
@@ -17,16 +17,10 @@
 	{* Sidebars *}
 	{if empty($isFullWidth)}
 		{call_hook|assign:"leftSidebarCode" name="Templates::Common::LeftSidebar"}
-		{call_hook|assign:"rightSidebarCode" name="Templates::Common::RightSidebar"}
 		{if $leftSidebarCode}
 			<div class="pkp_structure_sidebar left">
 				{$leftSidebarCode}
 			</div><!-- pkp_sidebar.left -->
-		{/if}
-		{if $rightSidebarCode}
-			<div class="pkp_structure_sidebar right">
-				{$rightSidebarCode}
-			</div><!-- pkp_sidebar.right -->
 		{/if}
 	{/if}
 </div><!-- pkp_structure_content -->
@@ -47,14 +41,12 @@
 					<a href="{$homeUrl}" class="is_img" rel="home">
 						<img src="{$publicFilesDir}/{$displayPageHeaderLogo.uploadName|escape:"url"}" width="{$displayPageHeaderLogo.width|escape}" height="{$displayPageHeaderLogo.height|escape}" {if $displayPageHeaderLogoAltText != ''}alt="{$displayPageHeaderLogoAltText|escape}"{else}alt="{translate key="common.pageHeaderLogo.altText"}"{/if} />
 					</a>
-				{elseif $displayPageHeaderTitle && is_array($displayPageHeaderTitle)}
-					<a href="{$homeUrl}" class="is_img" rel="home">
-						<img src="{$publicFilesDir}/{$displayPageHeaderTitle.uploadName|escape:"url"}" width="{$displayPageHeaderTitle.width|escape}" height="{$displayPageHeaderTitle.height|escape}" {if $displayPageHeaderTitleAltText != ''}alt="{$displayPageHeaderTitleAltText|escape}"{else}alt="{translate key="common.pageHeader.altText"}"{/if} />
-					</a>
-				{elseif $displayPageHeaderTitle}
+				{elseif $displayPageHeaderTitle && !$displayPageHeaderLogo && is_string($displayPageHeaderTitle)}
 					<a href="{$homeUrl}" class="is_text" rel="home">{$displayPageHeaderTitle}</a>
-				{elseif $alternatePageHeader}
-					{$alternatePageHeader}
+				{elseif $displayPageHeaderTitle && !$displayPageHeaderLogo && is_array($displayPageHeaderTitle)}
+					<a href="{$homeUrl}" class="is_img">
+						<img src="{$publicFilesDir}/{$displayPageHeaderTitle.uploadName|escape:"url"}" alt="{$displayPageHeaderTitle.altText|escape}" width="{$displayPageHeaderTitle.width|escape}" height="{$displayPageHeaderTitle.height|escape}" />
+					</a>
 				{else}
 					<a href="{$homeUrl}" class="is_img" rel="home">
 						{* hack: show Quest logo in site footer *}

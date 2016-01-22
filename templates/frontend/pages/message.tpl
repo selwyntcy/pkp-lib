@@ -10,7 +10,7 @@
  *
  *}
 {strip}
-{include file="common/frontend/header.tpl"}
+{include file="frontend/components/header.tpl"}
 {/strip}
 
 {if $message}{translate|assign:"messageTranslated" key=$message}{/if}

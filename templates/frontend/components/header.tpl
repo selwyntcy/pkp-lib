@@ -1,5 +1,5 @@
 {**
- * lib/pkp/templates/common/frontend/header.tpl
+ * lib/pkp/templates/frontend/components/header.tpl
  *
  * Copyright (c) 2014-2015 Simon Fraser University Library
  * Copyright (c) 2003-2015 John Willinsky
@@ -14,7 +14,7 @@
 <!DOCTYPE html>
 <html lang="{$currentLocale|replace:"_":"-"}" xml:lang="{$currentLocale|replace:"_":"-"}">
 {if !$pageTitleTranslated}{translate|assign:"pageTitleTranslated" key=$pageTitle}{/if}
-{include file="core:common/frontend/headerHead.tpl"}
+{include file="core:frontend/components/headerHead.tpl"}
 <body class="pkp_page_{$requestedPage|escape|default:"index"} pkp_op_{$requestedOp|escape|default:"index"}">
 	<script type="text/javascript">
 		// Initialise JS handler.
@@ -55,14 +55,12 @@
 							<a href="{$homeUrl}" class="is_img">
 								<img src="{$publicFilesDir}/{$displayPageHeaderLogo.uploadName|escape:"url"}" width="{$displayPageHeaderLogo.width|escape}" height="{$displayPageHeaderLogo.height|escape}" {if $displayPageHeaderLogoAltText != ''}alt="{$displayPageHeaderLogoAltText|escape}"{else}alt="{translate key="common.pageHeaderLogo.altText"}"{/if} />
 							</a>
-						{elseif $displayPageHeaderTitle && is_array($displayPageHeaderTitle)}
-							<a href="{$homeUrl}" class="is_img">
-								<img src="{$publicFilesDir}/{$displayPageHeaderTitle.uploadName|escape:"url"}" width="{$displayPageHeaderTitle.width|escape}" height="{$displayPageHeaderTitle.height|escape}" {if $displayPageHeaderTitleAltText != ''}alt="{$displayPageHeaderTitleAltText|escape}"{else}alt="{translate key="common.pageHeader.altText"}"{/if} />
-							</a>
-						{elseif $displayPageHeaderTitle}
+						{elseif $displayPageHeaderTitle && !$displayPageHeaderLogo && is_string($displayPageHeaderTitle)}
 							<a href="{$homeUrl}" class="is_text">{$displayPageHeaderTitle}</a>
-						{elseif $alternatePageHeader}
-							{$alternatePageHeader}
+						{elseif $displayPageHeaderTitle && !$displayPageHeaderLogo && is_array($displayPageHeaderTitle)}
+							<a href="{$homeUrl}" class="is_img">
+								<img src="{$publicFilesDir}/{$displayPageHeaderTitle.uploadName|escape:"url"}" alt="{$displayPageHeaderTitle.altText|escape}" width="{$displayPageHeaderTitle.width|escape}" height="{$displayPageHeaderTitle.height|escape}" />
+							</a>
 						{else}
 							<a href="{$homeUrl}" class="is_img">
 								{* hack: show Quest logo in site header *}
@@ -89,7 +87,7 @@
 					<div class="pkp_navigation_primary_wrapper">
 
 						{* Primary navigation menu for current application *}
-						{include file="header/primaryNavMenu.tpl"}
+						{include file="frontend/components/primaryNavMenu.tpl"}
 
 						{* Search form *}
 						{if !$noContextsConfigured}
@@ -108,9 +106,8 @@
 		{* Wrapper for page content and sidebars *}
 		{if $isFullWidth}
 			{assign var=hasLeftSidebar value=0}
-			{assign var=hasRightSidebar value=0}
 		{/if}
-		<div class="pkp_structure_content{if $hasLeftSidebar} has_left_sidebar{/if}{if $hasRightSidebar} has_right_sidebar{/if}">
+		<div class="pkp_structure_content{if $hasLeftSidebar} has_left_sidebar{/if}">
 
 			<script type="text/javascript">
 				// Attach the JS page handler to the main content wrapper.

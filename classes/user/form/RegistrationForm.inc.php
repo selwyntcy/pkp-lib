@@ -36,7 +36,7 @@ class RegistrationForm extends Form {
 	 * Constructor.
 	 */
 	function RegistrationForm($site) {
-		parent::Form('user/register.tpl');
+		parent::Form('frontend/pages/userRegister.tpl');
 		$this->implicitAuth = Config::getVar('security', 'implicit_auth');
 
 		// Validation checks for this form
@@ -111,11 +111,21 @@ class RegistrationForm extends Form {
 
 	/**
 	 * @copydoc Form::initData()
+	 * @param $context Context
 	 */
-	function initData() {
+	function initData($context) {
+		$userGroupDao = DAORegistry::getDAO('UserGroupDAO');
+		$userGroupIds = array();
+
+		// Register the user as a reader by default, if available.
+		$readerUserGroups = $userGroupDao->getByRoleId($context->getId(), ROLE_ID_READER);
+		while ($userGroup = $readerUserGroups->next()) {
+			if ($userGroup->getPermitSelfRegistration()) $userGroupIds[] = $userGroup->getId();
+		}
+
 		$this->_data = array(
 			'userLocales' => array(),
-			'userGroupIds' => array(),
+			'userGroupIds' => $userGroupIds,
 		);
 	}
 
@@ -215,6 +225,8 @@ class RegistrationForm extends Form {
 			$user->setDisabled(true);
 			$user->setDisabledReason(__('user.login.accountNotValidated'));
 		}
+
+		parent::execute($user);
 
 		$userDao->insertObject($user);
 		$userId = $user->getId();

@@ -182,7 +182,7 @@ class WebTestCase extends PHPUnit_Extensions_SeleniumTestCase {
 		$this->waitJQuery();
 
 		if (in_array('Author', $data['roles'])) {
-			$this->waitForText('css=h4', 'My Authored');
+			$this->waitForElementPresent('//h4[contains(.,\'My Authored\')]');
 		}
 	}
 
@@ -387,6 +387,14 @@ class WebTestCase extends PHPUnit_Extensions_SeleniumTestCase {
 			$loadedItems = $pagingInfo[1];
 			$totalItems = $pagingInfo[3];
 		}
+	}
+
+	/**
+	 * Scroll page down until the end.
+	 */
+	protected function scrollPageDown() {
+		$this->waitJQuery();
+		$this->runScript('scroll(0, document.body.scrollHeight()');	
 	}
 }
 ?>

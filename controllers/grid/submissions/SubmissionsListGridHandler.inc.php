@@ -41,8 +41,8 @@ class SubmissionsListGridHandler extends GridHandler {
 	 * @copydoc PKPHandler::authorize()
 	 */
 	function authorize($request, &$args, $roleAssignments) {
-		import('lib.pkp.classes.security.authorization.PKPSiteAccessPolicy');
-		$this->addPolicy(new PKPSiteAccessPolicy($request, null, $roleAssignments));
+		import('lib.pkp.classes.security.authorization.ContextAccessPolicy');
+		$this->addPolicy(new ContextAccessPolicy($request, $roleAssignments));
 		return parent::authorize($request, $args, $roleAssignments);
 	}
 
@@ -64,32 +64,7 @@ class SubmissionsListGridHandler extends GridHandler {
 		$this->_isManager = in_array(ROLE_ID_MANAGER, $authorizedRoles);
 
 		// If there is more than one context in the system, add a context column
-		$contextDao = Application::getContextDAO();
-		$contexts = $contextDao->getAll();
 		$cellProvider = new SubmissionsListGridCellProvider($authorizedRoles);
-		if($contexts->getCount() > 1) {
-			$hasRoleCount = 0;
-			$userGroupDao = DAORegistry::getDAO('UserGroupDAO');
-
-			$user = $request->getUser();
-			while ($context = $contexts->next()) {
-				$userGroups = $userGroupDao->getByUserId($user->getId(), $context->getId());
-				if ($userGroups->getCount() > 0) $hasRoleCount ++;
-			}
-
-			if ($hasRoleCount > 1 || $request->getContext() == null) {
-				$this->addColumn(
-					new GridColumn(
-						'context',
-						'context.context',
-						null,
-						null,
-						$cellProvider
-					)
-				);
-			}
-		}
-
 		$this->addColumn(
 			new GridColumn(
 				'id',
@@ -104,7 +79,7 @@ class SubmissionsListGridHandler extends GridHandler {
 		$this->addColumn(
 			new GridColumn(
 				'title',
-				'submission.title',
+				'grid.submission.itemTitle',
 				null,
 				null,
 				$cellProvider,
@@ -124,7 +99,7 @@ class SubmissionsListGridHandler extends GridHandler {
 			)
 		);
 	}
-	
+
 	/**
 	 * @copyDoc GridHandler::getIsSubcomponent()
 	 */
@@ -164,10 +139,10 @@ class SubmissionsListGridHandler extends GridHandler {
 		$search = (string) $request->getUserVar('search');
 		$column = (string) $request->getUserVar('column');
 		$stageId = (int) $request->getUserVar('stageId');
-		
+
 		return array(
-			'search' => $search, 
-			'column' => $column, 
+			'search' => $search,
+			'column' => $column,
 			'stageId' => $stageId
 		);
 	}
@@ -228,7 +203,7 @@ class SubmissionsListGridHandler extends GridHandler {
 	protected function getFilterColumns() {
 		return array(
 			'title' => __('submission.title'),
-			'author' => __('submission.authors'));		
+			'author' => __('submission.authors'));
 	}
 
 	/**
@@ -257,10 +232,10 @@ class SubmissionsListGridHandler extends GridHandler {
 
 		return array($search, $column, $stageId);
 	}
-	
+
 	/**
 	 * Define how many items this grid will start loading.
-	 * @return int 
+	 * @return int
 	 */
 	protected function getItemsNumber() {
 		return 5;

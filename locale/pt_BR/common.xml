@@ -359,8 +359,6 @@
 	<message key="form.emailRequired">Um endereço de email é obrigatório.</message>
 	<message key="form.dataHasChanged">Os dados deste formulário foram alterados. Continuar assim mesmo?</message>
 	<message key="form.invalidImage">Uma imagem inválida foi enviada. Formatos aceitos são .png, .gif, ou .jpg.</message>
-	<message key="help.toggleInlineHelpOn">Desabilitar ajuda</message>
-	<message key="help.toggleInlineHelpOff">Habilitar ajuda</message>
 	<message key="navigation.access"><![CDATA[Usuários &amp; Papéis]]></message>
 	<message key="navigation.admin">Administração</message>
 	<message key="navigation.browseByAuthor">por Autor</message>
@@ -435,7 +433,6 @@
 	<message key="common.startTyping">Iniciar digitação</message>
 	<message key="common.subjects">Assuntos</message>
 	<message key="common.subtitle">Subtítulo</message>
-	<message key="common.pageHeader.altText">Cabeçalho</message>
 	<message key="common.homepageImage.altText">Imagem da Homepage</message>
 	<message key="common.metric">Métrico</message>
 	<message key="common.count">Contagem</message>

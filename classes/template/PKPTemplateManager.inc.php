@@ -111,8 +111,6 @@ class PKPTemplateManager extends Smarty {
 			'timeFormat' => Config::getVar('general', 'time_format'),
 			'allowCDN' => Config::getVar('general', 'enable_cdn'),
 			'useMinifiedJavaScript' => Config::getVar('general', 'enable_minified'),
-			'toggleHelpOnText' => __('help.toggleInlineHelpOn'),
-			'toggleHelpOffText' => __('help.toggleInlineHelpOff'),
 			'currentContext' => $this->_request->getContext(),
 			'currentLocale' => $locale,
 			'pageTitle' => $application->getNameKey(),
@@ -226,10 +224,8 @@ class PKPTemplateManager extends Smarty {
 		// Load enabled block plugins and setup active sidebar variables
 		PluginRegistry::loadCategory('blocks', true);
 		$leftSidebarHooks = HookRegistry::getHooks('Templates::Common::LeftSidebar');
-		$rightSidebarHooks = HookRegistry::getHooks('Templates::Common::RightSidebar');
 		$this->assign(array(
 			'hasLeftSidebar' => !empty($leftSidebarHooks),
-			'hasRightSidebar' => !empty($rightSidebarHooks),
 		));
 	}
 

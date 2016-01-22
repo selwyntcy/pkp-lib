@@ -39,8 +39,8 @@ class PreparedEmailsGridHandler extends GridHandler {
 	 * @copydoc PKPHandler::authorize()
 	 */
 	function authorize($request, $args, $roleAssignments) {
-		import('lib.pkp.classes.security.authorization.PkpContextAccessPolicy');
-		$this->addPolicy(new PkpContextAccessPolicy($request, $roleAssignments));
+		import('lib.pkp.classes.security.authorization.ContextAccessPolicy');
+		$this->addPolicy(new ContextAccessPolicy($request, $roleAssignments));
 		return parent::authorize($request, $args, $roleAssignments);
 	}
 
@@ -56,8 +56,6 @@ class PreparedEmailsGridHandler extends GridHandler {
 
 		// Set the grid title.
 		$this->setTitle('grid.preparedEmails.title');
-
-		$this->setInstructions('grid.preparedEmails.description');
 
 		// Grid actions
 		import('lib.pkp.controllers.grid.settings.preparedEmails.linkAction.EditEmailLinkAction');

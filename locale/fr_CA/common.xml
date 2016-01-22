@@ -420,7 +420,6 @@
 	<message key="common.unread">Non lu</message>
 	<message key="common.fileUpload.maxFileSizeStatus"><![CDATA[Ce serveur permet de télécharger un fichier dont la taille maximale est {$fileSize}. Si nécessaire, contactez <a href="mailto:{$supportEmail}">{$supportName}</a> pour obtenir de l'aide.]]></message>
 	<message key="common.invalidFileType">Aucun fichier n'a été téléchargé ou type de fichier invalide!</message>
-	<message key="common.pageHeader.altText">Titre de haut de page</message>
 	<message key="common.homepageImage.altText">Image de la page d'accueil</message>
 	<message key="common.plugins">Modules externes</message>
 	<message key="common.metric">Métrique</message>
@@ -437,8 +436,6 @@
 	<message key="form.dataHasChanged">Les données de ce formulaire ont été modifiées. Vous voulez continuer sans sauvegarder?</message>
 	<message key="form.fileRequired">Un chargement de fichier est requis.</message>
 	<message key="form.invalidImage">Une image non valide a été téléchargée. Seuls les formats .png, .gif ou .jpg sont acceptés.</message>
-	<message key="help.toggleInlineHelpOn">Fonction d'Aide allumée</message>
-	<message key="help.toggleInlineHelpOff">Fonction d'Aide éteinte</message>
 	<message key="informationCenter.editorialHistory">Historique de rédaction</message>
 	<message key="navigation.management">Gestion</message>
 	<message key="navigation.access"><![CDATA[Utilisateurs &amp; Rôles]]></message>

@@ -28,12 +28,43 @@
 			$.pkp.classes.features.GeneralPagingFeature);
 
 
+	//
+	// Private properties
+	//
+	/**
+	 * The scrollable element.
+	 * @private
+	 * @type {jQueryObject}
+	 */
+	$.pkp.classes.features.InfiniteScrollingFeature.prototype.
+			$scrollableElement_ = $();
+
+
+	/**
+	 * The scrolling observer callback function.
+	 * @private
+	 * @type {Function}
+	 */
+	$.pkp.classes.features.InfiniteScrollingFeature.prototype.
+			observeScrollCallback_ = function() {};
+
+
+	//
+	// Extended methods from GeneralPagingFeature
+	//
 	/**
 	 * @inheritDoc
 	 */
 	$.pkp.classes.features.InfiniteScrollingFeature.prototype.init =
 			function() {
-		this.getGridHtmlElement().find('div.pkp_loading').hide();
+		var $scrollableElement = $('div.scrollable', this.getGridHtmlElement());
+		if (!$scrollableElement.length) {
+			this.gridHandler.publishEvent('pkpObserveScrolling');
+			this.gridHandler.publishEvent('pkpRemoveScrollingObserver');
+		}
+		this.$scrollableElement_ = $scrollableElement;
+		this.observeScrollCallback_ = this.gridHandler.callbackWrapper(
+				this.observeScroll_, this);
 		this.addScrollHandler_();
 		this.fixGridHeight_();
 		this.addPagingDataToRows_();
@@ -47,8 +78,9 @@
 			function($gridElement, options) {
 		var castOptions = /** @type {{pagingMarkup: string?,
 					loadingContainer: string?}} */ (options);
-		$gridElement.find('div.scrollable').append(castOptions.loadingContainer)
-			.after(castOptions.pagingMarkup);
+		$gridElement.append(castOptions.pagingMarkup);
+		$gridElement.find('.pkp_linkaction_moreItems')
+				.click(this.gridHandler.callbackWrapper(this.loadMoreItems_, this));
 	};
 
 
@@ -117,6 +149,9 @@
 
 		this.toggleLoadingContainer_();
 
+		this.getGridHtmlElement().find('.pkp_linkaction_moreItems').
+				click(this.gridHandler.callbackWrapper(this.loadMoreItems_, this));
+
 		return false;
 	};
 
@@ -135,22 +170,37 @@
 	 */
 	$.pkp.classes.features.InfiniteScrollingFeature.prototype.observeScroll_ =
 			function(sourceElement, event) {
-		var options = this.getOptions();
+		var options = this.getOptions(), sourceElementHeight,
+				bottomLimit, windowDimensions;
 		if (options.itemsTotal == this.gridHandler.getRows().length) {
 			return false;
 		}
-		if (sourceElement.scrollHeight - $(sourceElement).scrollTop() ==
-				$(sourceElement).height()) {
+
+		if (!this.getGridHtmlElement().is(':visible')) {
+			return false;
+		}
+
+		if ($(sourceElement).hasClass('scrollable')) {
+			sourceElementHeight = $(sourceElement).height();
+			bottomLimit = sourceElement.scrollHeight;
+		} else {
+			windowDimensions = $.pkp.controllers.SiteHandler.
+					prototype.getWindowDimensions();
+			sourceElementHeight = windowDimensions.height;
+			bottomLimit = this.getGridHtmlElement().offset().top +
+					this.getGridHtmlElement().height();
+		}
+
+		if (sourceElementHeight + $(sourceElement).scrollTop() >= bottomLimit) {
 			// Avoid multiple rows requests.
-			$('div.scrollable', this.getGridHtmlElement()).unbind('scroll');
+			if (this.$scrollableElement_.length) {
+				this.$scrollableElement_.unbind('scroll');
+			} else {
+				this.getGridHtmlElement().trigger('pkpRemoveScrollingObserver',
+						[this.observeScrollCallback_]);
+			}
 
-			// Show the loading icon.
-			this.toggleLoadingContainer_(true);
-
-			options.currentPage = Number($('tr.gridRow',
-					this.getGridHtmlElement()).last().attr('data-paging')) + 1;
-			this.getGridHtmlElement().trigger('dataChanged',
-					[$.pkp.controllers.grid.GridHandler.FETCH_ALL_ROWS_ID]);
+			this.loadMoreItems_();
 		}
 
 		return false;
@@ -227,8 +277,14 @@
 	 */
 	$.pkp.classes.features.InfiniteScrollingFeature.prototype.addScrollHandler_ =
 			function() {
-		$('div.scrollable', this.getGridHtmlElement()).
-				scroll(this.gridHandler.callbackWrapper(this.observeScroll_, this));
+		var $scrollableElement = this.$scrollableElement_;
+		if ($scrollableElement.length) {
+			$scrollableElement.
+					scroll(this.observeScrollCallback_);
+		} else {
+			this.getGridHtmlElement().trigger('pkpObserveScrolling',
+					[this.observeScrollCallback_]);
+		}
 	};
 
 
@@ -242,20 +298,41 @@
 	$.pkp.classes.features.InfiniteScrollingFeature.prototype.
 			toggleLoadingContainer_ = function(opt_show) {
 		var $loadingElement =
-				this.getGridHtmlElement().find('div.scrollable div.pkp_loading'),
-						$scrollableElement = this.getGridHtmlElement().find('div.scrollable'),
+				this.getGridHtmlElement().find('div.gridPagingScrolling div.pkp_loading'),
+						$scrollableElement = this.$scrollableElement_,
 						scrollTop,
 						loadingHeight = $loadingElement.height(),
 						scrollTarget;
 
 		if (opt_show) {
-			$loadingElement.show();
+			this.getGridHtmlElement().addClass('loading');
 			scrollTop = $scrollableElement.scrollTop();
 			scrollTarget = /** @type {number} */ scrollTop + loadingHeight;
 			$scrollableElement.scrollTop(scrollTarget);
 		} else {
-			$loadingElement.hide();
+			this.getGridHtmlElement().removeClass('loading');
 		}
+	};
+
+
+	/**
+	 * Trigger necessary actions for the grid to
+	 * load next page items.
+	 *
+	 * @private
+	 *
+	 */
+	$.pkp.classes.features.InfiniteScrollingFeature.prototype.
+			loadMoreItems_ = function() {
+		var options = this.getOptions();
+
+		// Show the loading icon.
+		this.toggleLoadingContainer_(true);
+
+		options.currentPage = Number($('tr.gridRow',
+				this.getGridHtmlElement()).last().attr('data-paging')) + 1;
+		this.getGridHtmlElement().trigger('dataChanged',
+				[$.pkp.controllers.grid.GridHandler.FETCH_ALL_ROWS_ID]);
 	};
 
 

@@ -93,6 +93,12 @@
 		background: @bg;
 		font-size: @font-sml;
 
+		label {
+			font-size: @font-sml;
+			font-weight: @normal;
+			font-style: italic;
+		}
+
 		.section {
 			margin-bottom: @half;
 		}
@@ -100,16 +106,6 @@
 		.pkp_spinner {
 			display: none;
 		}
-	}
-
-	// Description
-	> .description {
-		margin-top: @half / 2; // but single-line description heights to 32px
-		margin-bottom: @half / 2;
-		font-size: @font-sml;
-		line-height:  @line-sml;
-		color: @text-light;
-		color: @text-light-rgba;
 	}
 
 	// Grid rows
@@ -164,9 +160,13 @@
 	}
 
 	// Expand/collapse row actions
-	.sprite.show_extras,
-	.sprite.hide_extras,
-	.pkp_linkaction_moveItem {
+	.has_extras td:first-child,
+	.row_controls td:first-child {
+		padding-left: @double;
+	}
+
+	.show_extras,
+	.hide_extras {
 		position: absolute;
 		top: @half; // matches td padding
 		left: 0;
@@ -178,16 +178,15 @@
 		text-decoration: none;
 	}
 
-	.sprite.show_extras:before {
-		&:extend( .pkp_caret );
-		&:extend( .pkp_caret_right );
+	.show_extras:before {
+		&:extend(.pkp_caret);
+		&:extend(.pkp_caret_right);
 		margin-top: -4px;
 	}
 
-	.sprite.hide_extras:before {
-		&:extend( .pkp_caret );
-		&:extend( .pkp_caret_down );
-		margin-top: -2px;
+	.hide_extras:before {
+		&:extend(.pkp_caret);
+		&:extend(.pkp_caret_down);
 	}
 
 	// Ordering items
@@ -199,8 +198,21 @@
 		}
 	}
 
-	.ordering:hover {
-		background: @bg;
+	.ordering {
+
+		&:hover {
+			background: @bg;
+		}
+
+		.show_extras,
+		.hide_extras {
+			display: none;
+		}
+
+		.row_actions {
+			right: auto;
+			left: 0;
+		}
 	}
 
 	.order_finish_controls {
@@ -241,12 +253,29 @@
 	// Infinite scroll
 	.scrollable {
 		position: relative;
-		max-height: 15em;
+		max-height: 150px;
 		overflow: auto;
 	}
 
-	// Row actions
+	// Actions inline with the row
+	.row_actions {
+		position: absolute;
+		top: @half;
+		right: 0;
+
+		> a {
+			&:extend(.fa);
+			width: 24px;
+			height: 24px;
+			line-height: 24px;
+			text-align: center;
+			text-decoration: none;
+		}
+	}
+
+	// Secondary row of actions
 	.row_controls {
+		display: none;
 
 		td {
 			line-height: @line-base;
@@ -336,10 +365,54 @@
 
 	// Items shown for infinite scrolling
 	.gridPagingScrolling {
+		position: relative;
+		border-top: @bg-border;
 		font-size: @font-sml;
 		color: @text-light;
 		color: @text-light-rgba;
-		text-align: right;
+		text-align: center;
+		height: @double;
+		line-height: @double;
+
+		.item_count {
+			position: absolute;
+			right: 0;
+		}
+
+		.pkp_linkaction_icon_more_items {
+			font-weight: @bold;
+			text-decoration: none;
+
+			&:before {
+				&:extend(.pkp_caret);
+				&:extend(.pkp_caret_down);
+				position: relative;
+				top: 1px;
+				margin-right: 0.5em;
+			}
+		}
+
+		.pkp_loading {
+			visibility: hidden;
+			position: absolute;
+			top: 0;
+			width: 100%;
+			line-height: @double;
+			background: @lift;
+			opacity: 0;
+			transition: 0.3s opacity, 0.3s visibility;
+		}
+	}
+
+	&.loading {
+
+		.gridPagingScrolling {
+
+			.pkp_loading {
+				visibility: visible;
+				opacity: 1;
+			}
+		}
 	}
 }
 
@@ -357,10 +430,7 @@
 		font-size: @font-sml;
 		color: @text-light;
 		color: @text-light-rgba;
-	}
-
-	.gridRow:not(.category) td {
-		border-bottom: 1px solid @bg;
+		border-bottom: 1px solid @lift;
 	}
 }
 
@@ -369,76 +439,20 @@
 
 	.gridRow {
 
-		.row_actions,
-		.row_file {
-			display: inline-block;
-		}
-
 		.pkp_linkaction_delete {
-			position: absolute;
-			top: 4px;
-			left: 0;
-			width: @double;
-			height: @double;
-			text-align: center;
-			color: @no;
 
 			&:before {
 				&:extend(.fa);
-				content: @fa-var-trash;
-				line-height: @double;
+				content: @fa-var-times;
 			}
-		}
-
-		.first_column {
-			padding-left: @double;
 		}
 	}
 }
 
-// @todo
+// TODO check if these styles can be removed
 .pkp_controllers_grid {
 
-	tr.no_border, td.no_border {
-		border-bottom: none !important;
-	}
-
-	.grid_header {
-		.pkp_form {
-			div.formButtons {
-				margin-bottom: 0px;
-				float: right;
-			}
-
-			fieldset {
-				margin-bottom: 0px;
-			}
-		}
-
-		.pkp_grid_description {
-			padding:10px;
-			color:#999;
-			font-weight:normal;
-			font-size:80%;
-			line-height: 14px;
-		}
-	}
-
-	.grid_header_bar {
-		background-color: #d5e7f4;
-		padding: 3px 10px 3px 10px;
-	}
-
-	.grid_header_bar h3 {
-		display:inline;
-		vertical-align:middle;
-		line-height: 24px;
-	}
-
-	.grid_header_bar a {
-		float:left;
-	}
-
+	// See TODO at lib/pkp/templates/controllers/grid.tpl:54
 	.options {
 		float: right;
 		line-height: 24px;
@@ -454,22 +468,7 @@
 		margin-left: 20px;
 	}
 
-	.hidetext {
-		display:none;
-	}
-
-	.multiline {
-		line-height: inherit;
-	}
-
-	.row_controls {
-		display: none;
-	}
-
-	a.focus {
-		background-position: 0 bottom;
-	}
-
+	// See TODO at /var/www/html/ojs/lib/pkp/templates/controllers/grid/common/cell/statusCell.tpl
 	a.task {
 		width: 100%;
 		text-indent: -1500px;
@@ -479,54 +478,5 @@
 		background-repeat: no-repeat;
 		margin: 0;
 		height: 24px;
-	}
-
-	/* @group More/Less Detail Toggle */
-	.toggleDetailContainer {
-		margin: 20px 0 20px 0;
-	}
-
-	.toggleDetail {
-		display: block;
-		text-indent: -99999px;
-		overflow: hidden;
-		background-repeat: no-repeat;
-		width: 16px;
-		height: 16px;
-		background-image: url({$baseUrl}/lib/pkp/styles/images/ui-icons_222222_256x240.png);
-	}
-
-	.moreDetail {
-		background-position: -48px -192px;
-	}
-
-	.lessDetail {
-		background-position: -64px -192px;
-	}
-
-	.visible {
-		display: block;
-	}
-
-	tbody .ui-sortable-placeholder {
-		display: block;
-		visibility: visible !important;
-		height: 40px;
-		background-color: #EAF3F8 !important;
-	}
-
-	tbody.ui-sortable-helper {
-		display:table;
-	}
-}
-
-div.pkp_controllers_category_grid {
-
-	thead th:first-child {
-		padding-left: 5px;
-	}
-
-	thead th:nth-child(2) {
-		padding-left: 35px;
 	}
 }

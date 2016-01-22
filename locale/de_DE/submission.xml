@@ -277,7 +277,6 @@
 	<message key="submission.due">Fällig</message>
 	<message key="submission.editing">Redaktion</message>
 	<message key="submission.editMetadata">Metadaten bearbeiten</message>
-	<message key="submission.editorial">Editorial</message>
 	<message key="submission.email.backToEmailLog">Zurück zum E-Mail-Protokoll </message>
 	<message key="submission.email.confirmClearLog">Sind Sie sicher, dass Sie das E-Mail-Protokoll zu diesem Beitrag löschen wollen?</message>
 	<message key="submission.email.confirmDeleteLogEntry">Sind Sie sicher, dass Sie diesen Eintrag im E-Mail-Protokoll löschen wollen?</message>
@@ -429,7 +428,6 @@
 	<message key="submission.submit.fileAdded">Datei hinzugefügt</message>
 	<message key="submission.submit.includeInBrowse">Include this contributor in browse lists?</message>
 	<message key="submission.submit.newFile">Neue Datei einreichen</message>
-	<message key="submission.submit.errorDeletingAuthor">Es gab einen Fehler beim Löschen der Autorin/des Autors.</message>
 	<message key="submission.submit.metadataForm">Zusätzliche Verfeinerung</message>
 	<message key="submission.submit.metadataForm.tip">Fügen Sie zusätzliche Informationen für Ihre Einreichung hinzu. Drücken Sie 'Enter' nach jedem Begriff.</message>
 	<message key="submission.submit.submissionLocale">Beitragssprache</message>

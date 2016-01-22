@@ -29,7 +29,7 @@ class ArchivedSubmissionsListGridHandler extends SubmissionsListGridHandler {
 		parent::SubmissionsListGridHandler();
 		$this->addRoleAssignment(
 			array(ROLE_ID_REVIEWER, ROLE_ID_ASSISTANT, ROLE_ID_MANAGER, ROLE_ID_SUB_EDITOR),
-			array('fetchGrid', 'fetchRow')
+			array('fetchGrid', 'fetchRows', 'fetchRow')
 		);
 		$this->addRoleAssignment(
 			array(ROLE_ID_MANAGER, ROLE_ID_SUB_EDITOR),
@@ -37,10 +37,14 @@ class ArchivedSubmissionsListGridHandler extends SubmissionsListGridHandler {
 		);
 	}
 
-	
+
 	//
 	// Implement template methods from GridHandler
 	//
+	function getIsSubComponent() {
+		return false;
+	}
+
 	/**
 	 * @copydoc GridHandler::loadData()
 	 */
@@ -95,6 +99,15 @@ class ArchivedSubmissionsListGridHandler extends SubmissionsListGridHandler {
 	}
 
 
+	//
+	// Extend methods from SubmissionsListGridHandler
+	//
+	/**
+	 * @copydoc SubmissionsListGridHandler::getItemsNumber()
+	 */
+	protected function getItemsNumber() {
+		return 20;
+	}
 }
 
 ?>

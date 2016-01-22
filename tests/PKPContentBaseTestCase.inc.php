@@ -95,12 +95,10 @@ abstract class PKPContentBaseTestCase extends WebTestCase {
 			$metadata = isset($file['metadata'])?$file['metadata']:array();
 			$this->uploadWizardFile($file['fileTitle'], $file['file'], $metadata);
 		}
-		sleep(1); // Occasional race conditions in travis
-		$this->waitForElementPresent($selector='//button[text()=\'Save and continue\']');
+		$this->waitForElementPresent($selector='//form[@id=\'submitStep2Form\']//button[text()=\'Save and continue\']');
 		$this->click($selector);
 
 		// Page 3
-		sleep(1); // Occasional race conditions in travis
 		$this->waitForElementPresent('css=[id^=title-]');
 		$this->type('css=[id^=title-]', $data['title']);
 		if (isset($data['abstract'])) $this->typeTinyMCE('abstract', $data['abstract']);
@@ -111,14 +109,15 @@ abstract class PKPContentBaseTestCase extends WebTestCase {
 		}
 		// Permit the subclass to handle any extra step 3 actions
 		$this->_handleStep3($data);
+		$this->waitForElementPresent($selector='//form[@id=\'submitStep3Form\']//button[text()=\'Save and continue\']');
+		$this->click($selector);
 
-		// Finish
-		$this->waitForElementPresent($selector='//button[text()=\'Finish Submission\']');
+		// Page 4
+		$this->waitForElementPresent($selector='//form[@id=\'submitStep4Form\']//button[text()=\'Finish Submission\']');
 		$this->click($selector);
 		$this->waitForElementPresent($selector="//a[text()='OK']");
 		$this->click($selector);
 		$this->waitForElementPresent('//h2[contains(text(), \'Submission complete\')]');
-		$this->waitJQuery();
 	}
 
 	/**
@@ -208,8 +207,7 @@ abstract class PKPContentBaseTestCase extends WebTestCase {
 		if (isset($data['affiliation'])) $this->type('css=[id^=affiliation-]', $data['affiliation']);
 		$this->click('//label[contains(.,\'' . $this->escapeJS($data['role']) . '\')]');
 		$this->click('//button[text()=\'Save\']');
-		$this->waitForElementNotPresent('css=div.pkp_modal_panel'); // pkp/pkp-lib#655
-		$this->waitJQuery();
+		$this->waitForElementNotPresent('css=div.pkp_modal_panel');
 	}
 
 	/**
@@ -224,7 +222,7 @@ abstract class PKPContentBaseTestCase extends WebTestCase {
 		$this->waitForElementPresent('css=#dashboardTabs');
 		$this->click('css=[name=active]');
 		$this->waitForElementPresent('css=[id^=component-grid-submissions-activesubmissions-activesubmissionslistgrid-]');
-		$this->scrollGridDown('activeSubmissionsListGridContainer');
+		$this->scrollPageDown();
 		$xpath = '//span[contains(text(),' . $this->quoteXpath($title) .')]/../../..//a[contains(@id, "-stage-itemWorkflow-button-")]';
 		$this->waitForElementPresent($xpath);
 		$this->click($xpath);

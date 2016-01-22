@@ -268,7 +268,6 @@
 	<message key="submission.comments.subject">Subject</message>
 	<message key="submission.complete">Complete</message>
 	<message key="submission.contributors">List of Contributors</message>
-	<message key="submission.contributorsDescription">The list of contributors associated with this submission may include other authors; individual chapter authors of an edited volume; volume editors; and/or translators. One contributor from the list may be assigned as the primary contact for editorial correspondence; this does not necessarily have to be the submitting author.</message>
 	<message key="submission.copyedited">Copyedited</message>
 	<message key="submission.copyediting">Copyediting</message>
 	<message key="submission.queryNoteFiles">Discussion Files</message>
@@ -282,7 +281,7 @@
 	<message key="submission.due">Due</message>
 	<message key="submission.editing">Editing</message>
 	<message key="submission.editMetadata">Edit Metadata</message>
-	<message key="submission.editorial">Editorial</message>
+	<message key="submission.editorial">Copyediting</message>
 	<message key="submission.email.backToEmailLog">Back to Email Log</message>
 	<message key="submission.email.confirmClearLog">Are you sure you want to clear the email log for this submission?</message>
 	<message key="submission.email.confirmDeleteLogEntry">Are you sure you want to delete this email log entry?</message>
@@ -436,7 +435,6 @@
 	<message key="submission.submit.fileAdded">File Added</message>
 	<message key="submission.submit.includeInBrowse">Include this contributor in browse lists?</message>
 	<message key="submission.submit.newFile">Submit a New File</message>
-	<message key="submission.submit.errorDeletingAuthor">There was an error removing the author.</message>
 	<message key="submission.submit.metadataForm">Additional Refinements</message>
 	<message key="submission.submit.metadataForm.tip">Add additional information for your submission.  Press 'enter' after each term.</message>
 	<message key="submission.submit.submissionLocale">Submission Language</message>
@@ -445,7 +443,6 @@
 	<message key="submission.submit.dependentFiles">Dependent Files</message>
 	<message key="submission.manageDependentFiles">Manage Dependent Files</message>
 	<message key="submission.upload.dependent">Upload a Dependent File</message>
-	<message key="submission.dependent.upload.description">Upload files that this production file requires in order to display correctly (HTML, CSS, etc.)</message>
 	<message key="submission.upload.query">Upload a Discussion File</message>
 	<message key="submission.summary">Summary</message>
 	<message key="submission.supplementaryFiles">Supplementary Files</message>
@@ -652,8 +649,10 @@
 	<message key="submission.license.cc.by-sa4.footer"><![CDATA[<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.]]></message>
 
 	<!-- Submission Queries -->
-	<message key="submission.queries">Discussions</message>
-	<message key="submission.queriesDescription">Discussions with users participating in this stage of the submission.</message>
+	<message key="submission.queries.submission">Pre-Review Discussions</message>
+	<message key="submission.queries.review">Review Discussions</message>
+	<message key="submission.queries.editorial">Copyediting Discussions</message>
+	<message key="submission.queries.production">Production Discussions</message>
 	<message key="submission.query.subject">Subject</message>
 	<message key="submission.query.messages">Messages</message>
 	<message key="submission.query.replies">Replies</message>

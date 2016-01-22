@@ -1,5 +1,5 @@
 {**
- * templates/user/register.tpl
+ * templates/frontend/pages/userRegister.tpl
  *
  * Copyright (c) 2014-2015 Simon Fraser University Library
  * Copyright (c) 2003-2015 John Willinsky
@@ -7,7 +7,7 @@
  *
  * User registration form.
  *}
-{include file="common/frontend/header.tpl" pageTitle="user.register"}
+{include file="frontend/components/header.tpl" pageTitle="user.register"}
 
 <div class="page page_register">
 	<h1 class="page_title">
@@ -29,10 +29,11 @@
 	<script type="text/javascript">
 		$(function() {ldelim}
 			// Attach the form handler.
-			$('#register').pkpHandler('$.pkp.controllers.form.FormHandler',
+			$('#register').pkpHandler('$.pkp.controllers.form.UserFormHandler',
 				{ldelim}
 					fetchUsernameSuggestionUrl: {url|json_encode router=$smarty.const.ROUTE_COMPONENT component="api.user.UserApiHandler" op="suggestUsername" firstName="FIRST_NAME_DUMMY" lastName="LAST_NAME_DUMMY" escape=false},
-					usernameSuggestionTextAlert: {translate|json_encode key="grid.user.mustProvideName"}
+					usernameSuggestionTextAlert: {translate|json_encode key="grid.user.mustProvideName"},
+					hideNonReviewerInterests: true
 				{rdelim}
 			);
 		{rdelim});

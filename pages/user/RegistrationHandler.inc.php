@@ -44,7 +44,7 @@ class RegistrationHandler extends UserHandler {
 		if ($request->getContext()) {
 			import('lib.pkp.classes.user.form.RegistrationForm');
 			$regForm = new RegistrationForm($request->getSite());
-			$regForm->initData();
+			$regForm->initData($request->getContext());
 			$regForm->display($request);
 		} else {
 			$templateMgr = TemplateManager::getManager($request);
@@ -53,7 +53,7 @@ class RegistrationHandler extends UserHandler {
 				'source' => $request->getUserVar('source'),
 				'contexts' => $contextDao->getAll(true),
 			));
-			$templateMgr->display('user/registerSite.tpl');
+			$templateMgr->display('frontend/pages/userRegisterSite.tpl');
 		}
 	}
 
@@ -70,8 +70,7 @@ class RegistrationHandler extends UserHandler {
 		$regForm = new RegistrationForm($request->getSite());
 		$regForm->readInputData();
 		if (!$regForm->validate()) {
-			$regForm->display($request);
-			return;
+			return $regForm->fetchJson($request);
 		}
 
 		$regForm->execute($request);
@@ -79,7 +78,7 @@ class RegistrationHandler extends UserHandler {
 		if (Config::getVar('email', 'require_validation')) {
 			// Send them home; they need to deal with the
 			// registration email.
-			$request->redirect(null, 'index');
+			return $request->redirectUrlJson($request->url(null, 'index'));
 		}
 
 		$reason = null;
@@ -97,12 +96,11 @@ class RegistrationHandler extends UserHandler {
 			$templateMgr->assign('errorParams', array('reason' => $reason));
 			$templateMgr->assign('backLink', $request->url(null, 'login'));
 			$templateMgr->assign('backLinkLabel', 'user.login');
-			$templateMgr->display('common/error.tpl');
-			return;
+			return $templateMgr->fetchJson('frontend/pages/error.tpl');
 		}
 
-		if ($source = $request->getUserVar('source')) $request->redirectUrl($source);
-		$request->redirectHome();
+		if ($source = $request->getUserVar('source')) return $request->redirectUrlJson($source);
+		return $request->redirectUrlJson($request->getRouter()->getHomeUrl($request));
 	}
 
 	/**
@@ -137,7 +135,7 @@ class RegistrationHandler extends UserHandler {
 
 			$templateMgr = TemplateManager::getManager($request);
 			$templateMgr->assign('message', 'user.login.activated');
-			return $templateMgr->display('common/message.tpl');
+			return $templateMgr->display('frontend/pages/message.tpl');
 		}
 		$request->redirect(null, 'login');
 	}
@@ -158,7 +156,7 @@ class RegistrationHandler extends UserHandler {
 				$templateMgr->assign('errorMsg', 'user.register.registrationDisabled');
 				$templateMgr->assign('backLink', $request->url(null, 'login'));
 				$templateMgr->assign('backLinkLabel', 'user.login');
-				$templateMgr->display('common/error.tpl');
+				$templateMgr->display('frontend/pages/error.tpl');
 				exit;
 			}
 		}
