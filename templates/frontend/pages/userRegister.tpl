@@ -1,8 +1,8 @@
 {**
  * templates/frontend/pages/userRegister.tpl
  *
- * Copyright (c) 2014-2015 Simon Fraser University Library
- * Copyright (c) 2003-2015 John Willinsky
+ * Copyright (c) 2014-2016 Simon Fraser University Library
+ * Copyright (c) 2003-2016 John Willinsky
  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
  *
  * User registration form.
@@ -185,11 +185,11 @@
 			</div>
 		{/if}
 
-		<fieldset class="buttons">
+		<div class="buttons">
 			<button class="submit" type="submit">
 				{translate key="user.register"}
 			</button>
-		</fieldset>
+		</div>
 
 		{if !$implicitAuth}
 			<div class="required_label">
@@ -199,9 +199,9 @@
 
 		{if $privacyStatement}
 			<div class="privacy">
-				<h3>
+				<h2>
 					{translate key="user.register.privacyStatement"}
-				</h3>
+				</h2>
 				<p>
 					{$privacyStatement|nl2br}
 				</p>

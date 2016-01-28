@@ -1,8 +1,8 @@
 {**
  * templates/header/usernav.tpl
  *
- * Copyright (c) 2014-2015 Simon Fraser University Library
- * Copyright (c) 2003-2015 John Willinsky
+ * Copyright (c) 2014-2016 Simon Fraser University Library
+ * Copyright (c) 2003-2016 John Willinsky
  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
  *
  * Site-Wide Navigation Bar
@@ -20,7 +20,7 @@
 				'$.pkp.controllers.MenuHandler');
 	{rdelim});
 </script>
-<ul id="navigationContextMenu" class="pkp_nav_context pkp_nav_list">
+<ul id="navigationContextMenu" class="pkp_nav_context pkp_nav_list" role="navigation" aria-label="{translate|escape key="common.navigation.siteContext"}">
 
 	<li {if $multipleContexts}class="has_submenu submenu_opens_below"{/if}>
 		<span class="pkp_screen_reader">
@@ -62,7 +62,7 @@
 				'$.pkp.controllers.MenuHandler');
 	{rdelim});
 </script>
-<ul id="navigationUser" class="pkp_nav_user pkp_nav_list">
+<ul id="navigationUser" class="pkp_nav_user pkp_nav_list" role="navigation" aria-label="{translate|escape key="common.navigation.user"}">
 	{if $homeUrl}
 		<li>
 			<a href="{$homeUrl}">

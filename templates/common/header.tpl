@@ -1,8 +1,8 @@
 {**
  * lib/pkp/templates/common/header.tpl
  *
- * Copyright (c) 2014-2015 Simon Fraser University Library
- * Copyright (c) 2003-2015 John Willinsky
+ * Copyright (c) 2014-2016 Simon Fraser University Library
+ * Copyright (c) 2003-2016 John Willinsky
  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
  *
  * Common site header.
@@ -29,8 +29,8 @@
 		{rdelim});
 	</script>
 	<div class="pkp_structure_page">
-		<header class="pkp_structure_head">
-			<nav class="pkp_navigation" id="headerNavigationContainer">
+		<header class="pkp_structure_head" role="banner">
+			<div class="pkp_navigation" id="headerNavigationContainer">
 
 				{* Logo or site title *}
 				<div class="pkp_site_name">
@@ -41,7 +41,7 @@
 					{/if}
 					{if $displayPageHeaderLogo && is_array($displayPageHeaderLogo)}
 						<a href="{$homeUrl}" class="is_img">
-							<img src="{$publicFilesDir}/{$displayPageHeaderLogo.uploadName|escape:"url"}" {if $displayPageHeaderLogoAltText != ''}alt="{$displayPageHeaderLogoAltText|escape}"{else}alt="{translate key="common.pageHeaderLogo.altText"}"{/if}>
+							<img src="{$publicFilesDir}/{$displayPageHeaderLogo.uploadName|escape:"url"}" {if $displayPageHeaderLogo.altText != ''}alt="{$displayPageHeaderLogo.altText|escape}"{else}alt="{translate key="common.pageHeaderLogo.altText"}"{/if}>
 						</a>
 					{else}
 						<a href="{$homeUrl}" class="is_img">
@@ -59,7 +59,7 @@
 									'$.pkp.controllers.MenuHandler');
 						{rdelim});
 					 </script>
-					<ul id="navigationPrimary" class="pkp_navigation_primary pkp_nav_list">
+					<ul id="navigationPrimary" class="pkp_navigation_primary pkp_nav_list" role="navigation" aria-label="{translate|escape key="common.navigation.site"}">
 
 						{url|assign:fetchTaskUrl router=$smarty.const.ROUTE_COMPONENT component="page.PageHandler" op="tasks" escape=false}
 						{capture assign="tasksNavPlaceholder"}
@@ -109,7 +109,7 @@
 
 				{url|assign:fetchHeaderUrl router=$smarty.const.ROUTE_COMPONENT component="page.PageHandler" op="userNavBackend" escape=false}
 				{load_url_in_div class="pkp_navigation_user" id="navigationUserWrapper" url=$fetchHeaderUrl}
-			</nav><!-- pkp_navigation -->
+			</div><!-- pkp_navigation -->
 		</header>
 
 		<div class="pkp_structure_content">
@@ -121,13 +121,10 @@
 				{rdelim});
 			</script>
 
-			<div class="pkp_structure_main">
+			<div class="pkp_structure_main" role="main">
 				{** allow pages to provide their own titles **}
 				{if !$suppressPageTitle}
 					<div class="pkp_page_title">
-						<h2>{$pageTitleTranslated}</h2>
-						{if $currentJournal}
-							<h3>{$currentJournal->getLocalizedName()}</h3>
-						{/if}
+						<h1>{$pageTitleTranslated}</h1>
 					</div>
 				{/if}

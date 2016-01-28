@@ -1,8 +1,8 @@
 {**
  * templates/header/frontend/usernav.tpl
  *
- * Copyright (c) 2014-2015 Simon Fraser University Library
- * Copyright (c) 2003-2015 John Willinsky
+ * Copyright (c) 2014-2016 Simon Fraser University Library
+ * Copyright (c) 2003-2016 John Willinsky
  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
  *
  * Site-Wide Navigation Bar
@@ -14,7 +14,7 @@
 				'$.pkp.controllers.MenuHandler');
 	{rdelim});
  </script>
-<ul id="navigationUser" class="pkp_navigation_user pkp_nav_list">
+<ul id="navigationUser" class="pkp_navigation_user pkp_nav_list" role="navigation" aria-label="{translate|escape key="common.navigation.user"}">
 	{if $isUserLoggedIn}
 		<li>
 			{include file="controllers/page/tasks.tpl"}

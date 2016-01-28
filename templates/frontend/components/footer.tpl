@@ -1,8 +1,8 @@
 {**
  * templates/frontend/components/footer.tpl
  *
- * Copyright (c) 2014-2015 Simon Fraser University Library
- * Copyright (c) 2003-2015 John Willinsky
+ * Copyright (c) 2014-2016 Simon Fraser University Library
+ * Copyright (c) 2003-2016 John Willinsky
  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
  *
  * @brief Common site frontend footer.
@@ -18,14 +18,14 @@
 	{if empty($isFullWidth)}
 		{call_hook|assign:"leftSidebarCode" name="Templates::Common::LeftSidebar"}
 		{if $leftSidebarCode}
-			<div class="pkp_structure_sidebar left">
+			<div class="pkp_structure_sidebar left" role="complementary" aria-label="{translate|escape key="common.navigation.sidebar"}">
 				{$leftSidebarCode}
 			</div><!-- pkp_sidebar.left -->
 		{/if}
 	{/if}
 </div><!-- pkp_structure_content -->
 
-<div class="pkp_structure_footer_wrapper">
+<div class="pkp_structure_footer_wrapper" role="contentinfo">
 
 	<div class="pkp_structure_footer">
 
@@ -39,7 +39,7 @@
 				{/if}
 				{if $displayPageHeaderLogo && is_array($displayPageHeaderLogo)}
 					<a href="{$homeUrl}" class="is_img" rel="home">
-						<img src="{$publicFilesDir}/{$displayPageHeaderLogo.uploadName|escape:"url"}" width="{$displayPageHeaderLogo.width|escape}" height="{$displayPageHeaderLogo.height|escape}" {if $displayPageHeaderLogoAltText != ''}alt="{$displayPageHeaderLogoAltText|escape}"{else}alt="{translate key="common.pageHeaderLogo.altText"}"{/if} />
+						<img src="{$publicFilesDir}/{$displayPageHeaderLogo.uploadName|escape:"url"}" width="{$displayPageHeaderLogo.width|escape}" height="{$displayPageHeaderLogo.height|escape}" {if $displayPageHeaderLogo.altText != ''}alt="{$displayPageHeaderLogo.altText|escape}"{else}alt="{translate key="common.pageHeaderLogo.altText"}"{/if} />
 					</a>
 				{elseif $displayPageHeaderTitle && !$displayPageHeaderLogo && is_string($displayPageHeaderTitle)}
 					<a href="{$homeUrl}" class="is_text" rel="home">{$displayPageHeaderTitle}</a>
@@ -83,8 +83,8 @@
 
 </div><!-- pkp_structure_footer_wrapper -->
 
-<div class="pkp_brand_footer">
-{*
+<div class="pkp_brand_footer" role="complementary" aria-label="{translate|escape key="about.aboutThisPublishingSystem"}">
+{* hack: begins
 	<a href="{url page="about" op="aboutThisPublishingSystem"}">
 		<img alt="{translate key=$packageKey}" src="{$baseUrl}/{$brandImage}">
 	</a>

@@ -4,8 +4,8 @@
 <!--
   * locale/de_DE/editor.xml
   *
-  * Copyright (c) 2014-2015 Simon Fraser University Library
-  * Copyright (c) 2003-2015 John Willinsky
+  * Copyright (c) 2014-2016 Simon Fraser University Library
+  * Copyright (c) 2003-2016 John Willinsky
   * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
   * Localization strings for the de_DE (Deutsch (Deutschland)) locale.
   * Please contact Marco Tullney, marco.tullney@fu-berlin.de, with any questions regarding this translation.
@@ -29,7 +29,7 @@
 	<message key="editor.submission.addReviewer">Gutachter/in hinzufügen</message>
 	<message key="editor.submission.fileList.includeAllStages">Alle Dateien aus allen verfügbaren Workflow-Phasen berücksichtigen.</message>
 	<message key="editor.submission.review.currentFiles">Aktuelle Begutachtungsdateien für Runde {$round}</message>
-	<message key="editor.submission.returnToSimpleSearch">Zur einfachen Suche zurückkehren</message>
+	<message key="editor.submission.backToSearch">Zur einfachen Suche zurückkehren</message>
 	<message key="editor.review.createReviewer">Neue/n Gutachter/in anlegen</message>
 	<message key="editor.review.enrollReviewer.short">Existierende/n Benutzer/in eintragen</message>
 	<message key="editor.review.unassignReviewer">Zuteilung an Gutachter/in aufheben</message>
