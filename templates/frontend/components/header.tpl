@@ -1,8 +1,8 @@
 {**
  * lib/pkp/templates/frontend/components/header.tpl
  *
- * Copyright (c) 2014-2015 Simon Fraser University Library
- * Copyright (c) 2003-2015 John Willinsky
+ * Copyright (c) 2014-2016 Simon Fraser University Library
+ * Copyright (c) 2003-2016 John Willinsky
  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
  *
  * @brief Common frontend site header.
@@ -35,7 +35,7 @@
 	<div class="pkp_structure_page">
 
 		{* Header *}
-		<header class="pkp_structure_head" id="headerNavigationContainer">
+		<header class="pkp_structure_head" id="headerNavigationContainer" role="banner">
 			<div class="pkp_head_wrapper">
 
 				<div class="pkp_site_name_wrapper">
@@ -53,7 +53,7 @@
 						{/if}
 						{if $displayPageHeaderLogo && is_array($displayPageHeaderLogo)}
 							<a href="{$homeUrl}" class="is_img">
-								<img src="{$publicFilesDir}/{$displayPageHeaderLogo.uploadName|escape:"url"}" width="{$displayPageHeaderLogo.width|escape}" height="{$displayPageHeaderLogo.height|escape}" {if $displayPageHeaderLogoAltText != ''}alt="{$displayPageHeaderLogoAltText|escape}"{else}alt="{translate key="common.pageHeaderLogo.altText"}"{/if} />
+								<img src="{$publicFilesDir}/{$displayPageHeaderLogo.uploadName|escape:"url"}" width="{$displayPageHeaderLogo.width|escape}" height="{$displayPageHeaderLogo.height|escape}" {if $displayPageHeaderLogo.altText != ''}alt="{$displayPageHeaderLogo.altText|escape}"{else}alt="{translate key="common.pageHeaderLogo.altText"}"{/if} />
 							</a>
 						{elseif $displayPageHeaderTitle && !$displayPageHeaderLogo && is_string($displayPageHeaderTitle)}
 							<a href="{$homeUrl}" class="is_text">{$displayPageHeaderTitle}</a>
@@ -83,7 +83,7 @@
 							'$.pkp.controllers.MenuHandler');
 					{rdelim});
 				</script>
-				<nav class="pkp_navigation_primary_row">
+				<nav class="pkp_navigation_primary_row" aria-label="{translate|escape key="common.navigation.site"}">
 					<div class="pkp_navigation_primary_wrapper">
 
 						{* Primary navigation menu for current application *}
@@ -116,4 +116,4 @@
 				{rdelim});
 			</script>
 
-			<div class="pkp_structure_main">
+			<div class="pkp_structure_main" role="main">

@@ -1,8 +1,8 @@
 /**
  * @file js/controllers/modal/ConfirmationModalHandler.js
  *
- * Copyright (c) 2014-2015 Simon Fraser University Library
- * Copyright (c) 2000-2015 John Willinsky
+ * Copyright (c) 2014-2016 Simon Fraser University Library
+ * Copyright (c) 2000-2016 John Willinsky
  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
  *
  * @class ConfirmationModalHandler
@@ -35,6 +35,10 @@
 			function($handledElement, options) {
 
 		this.parent($handledElement, options);
+
+		// Bind to the confirmation button
+		$handledElement.find('.pkpModalConfirmButton')
+				.on('click', this.callbackWrapper(this.modalConfirm));
 	};
 	$.pkp.classes.Helper.inherits($.pkp.controllers.modal.ConfirmationModalHandler,
 			$.pkp.controllers.modal.ModalHandler);
@@ -92,6 +96,10 @@
 		}
 
 		$modal.append('<div class="footer">' + buttons + '</div>');
+
+		// Add aria role and label
+		$modal.attr('role', 'dialog')
+			.attr('aria-label', this.options.title);
 
 		return /** @type {jQueryObject} */ $modal;
 	};

@@ -3,8 +3,8 @@
 /**
  * @file controllers/grid/users/stageParticipant/StageParticipantGridHandler.inc.php
  *
- * Copyright (c) 2014-2015 Simon Fraser University Library
- * Copyright (c) 2000-2015 John Willinsky
+ * Copyright (c) 2014-2016 Simon Fraser University Library
+ * Copyright (c) 2000-2016 John Willinsky
  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
  *
  * @class StageParticipantGridHandler
@@ -37,6 +37,7 @@ class PKPStageParticipantGridHandler extends CategoryGridHandler {
 			array(ROLE_ID_MANAGER, ROLE_ID_SUB_EDITOR),
 			array_merge($peOps, array('addParticipant', 'deleteParticipant', 'saveParticipant', 'fetchUserList'))
 		);
+		$this->setTitle('editor.submission.stageParticipants');
 	}
 
 
