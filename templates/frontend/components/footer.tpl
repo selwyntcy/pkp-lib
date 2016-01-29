@@ -107,5 +107,9 @@
 </div><!-- pkp_structure_page -->
 
 {call_hook name="Templates::Common::Footer::PageFooter"}
+{* 20160128: hack: using cdn version of slick.js as upstream has removed it *}
+{* todo: should move to theme *}
+<script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.js"></script>
 </body>
 </html>
