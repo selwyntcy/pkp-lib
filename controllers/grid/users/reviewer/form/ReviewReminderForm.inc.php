@@ -88,7 +88,7 @@ class ReviewReminderForm extends Form {
 		$this->setData('reviewAssignment', $reviewAssignment);
 		$this->setData('reviewerName', $reviewer->getFullName() . ' <' . $reviewer->getEmail() . '>');
 		$this->setData('message', $email->getBody());
-		$this->setData('reviewDueDate', $reviewDueDate);
+//		$this->setData('reviewDueDate', $reviewDueDate);
 	}
 
 	/**
