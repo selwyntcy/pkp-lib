@@ -135,6 +135,7 @@ class FormBuilderVocabulary {
 	 * @param $repeat
 	 */
 	function smartyFBVFormSection($params, $content, &$smarty, &$repeat) {
+error_log("fbv FormSection \$params `\n" . print_r($params, true) . "`\n\n", 3, "/var/www/quest-dev/files/quest-dev-errors.log");
 		$form = $this->getForm();
 		if (!$repeat) {
 			$smarty->assign('FBV_required', isset($params['required']) ? $params['required'] : false);
@@ -228,6 +229,7 @@ class FormBuilderVocabulary {
 	function smartyFBVElement($params, &$smarty, $content = null) {
 		if (!isset($params['type'])) $smarty->trigger_error('FBV: Element type not set');
 		if (!isset($params['id'])) $smarty->trigger_error('FBV: Element ID not set');
+error_log("*** smartyFBVElement(): \$params `\n" . print_r($params, true) . "`\n\n", 3, "/var/www/quest-dev/files/quest-dev-errors.log");
 
 		// Set up the element template
 		$smarty->assign('FBV_id', $params['id']);
@@ -325,6 +327,7 @@ class FormBuilderVocabulary {
 	 * @param $smarty object
 	 */
 	function _smartyFBVButton($params, &$smarty) {
+error_log("fbv Button \$params `\n" . print_r($params, true) . "`\n", 3, "/var/www/quest-dev/files/quest-dev-errors.log");
 		// the type of this button. the default value is 'button' (but could be 'submit')
 
 		$buttonParams = '';
@@ -344,6 +347,7 @@ class FormBuilderVocabulary {
 		}
 
 		$smarty->assign('FBV_buttonParams', $buttonParams);
+error_log("fbv final params `" . print_r($buttonParams, true) . "`\n\n", 3, "/var/www/quest-dev/files/quest-dev-errors.log");
 
 		return $smarty->fetch('form/button.tpl');
 	}
@@ -355,6 +359,7 @@ class FormBuilderVocabulary {
 	 * @param $smarty object
 	 */
 	function _smartyFBVAutocompleteInput($params, &$smarty) {
+error_log("fbv AutocompleteInput \$params `\n" . print_r($params, true) . "`\n\n", 3, "/var/www/quest-dev/files/quest-dev-errors.log");
 		assert(isset($params['autocompleteUrl']) && isset($params['id']));
 
 		// This id will be used for the hidden input that should be read by the Form.
@@ -410,6 +415,7 @@ class FormBuilderVocabulary {
 	 * @param $smarty object
 	 */
 	function _smartyFBVTextInput($params, &$smarty) {
+error_log("fbv TextInput \$params `\n" . print_r($params, true) . "`\n", 3, "/var/www/quest-dev/files/quest-dev-errors.log");
 		$params['name'] = isset($params['name']) ? $params['name'] : $params['id'];
 		$params['subLabelTranslate'] = isset($params['subLabelTranslate']) ? (boolean) $params['subLabelTranslate'] : true;
 		$params['uniqId'] = uniqid();
@@ -433,12 +439,13 @@ class FormBuilderVocabulary {
 				case 'uniqId':
 					$smarty->assign('FBV_' . $key, $value); break;
 					break;
-				case 'required': if ($value != 'true') $textInputParams .= 'required="' + htmlspecialchars($value, ENT_QUOTES, LOCALE_ENCODING) +'"'; break;
+				case 'required': if ($value != 'true') $textInputParams .= ('required="' . htmlspecialchars($value, ENT_QUOTES, LOCALE_ENCODING) .'" '); break;
 				default: $textInputParams .= htmlspecialchars($key, ENT_QUOTES, LOCALE_ENCODING) . '="' . htmlspecialchars($value, ENT_QUOTES, LOCALE_ENCODING). '" ';
 			}
 		}
 
 		$smarty->assign('FBV_textInputParams', $textInputParams);
+error_log("fbv final params `" . print_r($textInputParams, true) . "`\n\n", 3, "/var/www/quest-dev/files/quest-dev-errors.log");
 
 		return $smarty->fetch('form/textInput.tpl');
 	}
@@ -455,6 +462,7 @@ class FormBuilderVocabulary {
 	 * @param $smarty object
 	 */
 	function _smartyFBVTextArea($params, &$smarty) {
+error_log("fbv TextArea \$params `\n" . print_r($params, true) . "`\n", 3, "/var/www/quest-dev/files/quest-dev-errors.log");
 		$params['name'] = isset($params['name']) ? $params['name'] : $params['id'];
 		$params['rows'] = isset($params['rows']) ? $params['rows'] : 10;
 		$params['cols'] = isset($params['cols']) ? $params['cols'] : 80;
@@ -496,6 +504,7 @@ class FormBuilderVocabulary {
 				default: $textAreaParams .= htmlspecialchars($key, ENT_QUOTES, LOCALE_ENCODING) . '="' . htmlspecialchars($value, ENT_QUOTES, LOCALE_ENCODING) . '" ';
 			}
 		}
+error_log("fbv final params `" . print_r($textAreaParams, true) . "`\n\n", 3, "/var/www/quest-dev/files/quest-dev-errors.log");
 
 		$smarty->assign('FBV_textAreaParams', $textAreaParams);
 
@@ -509,6 +518,7 @@ class FormBuilderVocabulary {
 	 * @param $smarty object
 	 */
 	function _smartyFBVHiddenInput($params, &$smarty) {
+error_log("fbv HiddenInput \$params `\n" . print_r($params, true) . "`\n", 3, "/var/www/quest-dev/files/quest-dev-errors.log");
 		$params['name'] = isset($params['name']) ? $params['name'] : $params['id'];
 
 		$hiddenInputParams = '';
@@ -527,6 +537,7 @@ class FormBuilderVocabulary {
 		}
 
 		$smarty->assign('FBV_hiddenInputParams', $hiddenInputParams);
+error_log("fbv final params `" . print_r($hiddenInputParams, true) . "`\n\n", 3, "/var/www/quest-dev/files/quest-dev-errors.log");
 
 		return $smarty->fetch('form/hiddenInput.tpl');
 	}
@@ -539,6 +550,7 @@ class FormBuilderVocabulary {
 	 * @param $smarty object
 	 */
 	function _smartyFBVSelect($params, &$smarty) {
+error_log("fbv Select \$params `\n" . print_r($params, true) . "`\n", 3, "/var/www/quest-dev/files/quest-dev-errors.log");
 		$params['name'] = isset($params['name']) ? $params['name'] : $params['id'];
 		$params['translate'] = isset($params['translate']) ? $params['translate'] : true;
 		$params['subLabelTranslate'] = isset($params['subLabelTranslate']) ? (boolean) $params['subLabelTranslate'] : true;
@@ -568,6 +580,7 @@ class FormBuilderVocabulary {
 		}
 
 		$smarty->assign('FBV_selectParams', $selectParams);
+error_log("fbv final params `" . print_r($selectParams, true) . "`\n\n", 3, "/var/www/quest-dev/files/quest-dev-errors.log");
 
 		return $smarty->fetch('form/select.tpl');
 	}
@@ -580,6 +593,7 @@ class FormBuilderVocabulary {
 	 * @param $smarty object
 	 */
 	function _smartyFBVCheckboxGroup($params, &$smarty) {
+error_log("fbv CheckboxGroup \$params `\n" . print_r($params, true) . "`\n", 3, "/var/www/quest-dev/files/quest-dev-errors.log");
 		$params['name'] = isset($params['name']) ? $params['name'] : $params['id'];
 		$params['translate'] = isset($params['translate']) ? (boolean)$params['translate'] : true;
 		$params['subLabelTranslate'] = isset($params['subLabelTranslate']) ? (boolean) $params['subLabelTranslate'] : true;
@@ -606,6 +620,7 @@ class FormBuilderVocabulary {
 		}
 
 		$smarty->assign('FBV_checkboxParams', $checkboxParams);
+error_log("fbv final params `" . print_r($checkboxParams, true) . "`\n\n", 3, "/var/www/quest-dev/files/quest-dev-errors.log");
 
 		return $smarty->fetch('form/checkboxGroup.tpl');
 	}
@@ -617,6 +632,7 @@ class FormBuilderVocabulary {
 	 * @param $smarty object
 	 */
 	function _smartyFBVCheckbox($params, &$smarty) {
+error_log("fbv Checkbox \$params `\n" . print_r($params, true) . "`\n", 3, "/var/www/quest-dev/files/quest-dev-errors.log");
 		$params['name'] = isset($params['name']) ? $params['name'] : $params['id'];
 		$params['translate'] = isset($params['translate']) ? (boolean)$params['translate'] : true;
 
@@ -637,6 +653,7 @@ class FormBuilderVocabulary {
 		}
 
 		$smarty->assign('FBV_checkboxParams', $checkboxParams);
+error_log("fbv final params `" . print_r($checkboxParams, true) . "`\n\n", 3, "/var/www/quest-dev/files/quest-dev-errors.log");
 
 		return $smarty->fetch('form/checkbox.tpl');
 	}
@@ -648,6 +665,7 @@ class FormBuilderVocabulary {
 	 * @param $smarty object
 	 */
 	function _smartyFBVRadioButton($params, &$smarty) {
+error_log("fbv RadioButton \$params `\n" . print_r($params, true) . "`\n", 3, "/var/www/quest-dev/files/quest-dev-errors.log");
 		$params['name'] = isset($params['name']) ? $params['name'] : $params['id'];
 		$params['translate'] = isset($params['translate']) ? $params['translate'] : true;
 
@@ -673,6 +691,7 @@ class FormBuilderVocabulary {
 		}
 
 		$smarty->assign('FBV_radioParams', $radioParams);
+error_log("fbv final params `" . print_r($radioParams, true) . "`\n\n", 3, "/var/www/quest-dev/files/quest-dev-errors.log");
 
 		return $smarty->fetch('form/radioButton.tpl');
 	}
@@ -841,6 +860,7 @@ class FormBuilderVocabulary {
 	 * @param $smarty Smarty
 	 */
 	function smartyFieldLabel($params, &$smarty) {
+error_log("fbv smartyFieldLabel \$params `\n" . print_r($params, true) . "`\n\n", 3, "/var/www/quest-dev/files/quest-dev-errors.log");
 		$returner = '';
 		if (isset($params) && !empty($params)) {
 			if (isset($params['key'])) {
