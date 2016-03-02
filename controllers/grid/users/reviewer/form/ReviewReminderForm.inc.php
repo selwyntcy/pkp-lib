@@ -88,7 +88,27 @@ class ReviewReminderForm extends Form {
 		$this->setData('reviewAssignment', $reviewAssignment);
 		$this->setData('reviewerName', $reviewer->getFullName() . ' <' . $reviewer->getEmail() . '>');
 		$this->setData('message', $email->getBody());
-//		$this->setData('reviewDueDate', $reviewDueDate);
+		$this->setData('reviewDueDate', $reviewDueDate);
+	}
+
+	/**
+	 * @copydoc Form::fetch()
+	 */
+	function fetch($request) {
+		$context = $request->getContext();
+		$user = $request->getUser();
+
+		$templateMgr = TemplateManager::getManager($request);
+		$templateMgr->assign('emailVariables', array(
+			'reviewerName' => __('user.name'),
+			'reviewDueDate' => __('reviewer.submission.reviewDueDate'),
+			'submissionReviewUrl' => __('common.url'),
+			'submissionTitle' => __('submission.title'),
+			'passwordResetUrl' => __('common.url'),
+			'contextName' => $context->getLocalizedName(),
+			'editorialContactSignature' => $user->getContactSignature(),
+		));
+		return parent::fetch($request);
 	}
 
 	/**
