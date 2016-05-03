@@ -314,7 +314,6 @@
 	<message key="submission.citations.editor.details.authorQueryExplanation">您可以就现有引用的更多问题，向作者进行询问。点击下面的“发送”按钮，您的信息就会以邮件的形式发送到作者那里。</message>
 	<message key="submission.citations.editor.details.cannotSelectDefaultForLabel">您不可以扰乱字段标签。如果您不需要的话，请将对应的字段删除。</message>
 	<message key="submission.citations.editor.details.clickToDismissMessage">您可以点击文本消息对其进行消除。</message>
-	<message key="submission.citations.editor.details.databaseQueryExplanation">从下面您可以找到为您的期刊所配置的一列引用服务清单。您的期刊管理所需要的最相关的服务已经被预先选中配置在上面。您可以根据您的喜好增加查询或排除服务等附加的服务项目。</message>
 	<message key="submission.citations.editor.details.editRawCitationExpertSettingsActive">专家引用编辑设置 （点击关闭）</message>
 	<message key="submission.citations.editor.details.editRawCitationExpertSettingsInactive">专家引用编辑设置（点击打开）</message>
 	<message key="submission.citations.editor.details.explainImprovementOptions">如果您对默认设置的结果不满意，您有多种选择来改进引用。其常常便于对重要字段（如题目和作者）进行手动编辑，然后重试引用服务。如果没有作用，您仍可以查询Google学术搜索或询问作者来获得详情。</message>
@@ -322,7 +321,6 @@
 	<message key="submission.citations.editor.details.newFieldInfo">...点击这里添加新字段...</message>
 	<message key="submission.citations.editor.details.queryCitation">重新查询引用服务</message>
 	<message key="submission.citations.editor.details.queryGoogleScholar">在Google学术搜索中搜索</message>
-	<message key="submission.citations.editor.details.pleaseClickOnCitationToStartEditing"><![CDATA[<p>欢迎来到引用编辑过程中。点击左侧列表中的引用连接， 在此窗口中就可以显示相关引用，您可以在此检查引用过程的准确性。您还将可以将引用同期刊管理中配置的引用服务进行对比，对引用进行手动编辑。</p>]]></message>
 	<message key="submission.citations.editor.details.processRawCitationWarning">您将更改原始引用文本。如果您这样做了， 那么所有字段将会被新生成的值所替换。这将会删除掉您通过手动调整的部分。</message>
 	<message key="submission.citations.editor.details.saveAndApprove">保存和批准</message>
 	<message key="submission.citations.editor.details.saveAndRevokeApproval">撤销批准</message>
@@ -352,15 +350,11 @@
 		<p>实验问吧导出选项包括 ABNT、APA、MLA 和 温哥华引用输出样式。这些选项提供了可以进行复制和粘贴到基于文本的文章校样（如Microsoft Word 或 OpenOffice; Adobe InDesign; 等）中的文本输出。每个引用包括一个嵌入的链接以便在Google学术中自动搜索引用。</p></li>
 	</ul>]]></message>
 	<message key="submission.citations.editor.loadMessage">请等待加载引用标记助理。</message>
-	<message key="submission.citations.editor.pleaseAddParserFilter"><![CDATA[请询问您的期刊管理员<a href="{$citationSetupUrl}">在您能使用引用标记助理之</a>前来添加至少一个引用提取服务。]]></message>
-	<message key="submission.citations.editor.pleaseConfigureOutputStyle"><![CDATA[请询问您的期刊管理员 <a href="{$citationSetupUrl}">在您能使用引用标记助理之前</a> 来配置引用导出样式。]]></message>
 	<message key="submission.citations.editor.pleaseImportCitationsFirst"><![CDATA[<p>没有该文章的引用。</p><p>请到文章 <a href="{$articleMetadataUrl}">元数据页面</a> 并输入引用列表或使用编辑中的添加项目按钮来手动添加参考文献。</p>]]></message>
-	<message key="submission.citations.editor.pleaseSetup"><![CDATA[请询问您的期刊管理员<a href="{$citationSetupUrl}">在您能够使用引用标记助理前</a> 来启用引用编辑。]]></message>
 	<message key="submission.citations.editor.unprocessedCitations">该文章引用仍然在服务器上进行处理。当前的引用列表只包含已经处理过的引用。请点击刷新按钮查看与此同时正在处理的引用。</message>
 	<message key="submission.citations.filter.invalidMetadata">在 {$filterName}中发生错误: 从数据资源（如web服务）中返回来的数据元素同内部元数据格式不符。因此，数据服务的结果被拒绝。请将其报告为错误。</message>
 	<message key="submission.citations.filter.noResultFromFilterError">一些引用服务未返回任何结果。您可以重新尝试手动编辑引用字段，然后再次检索引用服务来改善结果。如果没有作用，那么引用不存在于连接的数据库中。</message>
 	<message key="submission.citations.filter.unsupportedPublicationType">不支持或丢失的出版物类型。</message>
-	<message key="submission.citations.filter.webserviceError">在呼叫下面的URL: {$webserviceUrl}时， {$filterName}web服务呼叫返回一个错误。可能是因为web服务暂时不可用。您仍然可以使用剩下的服务并保存您的结果。您还可以稍后重试。如果错误仍然存在，请询问期刊管理员来停用此服务并开启错误报告。</message>
 	<message key="submission.citations.filter.webserviceResultTransformationError">在{$filterName}中发生了一个错误: XML结果在（例如从web服务）转变到基于字段的元数据中时失败。原因可能是web服务返回了无效或不完整的数据。请将其报告为错误。</message>
 	<message key="submission.layout.galleyRemoteURL">远程URL</message>
 	<message key="submission.layout.galleyRemoteURLValid">请提供一个有效的远程URL（包含http://）</message>

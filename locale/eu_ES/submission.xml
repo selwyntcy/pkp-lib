@@ -278,7 +278,6 @@
 	<message key="submission.citations.editor.details.citationImprovementResultsInactive">Aipuen barneko zerbitzu adituen emaitzak (egin klik irekitzeko)</message>
 	<message key="submission.citations.editor.details.citationServices">Aipuen Zerbitzuak</message>
 	<message key="submission.citations.editor.details.clickToDismissMessage">Mezu bat baztertzeko, haren testuan klik egin dezakezu.</message>
-	<message key="submission.citations.editor.details.databaseQueryExplanation">Beheran, zure aldizkarirako konfiguratuta dauden aipuen zerbitzuen zerrenda agertzen da. Zure aldizkariaren kudeatzaileak aurrez hautatu ditu zure aldizkariarentzat zerbitzu garrantzitsuenak iruditu zaizkionak. Zure eskaeran zerbitzu osagarriak jarri edo zerbitzuak ken ditzakezu, nahierara.</message>
 	<message key="submission.citations.editor.details.dataSaved">Zure aldaketak gorde dira.</message>
 	<message key="submission.citations.editor.details.editRawCitationDatabaseServices">Aukeratu Aipuen Datu-baseen Zerbitzuak:</message>
 	<message key="submission.citations.editor.details.editRawCitationExpertSettingsActive">Aipuak editatzeko adituen ezarpenak (egin klik ixteko)</message>
@@ -292,16 +291,6 @@
 	<message key="submission.citations.editor.details.newFieldInfo">…eremu berria gehitzeko, egin klik hemen…</message>
 	<message key="submission.citations.editor.details.queryCitation">Berriz Kontsultatu Aipuen Zerbitzuak</message>
 	<message key="submission.citations.editor.details.queryGoogleScholar">Bilatu Google Scholar-en</message>
-	<message key="submission.citations.editor.details.pleaseClickOnCitationToStartEditing"><![CDATA[<p> Ongi etorri aipuak editatzeko prozesura. Ezkerreko zerrendako aipu batean klik eginez gero, aipua leiho honetan agertuko da, eta bertan egiaztatu ahal izango duzu aipuaren prozesuaren zehaztasuna. Era berean, aldizkariaren kudeatzaileak konfiguratutako aipuen datu-baseen zerbitzuekin alderatu ahal izango duzu aipua, eta eskuz editatu ahal izango duzu. </p>
-		<h4> Interfazean nabigatzea</h4>
-		<p> Editatzen hasteko, egin klik ezkerreko zerrendako aipu batean. </p>
-		<p> Leiho honen eta ezkerreko zutabearen arteko bereizle urdin argia mugitu egin daiteke. Aipuen zerrenda ikusteko leku gehiago behar baduzu, edo aipua editatzeko toki gehiago behar baduzu, bi norabidetan mugi dezakezu. </p>
-		<p>Aipuaren interfazea hedatzeko, sakatu <strong>Pantaila osoa</strong> botoia. Aipuaren interfaze hedatutik interfaze normalera igarotzeko, egin klik <strong>Kendu pantaila osoa</strong> botoian.</p>
-		<h4>Aipuak gehitzea eta ezabatzea</h4>
-		<p> Aipuen zerrendaren zutabean, goian eskuinaldean, agertzen den <strong>Aipu berria</strong>ikonoa sakatuz gero, aipuak gehitu daitezke. Halaber, aipuak ezaba daitezke, aipuaren ezkerraldeko  <strong>Ezabatu</strong> ikur gorria sakatuz gero. </p>
-		<h4>Aipuak editatzea</h4>
-		<p>Ezkerreko zerrendako aipu bat editatzeko, egin klik haren gainean, eta leiho honetan irekiko da. Egileak idatzitako jatorrizko aipua agertuko zaizu, eta laguntzaileak automatikoki ateratako saioa ere agertuko da. Jatorrizko aipua eskuz editatu ahal izango duzu; aipu berriko zatiak edo aipu osoa editatu ahal izango duzu; konfiguratutako aipuen datu-baseen zerbitzuarekin alderatu ahal izango duzu aipua; Google Scholar-en bilaketa egin dezakezu; eta egileari berari informazio gehiago eska diezaiokezu. </p>
-		<p>Aipua zure modura editatzen amaitu ondoren, <strong>Gorde eta onartu</strong> botoian klik eginez gero, zerrendan onartu gabe dagoen hurrengo aipura igaroko zara automatikoki. Modu horretan, oso azkar lan egin dezakezu aipuen zerrenda luzeekin. Aipu guztiak onartu ondoren, <strong>Aipuak esportatu</strong> orrira igaroko zara. </p>]]></message>
 	<message key="submission.citations.editor.details.processRawCitation">Prozesua</message>
 	<message key="submission.citations.editor.details.processRawCitationGoAhead">Joan aurrera</message>
 	<message key="submission.citations.editor.details.processRawCitationTitle">Jatorrizko aipua aldatzen</message>
@@ -341,16 +330,12 @@
 <p>Aipuak XML edo testu gisa esportatu daitezke. Orain, XML gisa esportatzeko aukeren artean<a href="http://dtd.nlm.nih.gov/publishing/">NLM Aldizkaria Argitaratzea </a> 2.3 eta 3.0 <a href="http://www.ncbi.nlm.nih.gov/pmc/pmcdoc/tagging-guidelines/article/tags.html#el-reflist"> XML erreferentzia-zerrenda </a> daude. Aukera horietako bat hautatuz gero, XML kodedun erreferentzien zerrendaren mozkina aurkezten du, eta, hori kopiatu ondoren, NLM XML galerada batean itsatsi daiteke. </p>
 		<p>Testu-esportazio esperimentalaren aukeren artean ABNT, APA, MLA eta Vancouver aipuen irteera-estiloak daude. Aukera horiek kopiatu eta testuan oinarritutako artikulu-galerada batean itsasteko testu-irteera eskaintzen du (adib., Microsoft Word edo OpenOffice; Adobe InDesing, etab.). Aipu bakoitzak kapsulatutako esteka dauka, aipu hori automatikoki Google Scholar-en bilatzeko</p></li>
 	</ul>]]></message>
-	<message key="submission.citations.editor.pleaseAddParserFilter"><![CDATA[Mesedez, eskatu zure aldizkariaren kudeatzaileari <a href="{$citationSetupUrl}">aipuak erauzteko zerbitzu bat </a>gehitzeko gutxienez, aipuak markatzeko laguntzailea erabili baino lehen.]]></message>
-	<message key="submission.citations.editor.pleaseConfigureOutputStyle"><![CDATA[Mesedez, eskatu zure aldizkariaren kudeatzaileari <a href="{$citationSetupUrl}"> aipuen esportazio-estiloa konfiguratzeko</a> aipuak markatzeko laguntzailea erabili baino lehen.]]></message>
 	<message key="submission.citations.editor.pleaseImportCitationsFirst"><![CDATA[<p>Ez dago aipurik artikulu honentzat.</p><p>Mesedez, joan zaitez artikuluaren href="{$articleMetadataUrl}">metadatuen orrira</a> eta sartu erreferentzien zerrenda edo gehitu eskuz erreferentziak, editatzailearen “Gehitu elementua” botoia erabiliz.</p>]]></message>
 	<message key="submission.citations.editor.pleaseSelect">Mesedez, hautatu…</message>
-	<message key="submission.citations.editor.pleaseSetup"><![CDATA[Mesedez, eskatu zure aldizkariaren kudeatzaileari <a href="{$citationSetupUrl}"> aipuak editatzea gaitzeko</a> aipuak markatzeko laguntzailera sartu baino lehen.]]></message>
 	<message key="submission.citations.editor.unprocessedCitations">Artikulu honetako aipuak zerbitzarian prozesatzen ari dira oraindik. Aipuen zerrenda honek dagoeneko prozesatuta dauden aipuak ditu soilik. Oraindik prozesatu gabe dauden aipuak ikusteko, egin klik “berritu” botoian, mesedez.</message>
 	<message key="submission.citations.editor.unprocessedCitationsButton">Berritu aipuen zerrenda</message>
 	<message key="submission.citations.editor.unprocessedCitationsButtonTitle">Egin klik aipuen zerrenda berritzeko.</message>
 	<message key="submission.citations.filter.invalidMetadata">Errore bat gertatu da {$filterName} iragazkian: datuen iturritik (adib. web zerbitzu bat) itzulitako datu-elementu batek ez du barneko metadatuen formatua betetzen. Hortaz, datuen iturriko emaitzak baztertu egin dira. Mesedez, artxibatu errore gisa.</message>
-	<message key="submission.citations.filter.webserviceError">{$filterName} iragazkiaren web zerbitzuaren deiak errore bat sortu du honako URL honekin deitzean: {$webserviceUrl}. Agian, web zerbitzua ez dago erabilgarri aldi baterako. Gainerako zerbitzuekin lanean jarrai dezakezu, eta zure emaitzak gorde ditzakezu. Era berean, geroago saia zaitezke. Erroreak hor jarraitzen badu, eskatu aldizkariaren kudeatzaileari zerbitzu hori desaktibatzeko, eta errore-txostena irekitzeko.</message>
 	<message key="submission.citations.filter.webserviceResultTransformationError">Errore bat gertatu da  {$filterName} iragazkian: XML emaitzak (adib., web zerbitzu batekoak) eremuan oinarritutako metadatuetan eraldatzeak huts egin du. Ziurrenik web zerbitzua baliogabea bihurtu da edo datuak osatu gabe daude. Mesedez, artxibatu hori errore gisa.</message>
 	<message key="submission.citations.metadata.changeWarning">Ziur al zaude zure erreferentzien zerrenda eguneratu nahi duzula? “OK” botoian klik egiten baduzu, editoreek egindako aldaketa guztiak gainidatziko dira. Ez badakizu erreferentzien zerrendan aldaketak egin behar den edo ez, jar zaitez harremanetan dagokizun editorearekin.</message>
 	<message key="submission.artworkFileDetails">Artelanen Artxiboaren Xehetasunak</message>

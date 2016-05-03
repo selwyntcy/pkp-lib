@@ -7,6 +7,10 @@
  *
  * User profile form.
  *}
+
+{* Help Link *}
+{help file="user-profile.md" class="pkp_help_tab"}
+
 <script type="text/javascript">
 	$(function() {ldelim}
 		// Attach the form handler.
@@ -15,12 +19,13 @@
 </script>
 
 <form class="pkp_form" id="contactForm" method="post" action="{url op="saveContact"}">
+
 	{include file="controllers/notification/inPlaceNotification.tpl" notificationId="contactFormNotification"}
 
 	{fbvFormSection}
-		{fbvElement type="text" label="user.email" id="email" value=$email size=$fbvStyles.size.LARGE required=true}
-		{fbvElement type="text" label="user.phone" name="phone" id="phone" value=$phone maxlength="24" inline=true size=$fbvStyles.size.SMALL}
-		{fbvElement type="text" label="user.affiliation" multilingual="true" name="affiliation" id="affiliation" value=$affiliation size=$fbvStyles.size.LARGE}
+		{fbvElement type="text" label="user.email" id="email" value=$email size=$fbvStyles.size.MEDIUM required=true}
+		{fbvElement type="text" label="user.phone" name="phone" id="phone" value=$phone maxlength="24" size=$fbvStyles.size.SMALL}
+		{fbvElement type="text" label="user.affiliation" multilingual="true" name="affiliation" id="affiliation" value=$affiliation size=$fbvStyles.size.MEDIUM}
 	{/fbvFormSection}
 	{fbvFormSection}
 		{fbvElement type="textarea" label="common.mailingAddress" name="mailingAddress" id="mailingAddress" rich=true value=$mailingAddress size=$fbvStyles.size.LARGE}

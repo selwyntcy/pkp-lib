@@ -264,7 +264,6 @@
 	<message key="submission.citations.editor.details.citationImprovementResultsActive">Rezultate expert pentru serviciul intern pentru referințe bibliografice (clic pe închide)</message>
 	<message key="submission.citations.editor.details.citationImprovementResultsInactive">Rezultate expert pentru serviciul intern pentru referințe bibliografice (clic pe deschide)</message>
 	<message key="submission.citations.editor.details.clickToDismissMessage">Poți da clic pe textul unui mesaj pentru a-l anula.</message>
-	<message key="submission.citations.editor.details.databaseQueryExplanation">Mai jos găsești o listă cu servicii pentru referințe bibliografice configurate pentru revista ta. Serviciile pe care managerul le consideră relevante pentru revistă, au fost preselectate. Poți include servicii suplimentare în interogare sau poți scoate din servicii după cum crezi.</message>
 	<message key="submission.citations.editor.details.dataSaved">Modificările au fost salvate.</message>
 	<message key="submission.citations.editor.details.editRawCitationDatabaseServices">Selectează serviciile pentru baza de date pentru referințe bibliografice:</message>
 	<message key="submission.citations.editor.details.editRawCitationExpertSettingsActive">Setările pentru editarea expert pentru referințele bibliografice (clic pentru a închide)</message>
@@ -277,16 +276,6 @@
 	<message key="submission.citations.editor.details.newFieldInfo">...clic aici pentur a adăuga un câmp nou...</message>
 	<message key="submission.citations.editor.details.queryCitation">Reinteroghează serviciile pentru referințe bibliografice</message>
 	<message key="submission.citations.editor.details.queryGoogleScholar">Caută în Google Scholar</message>
-	<message key="submission.citations.editor.details.pleaseClickOnCitationToStartEditing"><![CDATA[<p>Ai ajuns la procesul de editare al referințelor bibliografice. Dând clic pe o referință din lista din partea stângă, va avea ca efect afișarea referinței în această fereastră, de unde poți verifica acuratețea procesului de citare. Vei putea verifica referița în bazele de date la care acces a fost configurat de managerul revistei și vei putea edita de mână referința.</p>
-		<h4>Navigarea prin interfață</h4>
-		<p>Clic pe una din referințele listate pe stânga pentru a porni editarea.</p>
-		<p>Separatorul albastru deschis dintre această fereastră și coloana din stânga se poate muta. Fie că ai nevoie de mai mult spațiu, fie că ai nevoie de mai mult spațiu pentru a edita citare, aceasta se poate muta în oricare direcție.</p>
-		<p>Pentru a extinde interfața de citare, dă clic pe butonul <strong>tot ecranul</strong>. Pentru a te întoarce la interfața obișnuită din interfața extinsă pentru referințele bibliografice, dă clic pe butonul <strong>în fereastră</strong>.</p>
-		<h4>Adăugarea și eliminarea referințelor bibliografice</h4>
-		<p>Referințele bibliografice pot fi adăugate dând clic pe pictograma <strong>referință nouă</strong> din colțul dreapta sus a coloanei pentru lista de citări bibliografice. Citările pot fi șterse dând clic pe pictograma roșie <strong>șterge</strong> din stânga referinței bibliografice.</p>
-		<h4>Editarea referințelor bibliografice</h4>
-		<p>Pentur a edita o referință din partea stângă, dă clic pe ea și se va deschide în această fereastră. Vi se va arăta referința în forma sa originală așa cum a fost întocmită de autor urmată de încercarea de extracție a asistentului. Vei putea să editezi de mână referinșa originală, să editezi parțial sau integral noua citare, reverifica citarea cu serviciile pentru referințe ale bazelor de date specializate, vei putea interoga Google Scholar și chiar să-i soliciți autorului mai multe informații.</p>
-		<p>La finalizarea unei referințe care va fi conformă cu așteptările, dă clic pe butonul <strong>salvează și aprobă</strong> și vei fi condus la următoarea citare care nu este verificată din listă. În acest mod poți parcurge o listă foarte mare de referințe bibliografice. Din moment ce toate referințele au fost aprobate, vei fi condus la următoarea pagină: <strong>exportă referințele bibliografice</strong>.</p>]]></message>
 	<message key="submission.citations.editor.details.processRawCitation">Proces</message>
 	<message key="submission.citations.editor.details.processRawCitationGoAhead">Mergi mai departe</message>
 	<message key="submission.citations.editor.details.processRawCitationTitle">Modificarea citării originale</message>
@@ -330,11 +319,8 @@
 		<p>Opțiunile experimentale pentru export includ ABNT, APA, MLA și Vancouver. Aceste opțiuni generează un rezultat de text care poate fi copiat și inserat într-o asamblare bazată pe text a unui articol (de exemplu în Microsoft Word sau OpenOffice; Adobe InDesign; etc.). Fiecare referință bibliografică include un link pentru a căuta automat acea referință bibliografică în Google Scholar.</p></li>
 	</ul>]]></message>
 	<message key="submission.citations.editor.loadMessage">Așteaptă până la încărcarea asistentului pentru markup-ul referințelor bibliografice</message>
-	<message key="submission.citations.editor.pleaseAddParserFilter"><![CDATA[Cere managerului revistei să <a href="{$citationSetupUrl}">adauge cel puțin un serviciu pentru extragerea referințelor bibliografice</a> înainte de a utiliza asistentul pentru extragerea referințelor bibliografice.]]></message>
-	<message key="submission.citations.editor.pleaseConfigureOutputStyle"><![CDATA[Cere managerului revistei să <a href="{$citationSetupUrl}">configureze un stil pentru exportul referințelor</a> înainte de a utiliza asistentul pentru extragerea referințelor bibliografice.]]></message>
 	<message key="submission.citations.editor.pleaseImportCitationsFirst"><![CDATA[<p>Nu există referințe bibliografice pentru acest articol.</p><p>Mergi la pagina <a href="{$articleMetadataUrl}">metadatelor</a> și introdu a listă cu referințe bibliografice sau adaugă referințele manual utilizând butonul pentru adăugare al editorului.</p>]]></message>
 	<message key="submission.citations.editor.pleaseSelect">Selectează...</message>
-	<message key="submission.citations.editor.pleaseSetup"><![CDATA[Cere managerului revistei să <a href="{$citationSetupUrl}">activeze editarea referințelor</a> înainte de a accesa asistentul pentru markup pentru referințele bibliografice.]]></message>
 	<message key="submission.citations.editor.unprocessedCitations">Referințele bibliografice pentru acest articol încă sunt procesare de server. Lista curentă a citărilor conține doar referințele care au fost procesate deja. Dă clic pe butonul de actualizare pentru a vedea care au mai fost procesate între timp.</message>
 	<message key="submission.citations.editor.unprocessedCitationsButton">Actualizează lista referințelor bibliografice</message>
 	<message key="submission.citations.editor.unprocessedCitationsButtonTitle">Clic pentru a actualiza lista referințelor bibliografice.</message>
@@ -352,7 +338,6 @@
 	<message key="submission.nameRequired">Se cere un nume pentru acest articol.</message>
 	<message key="submission.date.mmdd">LL-ZZ</message>
 	<message key="submission.date.yyyymmdd">AAAA-LL-ZZ</message>
-	<message key="submission.citations.filter.webserviceError">Apelul la serviciul web {$filterName}'s a semnalat eroarea urmând următorul URL: {$webserviceUrl}. Se pare că serviciul web este temporar indisponibil. Veți putea lucra cu serviciile rămase și salva rezultatele. Poți încerca mai târziu. Dacă eroarea persistă, atunci rugați managerul revistei pentru a dezactiva acest serviciu și să semnalați un bug.</message>
 	<message key="submission.citations.filter.webserviceResultTransformationError">A apărut o eroare în {$filterName}: A eșuat transfomarea rezultatelor XML (de ex. de la serviciul web) pe câmpurile bazate pe metadate. E posibil ca motivul să fie date incomplete sau invalide. Trimite eroarea ca un bug.</message>
 	<message key="submission.citations.metadata.changeWarning">Ești sigur că dorești să actualizezi lista cu referințe bibliografice? Dacă dați clic pe OK, oricare modificări făcute de editori vor fi suprascrise. Dacă nu ești sigur că trebuie să faceți modificări listei de referințe bibliografice, contactați-l pe redactorul responsabil de propunere.</message>
 	<message key="submission.citations.editor.details.authorQuery">Întreabă autorul</message>

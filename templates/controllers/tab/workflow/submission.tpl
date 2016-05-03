@@ -7,6 +7,10 @@
  *
  * Display submission details (metadata, file grid)
  *}
+
+{* Help Link *}
+{help file="editorial-workflow/submission.md" class="pkp_help_tab"}
+
 <div class="pkp_context_sidebar">
 	{url|assign:submissionEditorDecisionsUrl router=$smarty.const.ROUTE_PAGE page="workflow" op="editorDecisionActions" submissionId=$submission->getId() stageId=$stageId contextId="submission" escape=false}
 	{load_url_in_div id="submissionEditorDecisionsDiv" url=$submissionEditorDecisionsUrl class="pkp_tab_actions"}
@@ -14,8 +18,6 @@
 </div>
 
 <div class="pkp_content_panel">
-	<p class="pkp_help">{translate key="editor.submission.introduction"}</p>
-
 	{url|assign:submissionFilesGridUrl router=$smarty.const.ROUTE_COMPONENT component="grid.files.submission.EditorSubmissionDetailsFilesGridHandler" op="fetchGrid" submissionId=$submission->getId() stageId=$stageId escape=false}
 	{load_url_in_div id="submissionFilesGridDiv" url=$submissionFilesGridUrl}
 

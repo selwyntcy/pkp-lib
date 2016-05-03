@@ -66,12 +66,12 @@
 
 	// Search filter
 	.pkp_linkaction_search {
-		&:extend( .fa );
 		padding: 0 1px; // 1px prevents aliased icon from getting clipped at the edge
 		background: transparent;
 		transition: all 0.3s ease;
 
 		&:before {
+			&:extend( .fa );
 			margin-right: 0.5em;
 		}
 	}
@@ -107,10 +107,6 @@
 			&:last-child {
 				margin-bottom: 0;
 			}
-		}
-
-		.pkp_spinner {
-			display: none;
 		}
 
 		.pkp_controllers_extrasOnDemand {
@@ -246,22 +242,23 @@
 		text-align: right;
 
 		.saveButton {
-			&:extend( .pkp_button );
-
-			&:hover,
-			&:focus {
-				&:extend( .pkp_button:hover );
-			}
-
-			&[disabled] {
-				&:extend(.pkp_button[disabled]);
-			}
+			&:extend(.pkp_button all);
 		}
 
 		.cancelFormButton {
 			margin-left: 1em;
 			color: @no;
 		}
+	}
+
+	.order_message {
+		position: absolute;
+		background-color: lightGrey;
+		padding: 0.5em 0.5em;
+		display: inline-table;
+		top: 2em;
+		width: 15em;
+		z-index: 2;
 	}
 
 	// Labels within a grid cell which appear before a link action in the cell
@@ -337,8 +334,9 @@
 	.pkp_linkaction_resetEmail,
 	.pkp_linkaction_removeUserGroup,
 	.pkp_linkaction_deleteAuthor,
-	.pkp_linkaction_deleteQuery {
-		color: @offset;
+	.pkp_linkaction_deleteQuery,
+	.pkp_linkaction_deleteNote {
+		color: @no;
 	}
 
 	// Icons

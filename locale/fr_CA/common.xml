@@ -468,10 +468,7 @@
 	<message key="search.cli.rebuildIndex.clearingIndex">Elimination de l'index</message>
 	<message key="search.cli.rebuildIndex.done">Terminé</message>
 	<message key="search.cli.rebuildIndex.error">Erreur</message>
-	<message key="search.cli.rebuildIndex.indexing">Indexage de "{$journalName}"</message>
-	<message key="search.cli.rebuildIndex.indexingByJournalNotSupported">Cette application de recherche ne permet pas le ré-indexage par journal.</message>
 	<message key="search.cli.rebuildIndex.result">{$numIndexed} articles indexés</message>
-	<message key="search.cli.rebuildIndex.unknownJournal">Le chemin d'accès fourni "{$journalPath}" n'a pu être résolu à un journal.</message>
 	<message key="search.deleteFilter">Supprimer</message>
 	<message key="search.indexTermsLong">Tous les champs des termes de l'index</message>
 	<message key="grid.action.downloadFile">Télécharger ce fichier</message>
@@ -482,7 +479,6 @@
 	<message key="user.authorization.invalidSubmission">Soumission invalide</message>
 	<message key="navigation.archives">Archives</message>
 	<message key="search.advancedSearchMore">Options de recherche supplémentaires (cliquer pour afficher)</message>
-	<message key="grid.action.toggleHelp">Basculer l'affichage d'aide en ligne</message>
 	<message key="review.ensuringBlindReview">Assurer un examen aveugle</message>
 	<message key="grid.action.showReviewPolicy">Lire la politique actuelle concernant la révision</message>
 	<message key="user.authorization.submissionFile">L'utilisateur actuel n'a pas accès au fichier de soumission spécifié.</message>

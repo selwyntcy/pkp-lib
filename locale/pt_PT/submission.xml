@@ -280,7 +280,6 @@
 	<message key="submission.citations.editor.details.citationImprovementResultsInactive">Resultados do serviço de citação interno especializado (clicar para abrir)</message>
 	<message key="submission.citations.editor.details.citationServices">Serviços de Citação</message>
 	<message key="submission.citations.editor.details.clickToDismissMessage">Pode clicar sobre o texto da mensagem para recusá-lo.</message>
-	<message key="submission.citations.editor.details.databaseQueryExplanation">Pode encontrar em baixo uma lista dos serviços de citação configurados na sua revista. Os serviços que o Editor-Gestor considera mais relevantes para a sua revista foram pré-seleccionados. Pode incluir serviços adicionais na sua query ou excluir os serviços que entender sejam necessários.</message>
 	<message key="submission.citations.editor.details.dataSaved">As alterações foram gravadas.</message>
 	<message key="submission.citations.editor.details.editRawCitationDatabaseServices">Seleccionar os Serviços de Bases de Dados de Citação:</message>
 	<message key="submission.citations.editor.details.editRawCitationExpertSettingsActive">Configurações da edição de citação especializada (clicar para fechar)</message>
@@ -294,16 +293,6 @@
 	<message key="submission.citations.editor.details.newFieldInfo">...clicar aqui para adicionar um novo campo...</message>
 	<message key="submission.citations.editor.details.queryCitation">Serviços de Citação Re-Query</message>
 	<message key="submission.citations.editor.details.queryGoogleScholar">Pesquisar no Google Académico</message>
-	<message key="submission.citations.editor.details.pleaseClickOnCitationToStartEditing"><![CDATA[<p>Bem-vindo ao processo de edição da citação. Clique na lista de citações apresentada à esquerda na janela, onde pode verificar a precisão do processo de citação. Também poderá comparar a citação com os serviços de citação das bases de dados configurados pelo Editor-Gestor, e manualmente editar a citação.</p>
-		<h4>Navegar na Interface</h4>
-		<p>Clique sobre as citações listadas na esquerda para dar início à edição.</p>
-		<p>O separador azul claro situado entre esta janela e a coluna na esquerda é movível. Quer precise de mais espaço para ver a lista de citações, ou alternativamente mais espaço para editar uma citação, pode deslocar para qualquer direcção.</p>
-		<p>Para expandir a interface de citação, clique no botão <strong>Ecrã Inteiro</strong>. Para voltar à interface normal da interface de citação expandida, clique no botão <strong>Ecrã Inteiro Desligado</strong>.</p>
-		<h4>Adicionar e Eliminar Citações</h4>
-		<p>As citações podem ser adicionadas clicando o ícone <strong>Nova Citação</strong> localizado no canto superior direito da coluna da lista de citação. As citações podem ser eliminadas clicando o ícone <strong>Eliminar</strong> vermelho localizado à esquerda da citação.</p>
-		<h4>Editar Citações</h4>
-		<p>Para editar uma citação na lista da esquerda, clique sobre esta e abrir-se-á uma janela. Será apresentada uma citação original tal como foi escrita pelo autor, acompanhada pela tentativa de extracção automática feita pelo Assistente. Poderá editar manualmente a citação original; editar partes ou todas as novas citações; comparar novamente a citação com os serviços de bases de dados da citação configurados; inquirir Google Académico; e inquirir o autor para obter informações adicionais sobre a citação.</p>
-		<p>Quando concluir satisfatoriamente a edição da citação, clique no botão <strong>Guardar e Aprovar</strong> e será encaminhado automaticamente para a próxima citação não aprovada da lista. Deste modo poderá trabalhar facilmente com várias listas de citações. Assim que todas as citações tenham sido aprovadas, será encaminhado para a página. <strong>Exportar Citações</strong></p>]]></message>
 	<message key="submission.citations.editor.details.processRawCitation">Processo</message>
 	<message key="submission.citations.editor.details.processRawCitationGoAhead">Avançar</message>
 	<message key="submission.citations.editor.details.processRawCitationTitle">Modificação da Citação Original</message>
@@ -343,11 +332,8 @@
  		<p>As citações podem ser exportadas como XML ou texto. As opções de exportação em formato XML actualmente disponíveis incluem <a href="http://dtd.nlm.nih.gov/publishing/">NLM Journal Publishing</a> 2.3 e 3.0 <a href="http://www.ncbi.nlm.nih.gov/pmc/pmcdoc/tagging-guidelines/article/tags.html#el-reflist">ref-list XML</a>. Ao seleccionar uma destas opções os outputs codificados como XML ref-list podem ser copiados e colados no tipo NLM XML.</p>
 		<p>As opções experimentais de exportação de texto incluem os estilos de output de citação ABNT, APA, MLA e Vancouver. Estas opções fornecem um output de texto que pode ser copiado e colado como texto (por exemplo como Microsoft Word ou OpenOffice; Adobe InDesign; etc.). Cada citação inclui um link embebido para pesquisar automaticamente esta citação no Google Académico.</p></li>
 	</ul>]]></message>
-	<message key="submission.citations.editor.pleaseAddParserFilter"><![CDATA[Por favor solicite ao Editor-Gestor para <a href="{$citationSetupUrl}">adicionar pelos menos um serviço de extracção de citações</a> antes de usar o assistente de marcação de citação.]]></message>
-	<message key="submission.citations.editor.pleaseConfigureOutputStyle"><![CDATA[Por favor solicite ao Editor-Gestor para <a href="{$citationSetupUrl}">configurar o estilo de exportação de citação</a> antes de usar o assistente de marcação de citação.]]></message>
 	<message key="submission.citations.editor.pleaseImportCitationsFirst"><![CDATA[<p>Não existem citações para este artigo.</p><p>Vá à página de metadados do artigo <a href="{$articleMetadataUrl}"></a> e insira uma lista de referências ou adicione manualmente as referências usando o botão de adição do editor.</p>]]></message>
 	<message key="submission.citations.editor.pleaseSelect">Por favor seleccione...</message>
-	<message key="submission.citations.editor.pleaseSetup"><![CDATA[Por favor solicite ao Editor-Gestor para activar a edição de citação <a href="{$citationSetupUrl}"></a> antes de aceder ao assistente de marcação de citação.]]></message>
 	<message key="submission.citations.editor.unprocessedCitations">As citações do artigo estão em processamento no servidor. A lista de citação actual contem apenas as citações processadas. Por favor clique no botão de actualização para ver as citações processadas até ao momento.</message>
 	<message key="submission.citations.editor.unprocessedCitationsButton">Lista de Citações Actualizada</message>
 	<message key="submission.citations.editor.unprocessedCitationsButtonTitle">Clicar para actualizar a lista de citações.</message>

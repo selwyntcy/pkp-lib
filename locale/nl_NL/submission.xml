@@ -226,12 +226,8 @@
 	<message key="submission.citations.filter.invalidMetadata">Er is een fout opgetreden in {$filterName}: één van de data-elementen die werd teruggegeven door de dienst (bv. door een webservice) voldoet niet aan het interne metadata-formaat. De informatie van deze dienst is genegeerd. Gelieve dit als een fout te melden.</message>
 	<message key="submission.citations.filter.noResultFromFilterError">Meerder citatiediensten gaven geen resultaten. U kunt de citatievelden met de hand bewerken en dan de citatiediensten nogmaals proberen. Als dat niet helpt, bestaat de citatie niet in de aangesloten databanken.</message>
 	<message key="submission.citations.filter.unsupportedPublicationType">Niet-ondersteund of ontbrekend publicatietype. Bewerk de citatie met de hand en geef een publicatietype op (toegestaan zijn 'book', 'journal', 'thesis' en 'conf-proc').</message>
-	<message key="submission.citations.filter.webserviceError">De webservice van {$filterName}'s gaf een foutmelding bij het aanroepen met de volgende URL: {$webserviceUrl}. Mogelijk is de webservice tijdelijk niet beschikbaar. U kunt doorwerken met de resterende webservices en uw resultaten opslaan. U kunt het ook later opnieuw proberen. Als de fout blijft, vraag dan de tijdschriftbeheerder om de webservice te deactiveren en een foutmelding in te dienen.</message>
 	<message key="submission.citations.editor.details.sourceResultsUseExplanation">Klik om dit resultaatveld meteen naar uw veldlijst te transporteren</message>
-	<message key="submission.citations.editor.pleaseAddParserFilter"><![CDATA[Vraag uw tijdschriftbeheerder om <a href="{$citationSetupUrl}">ten minste één citatie-extractie dienst toe te voegen</a> om u toegang te geven tot de citatiemarkeringsassistent.]]></message>
-	<message key="submission.citations.editor.pleaseConfigureOutputStyle"><![CDATA[Vraag uw tijdschriftbeheerder om een <a href="{$citationSetupUrl}">citatie-export stijl te configureren</a> om u toegang te geven tot de citatiemarkeringsassistent.]]></message>
 	<message key="submission.citations.editor.pleaseImportCitationsFirst"><![CDATA[<p>Eer zijn geen citaties voor dit artikel.</p><p>Ga naar de <a href="{$articleMetadataUrl}">metadata pagina</a> van het artikel en geef een referentielijst of voeg ze per stuk toe met de 'voeg onderdeel toe' knop.</p>]]></message>
-	<message key="submission.citations.editor.pleaseSetup"><![CDATA[Vraag uw tijdschriftbeheerder om <a href="{$citationSetupUrl}">citatiebewerking in te schakelen</a> om u toegang te geven tot de citatiemarkeringsassistent.]]></message>
 	<message key="submission.citations.editor.unprocessedCitations">De citaties van dit artikel worden nog verwerkt door de server. De huidige citatielijst bevat de reeds verwerkte citaties. Klik op de ververs-knop om de citaties te bekijken die in de tussentijd verwerkt zijn.</message>
 	<message key="submission.citations.editor.details.processRawCitation">Verwerk</message>
 	<message key="submission.citations.editor.details.processRawCitationGoAhead">Doorgaan</message>
@@ -332,7 +328,6 @@
 	<message key="metadata.property.validationMessage.fpage">Geef een geldige eerste pagina (moet een numerieke waarde zijn).</message>
 	<message key="metadata.property.validationMessage.publisher-name">Geef een geldige uitgeversnaam</message>
 	<message key="metadata.property.validationMessage.isbn">Geef een geldig ISBN (9 of 13 cijfers)</message>
-	<message key="submission.citations.editor.details.databaseQueryExplanation">Hieronder vindt u de lijst met citatiediensten die voor uw tijdschrift geconfigureerd zijn. De diensten die volgens uw tijdschriftbeheerder het meest relevant zijn, zijn al geselecteerd. U kunt additionele diensten in uw vraag opnemen of diensten uitschakelen.</message>
 	<message key="submission.citations.editor.introduction.introductionMessage"><![CDATA[<h4>Welkom bij de citatie-markering assistent!</h4>
 	<p>Met deze assistent kunt u de citaties van de auteur markeren voor export naar NLM 2.3 of 3.0 XML proeven, of naar tekst-uitvoer. Dit gereedschap probeert om te beginnen de citaties automatisch te extraheren en herkennen, maar u kunt op ieder moment zelf de resultaten aanpassen.</p>
 	<ul>
@@ -349,16 +344,6 @@
  		<p>Ciitaties kunnen geëxporteerd worden als XML of tekst. XML export opties omvatten momenteel <a href="http://dtd.nlm.nih.gov/publishing/">NLM Journal Publishing</a> 2.3 en 3.0 <a href="http://www.ncbi.nlm.nih.gov/pmc/pmcdoc/tagging-guidelines/article/tags.html#el-reflist">ref-list XML</a>. Het kiezen van een van deze opties geeft een in XML gecodeerde lijst met referenties die gekopieerd kan worden en geplakt in een NLM XML proef.</p>
 		<p>Experimentele tekst-export opties omvatten ABNT, APA, MLA en Vancouver citatiestijlen. Deze opties leveren tekst-uitvoer die gekopieerd en geplakt kan worden en een tekst-gebaseerde artikel-proef (bijvoorbeeld in  Microsoft Word of OpenOffice, Adobe InDesign, enz.). Iedere citatie bevat een link om de automatisch naar die citatie te zoeken in Google Scholar.</p></li>
 	</ul>]]></message>
-	<message key="submission.citations.editor.details.pleaseClickOnCitationToStartEditing"><![CDATA[<p>Welkom bij het citatie-bewerkingsproces. Klikken op een citatie in de lijst aan de linkerkant toont de citatie in dit venster, zodat u de juistheid van de citatie kunt controleren. U kunt de citatie ook controleren bij een aantal citatie-databanken die door de tijdschriftbeheerder zijn ingesteld. U kunt de citatie ook zelf bewerken.</p>
-		<h4>Navigatie</h4>
-		<p>Klik op een van de citaties links om het bewerken te starten.</p>
-		<p>De lichtblauwe scheider tussen dit venster en de lijst aan de linkerkant is verschuifbaar. Als u meer ruimte wenst om de citatielijst te bekijken of meer ruimte om een citatie te bewerken, kunt u de scheider in één van beide richtingen verslepen.</p>
-		<p>Klik op de <strong>Volledig scherm</strong> knop om het scherm te vergoten. Om terug te keren naar het normale scherm, klik op de <strong>Volledig scherm uit</strong> knop.</p>
-		<h4>Citaties toevoegen en verwijderen</h4>
-		<p>Citaties kunnen toegevoegd worden met het <strong>Nieuwe citatie</strong> ikoon in de rechterbovenhoek van de citatielijst. Citaties kunnen verwijderd worden door te klikken op het rode <strong>Verwijder</strong> ikoon aan de linkerkant van de citatie.</p>
-		<h4>Citaties bewerken</h4>
-		<p>Klik op een citatie in de lijst aan de linkerkant om die citatie te bewerken. De citatie zal dan geopend worden in dit venster. U krijgt de originele citatie van de auteur te zien,gevolg door de automatisch extractie van de assistent. U kunt de originele citatie bewerken, onderdelen of de gehele nieuwe citatie bewerken, de citatie opnieuw controleren bij de geconfigureerde databanken, Google Scholar doorzoeken of de auteur om meer informatie vragen.</p>
-		<p>Als u een citatie naar tevredenheid bewerkt hebt, kunt up op de <strong>Bewaren en goedkeuren</strong> knop klikken. U krijgt dan de volgende niet-goedgekeurde citatie uit de lijst. Op deze manier kunt een grote lijst citaties snel verwerken. Zodra alle citaties goedgekeurd zijn komt u  op de <strong>Exporteer citaties</strong> pagina.</p>]]></message>
 	<message key="metadata.property.displayName.nonSort">Deel van de titel genegeerd bij het sorteren</message>
 	<message key="metadata.property.displayName.title">Titel</message>
 	<message key="metadata.property.validationMessage.title">Geef een geldige titel</message>

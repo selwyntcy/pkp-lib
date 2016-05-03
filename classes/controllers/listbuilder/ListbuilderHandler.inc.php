@@ -200,7 +200,7 @@ class ListbuilderHandler extends GridHandler {
 	 * @return array
 	 */
 	function getOptions($request) {
-		fatalError('ABSTRACT METHOD');
+		return array();
 	}
 
 	//
@@ -342,7 +342,7 @@ class ListbuilderHandler extends GridHandler {
 	//
 	/**
 	 * @see GridHandler::getRowInstance()
-	 * @return CitationGridRow
+	 * @return ListbuilderGridRow
 	 */
 	protected function getRowInstance() {
 		// Return a citation row

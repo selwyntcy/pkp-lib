@@ -9,6 +9,9 @@
  *
  *}
 
+{* Help Link *}
+{help file="settings.md" section="website" class="pkp_help_tab"}
+
 <script type="text/javascript">
 	$(function() {ldelim}
 		// Attach the form handler.
@@ -19,6 +22,7 @@
 </script>
 
 <form id="informationForm" class="pkp_form" method="post" action="{url router=$smarty.const.ROUTE_COMPONENT component="tab.settings.WebsiteSettingsTabHandler" op="saveFormData" tab="information"}">
+
 	{include file="controllers/notification/inPlaceNotification.tpl" notificationId="informationFormNotification"}
 
 	{fbvFormArea id="information"}

@@ -75,6 +75,9 @@
 					this.fetchFormHandler_));
 		}
 
+		// Hide the loading container.
+		$('.pkp_loading', $form).hide();
+
 		// Update form when report template is changed.
 		$reportTemplateSelectElement = $(options.reportTemplateSelectSelector,
 				this.getHtmlElement());
@@ -343,6 +346,9 @@
 			args[element.name] = element.value;
 		});
 
+		// Show loading spinner.
+		$('.pkp_loading', this.getHtmlElement()).show();
+
 		$metricTypeSelectedOption = $('option:selected',
 				this.$metricTypeSelectElement_);
 		if ($metricTypeSelectedOption[0] !== undefined &&
@@ -516,7 +522,7 @@
 		$column = $columns.find('option[value="' + $aggregationOption.
 				attr('value') + '"]');
 
-		if ($aggregationOption.attr('checked')) {
+		if ($aggregationOption.is(':checked')) {
 			$column.attr('selected', 'selected');
 		} else {
 			$column.removeAttr('selected');

@@ -60,6 +60,10 @@ class RepresentationsGridCellProvider extends DataObjectGridCellProvider {
 		if (is_a($data, 'Representation')) switch ($column->getId()) {
 			case 'indent': return array();
 			case 'name':
+				$remoteURL = $data->getRemoteURL();
+				if ($remoteURL) {
+					return array('label' => '<a href="'.htmlspecialchars($remoteURL).'" target="_blank">'.htmlspecialchars($data->getLocalizedName()).'</a>');
+				}
 				return array('label' => htmlspecialchars($data->getLocalizedName()));
 			case 'isComplete':
 				return array('status' => $data->getIsApproved()?'completed':'new');
@@ -87,6 +91,12 @@ class RepresentationsGridCellProvider extends DataObjectGridCellProvider {
 		if (is_a($data, 'Representation')) {
 			switch ($column->getId()) {
 				case 'name':
+					// if it is a remotely hosted content, don't provide
+					// file upload and select link actions
+					$remoteURL = $data->getRemoteURL();
+					if ($remoteURL) {
+						return array();
+					}
 					import('lib.pkp.controllers.api.file.linkAction.AddFileLinkAction');
 					import('lib.pkp.controllers.grid.files.fileList.linkAction.SelectFilesLinkAction');
 					AppLocale::requireComponents(LOCALE_COMPONENT_PKP_EDITOR);
@@ -125,7 +135,7 @@ class RepresentationsGridCellProvider extends DataObjectGridCellProvider {
 							),
 							'modal_approve'
 						),
-						$data->getIsApproved()?__('submission.catalogEntry'):__('submission.noCatalogEntry'),
+						$data->getIsApproved()?__('submission.complete'):__('submission.incomplete'),
 						$data->getIsApproved()?'complete':'incomplete',
 						__('grid.action.setApproval')
 					));

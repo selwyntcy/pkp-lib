@@ -124,7 +124,7 @@ abstract class PKPWorkflowTabHandler extends Handler {
 				return $templateMgr->fetchJson('controllers/tab/workflow/editorial.tpl');
 			case WORKFLOW_STAGE_ID_PRODUCTION:
 				$templateMgr = TemplateManager::getManager($request);
-				$notificationRequestOptions = $this->getProductionNotificationOptions($submission->getId()); 
+				$notificationRequestOptions = $this->getProductionNotificationOptions($submission->getId());
 				$representationDao = Application::getRepresentationDAO();
 				$representations = $representationDao->getBySubmissionId($submission->getId());
 				$templateMgr->assign('representations', $representations->toAssociativeArray());
@@ -166,11 +166,6 @@ abstract class PKPWorkflowTabHandler extends Handler {
 			NOTIFICATION_LEVEL_TRIVIAL => array()
 		);
 
-		$signoffNotificationType = $this->_getSignoffNotificationTypeByStageId($stageId);
-		if (!is_null($signoffNotificationType)) {
-			$notificationRequestOptions[NOTIFICATION_LEVEL_TASK][$signoffNotificationType] = array(ASSOC_TYPE_SUBMISSION, $submission->getId());
-		}
-
 		$templateMgr->assign('workflowNotificationRequestOptions', $notificationRequestOptions);
 	}
 
@@ -199,21 +194,6 @@ abstract class PKPWorkflowTabHandler extends Handler {
 	 * @return array
 	 */
 	abstract protected function getProductionNotificationOptions($submissionId);
-
-	/**
-	 * Return the signoff notification type based on stage id.
-	 * @param $stageId
-	 * @return int
-	 */
-	private function _getSignoffNotificationTypeByStageId($stageId) {
-		switch ($stageId) {
-			case WORKFLOW_STAGE_ID_EDITING:
-				return NOTIFICATION_TYPE_SIGNOFF_COPYEDIT;
-			case WORKFLOW_STAGE_ID_PRODUCTION:
-				return NOTIFICATION_TYPE_SIGNOFF_PROOF;
-		}
-		return null;
-	}
 
 	/**
 	 * Translate the requested operation to a stage id.

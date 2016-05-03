@@ -367,7 +367,7 @@ class ReviewerForm extends Form {
 
 		// Notify the reviewer via email.
 		import('lib.pkp.classes.mail.SubmissionMailTemplate');
-		$templateKey = $keywords = $this->getData('template');
+		$templateKey = $this->getData('template');
 		$mail = new SubmissionMailTemplate($submission, $templateKey, null, null, null, false);
 
 		if ($mail->isEnabled() && !$this->getData('skipEmail')) {
@@ -389,15 +389,13 @@ class ReviewerForm extends Form {
 			}
 
 			// Assign the remaining parameters
-			$paramArray = array(
+			$mail->assignParams(array(
 				'reviewerName' => $reviewer->getFullName(),
 				'responseDueDate' => $responseDueDate,
 				'reviewDueDate' => $reviewDueDate,
 				'reviewerUserName' => $reviewer->getUsername(),
-				'submissionReviewUrl' => $dispatcher->url($request, ROUTE_PAGE, null, 'reviewer', 'submission', null, $reviewUrlArgs),
-				'editorialContactSignature' => $user->getContactSignature(),
-			);
-			$mail->assignParams($paramArray);
+				'submissionReviewUrl' => $dispatcher->url($request, ROUTE_PAGE, null, 'reviewer', 'submission', null, $reviewUrlArgs)
+			));
 			$mail->send($request);
 		}
 

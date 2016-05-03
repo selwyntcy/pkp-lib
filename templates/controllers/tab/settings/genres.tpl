@@ -8,5 +8,11 @@
  * Publication process genres (submission file types).
  *
  *}
-{url|assign:genresUrl router=$smarty.const.ROUTE_COMPONENT component="grid.settings.genre.GenreGridHandler" op="fetchGrid" escape=false}
-{load_url_in_div id="genresContainer" url=$genresUrl}
+
+{* Help Link *}
+{help file="settings.md" section="workflow-components" class="pkp_help_tab"}
+
+<div class="genres">
+	{url|assign:genresUrl router=$smarty.const.ROUTE_COMPONENT component="grid.settings.genre.GenreGridHandler" op="fetchGrid" escape=false}
+	{load_url_in_div id="genresContainer" url=$genresUrl}
+</div>

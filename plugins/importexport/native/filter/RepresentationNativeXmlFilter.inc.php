@@ -76,15 +76,22 @@ class RepresentationNativeXmlFilter extends NativeExportFilter {
 		// Add metadata
 		$this->createLocalizedNodes($doc, $representationNode, 'name', $representation->getName(null));
 		$sequenceNode = $doc->createElementNS($deployment->getNamespace(), 'seq');
-		$sequenceNode->appendChild($doc->createTextNode($representation->getSeq()));
+		$sequenceNode->appendChild($doc->createTextNode($representation->getSequence()));
 		$representationNode->appendChild($sequenceNode);
 
-		// Add files
-		foreach ($this->getFiles($representation) as $submissionFile) {
-			$fileRefNode = $doc->createElementNS($deployment->getNamespace(), 'submission_file_ref');
-			$fileRefNode->setAttribute('id', $submissionFile->getFileId());
-			$fileRefNode->setAttribute('revision', $submissionFile->getRevision());
-			$representationNode->appendChild($fileRefNode);
+		$remoteURL = $representation->getRemoteURL();
+		if ($remoteURL) {
+			$remoteNode = $doc->createElementNS($deployment->getNamespace(), 'remote');
+			$remoteNode->setAttribute('src', $remoteURL);
+			$representationNode->appendChild($remoteNode);
+		} else {
+			// Add files
+			foreach ($this->getFiles($representation) as $submissionFile) {
+				$fileRefNode = $doc->createElementNS($deployment->getNamespace(), 'submission_file_ref');
+				$fileRefNode->setAttribute('id', $submissionFile->getFileId());
+				$fileRefNode->setAttribute('revision', $submissionFile->getRevision());
+				$representationNode->appendChild($fileRefNode);
+			}
 		}
 
 		return $representationNode;

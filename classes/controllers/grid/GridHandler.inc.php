@@ -316,7 +316,7 @@ class GridHandler extends PKPHandler {
 			$this->setGridDataElements($data);
 		}
 
-		$this->callFeaturesHook('getGridDataElements', array('request' => &$request, 'grid' => &$this, 'gridData' => &$gridData, 'filter' => &$filter));
+		$this->callFeaturesHook('getGridDataElements', array('request' => &$request, 'grid' => &$this, 'gridData' => &$data, 'filter' => &$filter));
 
 		return $this->_data;
 	}
@@ -448,7 +448,7 @@ class GridHandler extends PKPHandler {
 	 * @return int
 	 */
 	function getDataElementSequence(&$gridDataElement) {
-		assert(false);
+		return 0; // Ordering is ambiguous or irrelevant.
 	}
 
 	/**

@@ -74,29 +74,22 @@ class NotificationsGridCellProvider extends GridCellProvider {
 	}
 
 	/**
-	 * Get the submission title for a notification.
+	 * Get the title for a notification.
 	 * @param $notification Notification
 	 * @return string
 	 */
 	function _getTitle($notification) {
 		switch ($notification->getAssocType()) {
+			case ASSOC_TYPE_ANNOUNCEMENT:
+				$announcementId = $notification->getAssocId();
+				$announcement = DAORegistry::getDAO('AnnouncementDAO')->getById($announcementId);
+				if ($announcement) return $announcement->getLocalizedTitle();
+				return null;
 			case ASSOC_TYPE_SUBMISSION:
 				$submissionId = $notification->getAssocId();
 				break;
 			case ASSOC_TYPE_SUBMISSION_FILE:
 				$fileId = $notification->getAssocId();
-				break;
-			case ASSOC_TYPE_SIGNOFF:
-				$signoffDao = DAORegistry::getDAO('SignoffDAO'); /* @var $signoffDao SignoffDAO */
-				$signoff = $signoffDao->getById($notification->getAssocId());
-				if ($signoff->getAssocType() == ASSOC_TYPE_SUBMISSION) {
-					$submissionId = $signoff->getAssocId();
-				} elseif ($signoff->getAssocType() == ASSOC_TYPE_SUBMISSION_FILE) {
-					$fileId = $signoff->getAssocId();
-				} else {
-					// Don't know of SIGNOFFs with other ASSOC types for TASKS
-					assert(false);
-				}
 				break;
 			case ASSOC_TYPE_REVIEW_ASSIGNMENT:
 				$reviewAssignmentDao = DAORegistry::getDAO('ReviewAssignmentDAO'); /* @var $reviewAssignmentDao ReviewAssignmentDAO */

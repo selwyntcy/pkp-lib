@@ -336,24 +336,6 @@ class PKPStageParticipantGridHandler extends CategoryGridHandler {
 			fatalError('Invalid Assignment');
 		}
 
-		// Delete all user submission file signoffs not completed, if any.
-		$userId = $stageAssignment->getUserId();
-		$signoffDao = DAORegistry::getDAO('SignoffDAO');
-		$submissionFileDao = DAORegistry::getDAO('SubmissionFileDAO');
-
-		$signoffsFactory = $signoffDao->getByUserId($userId);
-		while($signoff = $signoffsFactory->next()) {
-			if (($signoff->getSymbolic() != 'SIGNOFF_COPYEDITING' &&
-				$signoff->getSymbolic() != 'SIGNOFF_PROOFING') ||
-				$signoff->getAssocType() != ASSOC_TYPE_SUBMISSION_FILE ||
-				$signoff->getDateCompleted()) continue;
-			$submissionFileId = $signoff->getAssocId();
-			$submissionFile = $submissionFileDao->getLatestRevision($submissionFileId, null, $stageAssignment->getSubmissionId());
-			if (is_a($submissionFile, 'SubmissionFile')) {
-				$signoffDao->deleteObject($signoff);
-			}
-		}
-
 		// Delete the assignment
 		$stageAssignmentDao->deleteObject($stageAssignment);
 
@@ -504,9 +486,10 @@ class PKPStageParticipantGridHandler extends CategoryGridHandler {
 			$dispatcher = $request->getDispatcher();
 			$context = $request->getContext();
 			$template->assignParams(array(
-					'editorialContactSignature' => $user->getContactSignature(),
-					'signatureFullName' => $user->getFullname(),
+				'editorialContactSignature' => $user->getContactSignature(),
+				'signatureFullName' => $user->getFullname(),
 			));
+			$template->replaceParams();
 
 			import('controllers.grid.users.stageParticipant.form.StageParticipantNotifyForm'); // exists in each app.
 			$notifyForm = new StageParticipantNotifyForm($this->getSubmission()->getId(), ASSOC_TYPE_SUBMISSION, $this->getAuthorizedContextObject(ASSOC_TYPE_WORKFLOW_STAGE));

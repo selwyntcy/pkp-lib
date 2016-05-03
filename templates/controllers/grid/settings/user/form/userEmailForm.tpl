@@ -7,7 +7,7 @@
  *
  * Display form to send user an email.
  *}
- <script type="text/javascript">
+<script type="text/javascript">
 	$(function() {ldelim}
 		// Attach the form handler.
 		$('#sendEmailForm').pkpHandler('$.pkp.controllers.form.AjaxFormHandler');

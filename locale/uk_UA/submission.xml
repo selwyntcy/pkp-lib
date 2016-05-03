@@ -150,7 +150,6 @@
 	<message key="submission.citations.editor.details.citationImprovementResultsInactive">Результати експертної служби внутрішніх цитувань (натисніть для відкриття)</message>
 	<message key="submission.citations.editor.details.citationServices">Служби цитувань</message>
 	<message key="submission.citations.editor.details.clickToDismissMessage">Ви можете натиснути на тексті повідомлення, щоб очистити його.</message>
-	<message key="submission.citations.editor.details.databaseQueryExplanation">Нижче знаходиться список служб цитування, налаштованих для вашого журналу. Були вибрані служби, які менеджер вашого журналу визначив як найбільш релевантні. У своєму запиті ви, на власний розсуд, можете включати додаткові служби або відключати вибрані.</message>
 	<message key="submission.citations.editor.details.dataSaved">Ваші зміни були збережені.</message>
 	<message key="submission.citations.editor.details.editRawCitationDatabaseServices">Виберіть бази даних цитованості:</message>
 	<message key="submission.citations.editor.details.editRawCitationExpertSettingsActive">Експертні налаштування редагування цитат (натисніть для закриття)</message>
@@ -165,16 +164,6 @@
 	<message key="submission.citations.editor.details.newFieldInfo">...натисніть сюди, щоб додати нове поле...</message>
 	<message key="submission.citations.editor.details.queryCitation">Повторний запит до служб цитованості</message>
 	<message key="submission.citations.editor.details.queryGoogleScholar">Пошук у Google Академії</message>
-	<message key="submission.citations.editor.details.pleaseClickOnCitationToStartEditing"><![CDATA[<p>Вітаємо у службі редагування цитат. Натисканням на цитатах у списку зліва ви можете завантажувати їх у це вікно. Тут ви зможете редагувати та уточнювати цитати. Ви можете перевіряти коректність цитат у базах даних цитованості, налаштованих менеджером журналу, або редагувати цитати вручну.</p>
-		<h4>Пояснення інтерфейсу</h4>
-		<p>Для початку редагування натисніть на одній з цитат у списку зліва.</p>
-		<p>Блакитна смуга, якою відділене це вікно від вікна зі списком зліва, є рухомою. Переміщаючи цю смугу, ви можете змінювати ширину вікон в залежності від того чи хочете ви більше місця для перегляду списку цитат або, навпаки, для вікна редагування.</p>
-		<p>Щоб максимізувати інтерфейс натисніть кнопку <strong>Повноекранний режим</strong>. Щоб повернутися з повноекранного режиму до нормального інтерфейсу натисніть кнопку <strong>Вихід з повноекранного режиму</strong>.</p>
-		<h4>Додавання та видалення цитат</h4>
-		<p>Цитати можуть додаватися засобами кнопки <strong>Нова цитата</strong> у верхньому правому куті вікна зі списком цитат. Для видалення цитати слід натиснути червону кнопку <strong>Видалити</strong> зліва від цитати.</p>
-		<h4>Редагування цитат</h4>
-		<p>Для редагування цитати слід натиснути на неї, щоб вона завантажилася у це вікно. Вам буде показана оригінальна цитата у тому вигляді, як подав її автор, а також версія цієї ж цитати після спроби її автоматичного розпізнання Помічником. Ви зможете вручну редагувати оригінальну цитату; частково або повністю змінювати нову цитату; повторно надсилати запити до налаштованих баз даних цитованості; шукати цитату в Google Академії; звертатися до автора за уточненнями.</p>
-		<p>Коли відредагована цитата буде вас задовольняти, натисніть на кнопку <strong>Записати та підтвердити</strong>. У вікно редагування автоматично буде завантажена наступна непідтверджена цитата зі списку. У такий спосіб можна дуже швидко опрацювати великий список цитат. Коли всі цитати будуть підтверджені, автоматично буде завантажена сторінка <strong>Експорт цитат</strong>.</p>]]></message>
 	<message key="submission.citations.editor.details.processRawCitation">Опрацювати</message>
 	<message key="submission.citations.editor.details.processRawCitationGoAhead">Вперед</message>
 	<message key="submission.citations.editor.details.processRawCitationTitle">Зміна оригінальної цитати</message>
@@ -218,18 +207,14 @@
 		<p>Експериментальна опція експорту цитат як тексту включає підтримку форматів цитування ABNT, APA, MLA та Vancouver. В цьому випадку ви отримаєте текстовий блок, який можна копіювати та вставити у текстову гранку статті (наприклад, у файл Microsoft Word або OpenOffice; Adobe InDesign тощо). Кожна цитата має вбудоване посилання для автоматичного пошуку посилань у Google Академії.</p></li>
 	</ul>]]></message>
 	<message key="submission.citations.editor.loadMessage">Будь ласка, зачекайте поки завантажиться Помічник розмітки цитат.</message>
-	<message key="submission.citations.editor.pleaseAddParserFilter"><![CDATA[Будь ласка, попросіть менеджера вашого журналу <a href="{$citationSetupUrl}">додати принаймні одну службу екстракції цитат</a>, щоб ви могли використовувати Помічник розмітки цитат.]]></message>
-	<message key="submission.citations.editor.pleaseConfigureOutputStyle"><![CDATA[Будь ласка, попросіть менеджера вашого журналу <a href="{$citationSetupUrl}">налаштувати вихідний формат цитат</a>, щоб ви могли використовувати Помічник розмітки цитат.]]></message>
 	<message key="submission.citations.editor.pleaseImportCitationsFirst"><![CDATA[<p>Ця стаття не має цитат.</p><p>Будь ласка, перейдіть до <a href="{$articleMetadataUrl}">сторінки метаданих</a> статті та введіть список пристатейної бібліографії або вручну додайте посилання, скориставшись кнопкою "Нова цитата" цього редактора.</p>]]></message>
 	<message key="submission.citations.editor.pleaseSelect">Будь ласка, оберіть...</message>
-	<message key="submission.citations.editor.pleaseSetup"><![CDATA[Будь ласка, попросіть менеджера вашого журналу <a href="{$citationSetupUrl}">дозволити редагування цитат</a>, щоб ви могли використовувати Помічник розмітки цитат.]]></message>
 	<message key="submission.citations.editor.unprocessedCitations">Цитати цієї статті все ще обробляються на сервері. Поточний список цитат містить лише ті цитати, які наразі вже оброблені. Для оновлення цього списку використовуйте відповідну кнопку.</message>
 	<message key="submission.citations.editor.unprocessedCitationsButton">Оновити список цитат</message>
 	<message key="submission.citations.editor.unprocessedCitationsButtonTitle">Натисніть, щоб оновити список цитат.</message>
 	<message key="submission.citations.filter.invalidMetadata">У фільтрі {$filterName} сталася помилка: Один з елементів даних, що надійшли з джерела даних (наприклад, від веб-сервісу), не відповідає внутрішньому формату метаданих. Тому результати, отримані з джерела даних, були відхилені. Будь ласка, повідомте про цю помилку розробникам.</message>
 	<message key="submission.citations.filter.noResultFromFilterError">Служби цитування не повернули жодних результатів. Щоб покращити результати спробуйте вручну відредагувати поля цитати, а потім знову надішліть запит службам цитування. Якщо це не допомогло, це означає, що цитати не існує у жодній з підключених баз даних.</message>
 	<message key="submission.citations.filter.unsupportedPublicationType">Тип публікації не вірно вказаний або не підтримується. Будь ласка, вручну відредагуйте цитату та введіть тип публікації (дозволені типи 'book', 'journal', 'thesis' та 'conf-proc').</message>
-	<message key="submission.citations.filter.webserviceError">Виклик веб-сервісу фільтру {$filterName} за адресою URL {$webserviceUrl} був невдалим. Можливо, веб-сервіс тимчасово недоступний. Але ви можете працювати з іншими службами та зберегти отримані результати. Також ви можете спробувати викликати цей веб-сервіс пізніше. Якщо помилка буде повторюватись, будь ласка, попросіть менеджера журналу деактивувати цей веб-сервіс та повідомити про помилку розробникам.</message>
 	<message key="submission.citations.filter.webserviceResultTransformationError">У фільтрі {$filterName} сталася помилка: Не вдалася трансформація результатів XML (наприклад, від веб-сервісу) у поля метаданих. Напевно, веб-сервіс повернув помилкові або неповні дані. Будь ласка, повідомте розробників про цю помилку.</message>
 	<message key="submission.citations.metadata.changeWarning">Ви справді хочете оновити список посилань? Якщо ви натиснете OK всі зміни, зроблені редакторами, будуть перезаписані. Якщо ви не впевнені, що ваше редагування справді потрібне, будь ласка, зв'яжіться з редактором, відповідальним за ваше подання.</message>
 	<message key="submission.comments.addComment">Додати коментар</message>

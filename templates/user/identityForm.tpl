@@ -7,6 +7,10 @@
  *
  * User profile form.
  *}
+
+{* Help Link *}
+{help file="user-profile.md" class="pkp_help_tab"}
+
 <script type="text/javascript">
 	$(function() {ldelim}
 		// Attach the form handler.
@@ -15,6 +19,7 @@
 </script>
 
 <form class="pkp_form" id="identityForm" method="post" action="{url op="saveIdentity"}" enctype="multipart/form-data">
+
 	{include file="controllers/notification/inPlaceNotification.tpl" notificationId="identityFormNotification"}
 
 	{fbvFormArea id="userNameInfo"}

@@ -275,7 +275,6 @@ Coleman Jr, D. (Ralf) Dr</message>
 	<message key="submission.citations.editor.details.citationImprovementResultsActive">نتایج سرویس ارجاع داخلی پیشرفته: کلیک برای بستن</message>
 	<message key="submission.citations.editor.details.citationImprovementResultsInactive">نتایج سرویس ارجاع داخلی پیشرفته: کلیک برای باز کردن</message>
 	<message key="submission.citations.editor.details.clickToDismissMessage">با کلیک بر روی متن یک پیام آن را مرخص کنید</message>
-	<message key="submission.citations.editor.details.databaseQueryExplanation">در زیر لیستی از سرویس های ارجاع تنظیم شده برای مجله شما را می بینید. سرویس های مناسب تر برای مجله شما از قبل انتخاب شده اند. شما می توانید انتخاب ها را کم یا زیاد کنید.</message>
 	<message key="submission.citations.editor.details.dataSaved">تغییرات ذخیره شدند</message>
 	<message key="submission.citations.editor.details.editRawCitationDatabaseServices">سرویس های بانک ارحاع را انتخاب کنید</message>
 	<message key="submission.citations.editor.details.editRawCitationExpertSettingsActive">ویرایش تنظیمات ارجاع پیشرفته: کلیک برای بستن</message>
@@ -288,15 +287,6 @@ Coleman Jr, D. (Ralf) Dr</message>
 	<message key="submission.citations.editor.details.newFieldInfo">... اینجا را کلیک کنید تا یک فیلد جدید اضافه کنید</message>
 	<message key="submission.citations.editor.details.queryCitation">استعلام مجدد از سرویس های ارجاعی</message>
 	<message key="submission.citations.editor.details.queryGoogleScholar">جستجو در گوگل اسکولار</message>
-	<message key="submission.citations.editor.details.pleaseClickOnCitationToStartEditing"><![CDATA[<p>
-به پروسه ویرایش ارجاع خوش آمدید. کلیک بر بروی یک ارجاع در سمت چپ، ان را در این پنجره باز می کند که در اینجا می توانید صحت پروسه ارجاع را چک کنید. همچنین می توانید ارجاع را در مقابل سرویس های بان ارجاع تنظیم شده توسط مدیر مجله چک کنید و بصورت دستی خود ارجاع را نیز ویرایش کنید.
-</p>
-<h4>
-گشت و گذار در اینترفیس
-</h4>
-<p>
-بر روی یکی از ارجاعات سمت چپ کلیک کنید تا شروع به ویرایش آن کنید.
-</p>]]></message>
 	<message key="submission.citations.editor.details.processRawCitation">پروسه</message>
 	<message key="submission.citations.editor.details.processRawCitationGoAhead">برو جلو</message>
 	<message key="submission.citations.editor.details.processRawCitationTitle">تغییر ارجاع اصلی</message>
@@ -370,16 +360,6 @@ Coleman Jr, D. (Ralf) Dr</message>
 				<strong>
 ویرایش]]></message>
 	<message key="submission.citations.editor.loadMessage">لطفا تا بارگیری مددیار مارک آپ ارجاع صبر کنید.</message>
-	<message key="submission.citations.editor.pleaseAddParserFilter"><![CDATA[لطفا از مدیر مجله تان بخواهید تا 
-<a href="{$citationSetupUrl}">
-حداقل یک سرویس استخراج ارجاع
-</a>
-را اضافه کند.]]></message>
-	<message key="submission.citations.editor.pleaseConfigureOutputStyle"><![CDATA[لطفا از مدیر مجله تان بخواهید تا 
-<a href="{$citationSetupUrl}">
-حداقل یک سرویس استخراج ارجاع
-</a>
-را اضافه کند.]]></message>
 	<message key="submission.citations.editor.pleaseImportCitationsFirst"><![CDATA[<p>
 هیچ ارجاعی برای این مقاله وجود ندارد.
 </p>
@@ -391,18 +371,11 @@ Coleman Jr, D. (Ralf) Dr</message>
 مقاله رفته و لیستی ار رفرانس ها را وارد کنید و یا بطور دستی رفرانس را وارد کنید.
 </p>]]></message>
 	<message key="submission.citations.editor.pleaseSelect">لطفا انتخاب کنید...</message>
-	<message key="submission.citations.editor.pleaseSetup"><![CDATA[لطفا از مدیر مجله تان بخواهید تا 
-<a href="{$citationSetupUrl}">
-ویرایش ارجاع را فعال
-</a>
-کند.]]></message>
 	<message key="submission.citations.editor.unprocessedCitations">ارجاعات این مقاله هنوز در سرور در حال پردازش است.</message>
 	<message key="submission.citations.editor.unprocessedCitationsButton">تازه سازی لیست ارجاع</message>
 	<message key="submission.citations.editor.unprocessedCitationsButtonTitle">برای تازه سازی لیست ارجاع کلیک کنید</message>
 	<message key="submission.citations.filter.invalidMetadata">بروز خطا در {$filterName}: یکی از المان های داده برگشتی از منبع داده با فرمت متاداده داخلی مطابقت ندارد. بنابراین نتایج حاصل از منبع داده رد شد. لطفا باگ را گزارش کنید.</message>
 	<message key="submission.citations.filter.noResultFromFilterError">چندین سرویس ارجاع هیچ نتیجه ای برنگرداندند. می توانید بصورت دستی فیلدها را ویرایش کنید و سپس سرویس ارجاع را از نو جستجو کنید. اگر فایده نداشت در این صورت ارجاع در خواستی در هیچ یک نیست</message>
-	<message key="submission.citations.filter.webserviceError">یک خطا از وب سرویس مربوط به {$filterName} با آدرس زیر روی دارده است: {$webserviceUrl}
-ممکن است سرویس وب مذکور بطور موقت در دسترس نباشد. البته شما می توانید با بقیه سرویس های آن کار کنید و نتایج خود را ذخیره کنید. همچنین می توانید بعدا نیز امتحان کتید. اگر خطا ادامه یافت لطفا از مدیر مجله بخواهید تا این سرویس را غیر فعال کرده و باگ را گزارش کند.</message>
 	<message key="submission.citations.filter.webserviceResultTransformationError">در {$filterName} خطائی رخ داده است. ترانس فورماسیون نتایج XML به صورت متاداده متکی به فیلد شکست خورده است. ممکن است دلیل آن این باشد که سرویس وب مذکور داده های بی اعتبار و یا ناکامل برگردانده است. لطفا باگ را گزارش کنید.</message>
 	<message key="submission.citations.metadata.changeWarning">آیا مطمئن هستید که می خواهید لیست رفرانس ها را بروز رسانی کنید؟ در صورت کلیک بر روی OK تمام تغییرات ادیتور از بین می رود. اگر مطمئن نیستید با ادیتور تماس بگیرید.</message>
 	<message key="submission.page.citations">#{$id} ارجاعات</message>

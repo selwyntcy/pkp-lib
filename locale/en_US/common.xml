@@ -33,6 +33,7 @@
 	<message key="announcement.posted">Posted</message>
 	<message key="announcement.postedOn">Posted on {$postDate}</message>
 	<message key="announcement.view">View Announcement</message>
+	<message key="common.allDownloads">All Downloads</message>
 	<message key="common.navigation.sidebar">Sidebar</message>
 	<message key="common.navigation.site">Site Navigation</message>
 	<message key="common.navigation.siteContext">Site Context Navigation</message>
@@ -56,7 +57,7 @@
 	<message key="common.titleSmallWords">of a the and an or nor but is if then else when at from by on off for in out over to into with</message>
 	<message key="common.alreadyAssigned">Assigned</message>
 	<message key="common.altText">Alternate text</message>
-	<message key="common.altTextInstructions">Please provide alternate text for this image to ensure accessibility for users with text-only browsers or assistive devices.</message>
+	<message key="common.altTextInstructions">To improve your search engine optimization and comply with WCAG standards, please describe any information that appears in this image which would be missed if the site was viewed in a text-only browser or with assistive devices. Example: "Our editor speaking at the PKP#2015 conference."</message>
 	<message key="common.and">and</message>
 	<message key="common.applyAction">Apply Action</message>
 	<message key="common.assign">Assign</message>
@@ -155,7 +156,7 @@
 	<message key="common.initiate">Initiate</message>
 	<message key="common.inProgress">In progress</message>
 	<message key="common.itemsPerPage">Items per page</message>
-	<message key="common.favicon.altText">Journal Favicon</message>
+	<message key="common.favicon.altText">Favicon</message>
 	<message key="common.keywords">Keywords</message>
 	<message key="common.language">Language</message>
 	<message key="common.languages">Languages</message>
@@ -196,8 +197,8 @@
 	<message key="common.pluginEnabled">The plugin "{$pluginName}" has been enabled.</message>
 	<message key="common.pluginDisabled">The plugin "{$pluginName}" has been disabled.</message>
 	<message key="common.prefix">Prefix</message>
-	<message key="common.prefixAndTitle.tip">If book title begins "A'" or "The" (or something similar re alphabetical order) place word in Prefix.</message>
-	<message key="common.subtitle.tip">The submission's optional subtitle will appear after a colon (:), following the main title.</message>
+	<message key="common.prefixAndTitle.tip">Examples: A, The</message>
+	<message key="common.subtitle.tip">The optional subtitle will appear after a colon (:), following the main title.</message>
 	<message key="common.preview">Preview</message>
 	<message key="common.publisher">Publisher</message>
 	<message key="common.quality">Quality</message>
@@ -210,7 +211,7 @@
 	<message key="common.refresh">Refresh</message>
 	<message key="common.related">Related</message>
 	<message key="common.reminder">Reminder</message>
-	<message key="common.rreminded.date">Reminded: {$dateReminded}</message>
+	<message key="common.reminded.date">Reminded: {$dateReminded}</message>
 	<message key="common.remote">Remote</message>
 	<message key="common.remoteURL">RemoteURL</message>
 	<message key="common.remove">Remove</message>
@@ -230,7 +231,6 @@
 	<message key="common.selectNone">Select None</message>
 	<message key="common.select">Select</message>
 	<message key="common.sendEmail">Send Email</message>
-	<message key="common.signoff">Sign Off</message>
 	<message key="common.size">Size</message>
 	<message key="common.source">Source</message>
 	<message key="common.status">Status</message>
@@ -328,17 +328,10 @@
 	<message key="form.send">Send</message>
 	<message key="form.submit">Submit</message>
 	<message key="form.invalidImage">An invalid image was uploaded. Accepted formats are .png, .gif, or .jpg.</message>
-	<message key="help.contents">Contents</message>
 	<message key="help.help">Help</message>
-	<message key="help.helpIndex">Help Index</message>
-	<message key="help.matchesFound">{$matches} matches found</message>
-	<message key="help.noMatchingTopics">No matching help topics were found.</message>
-	<message key="help.relatedTopics">Related Topics</message>
-	<message key="help.searchFor">Search help topics for</message>
-	<message key="help.searchResultsFor">Results for</message>
-	<message key="help.searchResults">Search Results</message>
-	<message key="help.search">Search Help</message>
 	<message key="help.toc">Table of Contents</message>
+	<message key="help.previous">Previous</message>
+	<message key="help.next">Next</message>
 	<message key="help.upALevel">Up a Level</message>
 	<message key="icon.checked.alt">Checked</message>
 	<message key="icon.comment.alt">Comment</message>
@@ -409,7 +402,6 @@
 	<message key="navigation.sitemap">Site Map</message>
 	<message key="navigation.stepNumber">Step {$step}</message>
 	<message key="navigation.submissions">Submissions</message>
-	<message key="navigation.switchJournals">Switch Journals</message>
 	<message key="navigation.system">System</message>
 	<message key="navigation.userHome">User Home</message>
 	<message key="navigation.user">User</message>
@@ -469,10 +461,7 @@
 	<message key="search.cli.rebuildIndex.clearingIndex">Clearing index</message>
 	<message key="search.cli.rebuildIndex.done">done</message>
 	<message key="search.cli.rebuildIndex.error">error</message>
-	<message key="search.cli.rebuildIndex.indexing">Indexing "{$journalName}"</message>
-	<message key="search.cli.rebuildIndex.indexingByJournalNotSupported">This search implementation does not allow per-journal re-indexing.</message>
 	<message key="search.cli.rebuildIndex.result">{$numIndexed} articles indexed</message>
-	<message key="search.cli.rebuildIndex.unknownJournal">The given journal path "{$journalPath}" could not be resolved to a journal.</message>
 	<message key="search.coverage">Coverage</message>
 	<message key="search.date">Publication Date</message>
 	<message key="search.dateFrom">From</message>
@@ -497,7 +486,6 @@
 	<message key="search.typeMethodApproach">Type (method/approach)</message>
 
 	<!-- Common -->
-	<message key="grid.action.toggleHelp">Toggle the display of inline help</message>
 	<message key="grid.action.downloadFile">Download this file</message>
 
 	<message key="context.path">Path</message>

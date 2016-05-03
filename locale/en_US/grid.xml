@@ -16,6 +16,7 @@
 	<message key="grid.noItems">No Items</message>
 	<message key="grid.settings">Settings</message>
 	<message key="grid.noAuditors">No Auditors</message>
+	<message key="grid.remotelyHostedItem">This item is remotely hosted.</message>
 
 	<message key="grid.action.manageAccess">Manage Access</message>
 	<message key="grid.action.sort">Sort</message>
@@ -65,7 +66,6 @@
 	<message key="grid.action.editFile">Edit a file</message>
 	<message key="grid.action.selectFiles">Select files to manage</message>
 	<message key="grid.action.requestRevisions">Request revisions for this submission</message>
-	<message key="grid.action.resubmit">Request that this submission be resubmitted</message>
 	<message key="grid.action.accept">Accept this submission</message>
 	<message key="grid.action.decline">Decline this Submission</message>
 	<message key="grid.action.internalReview">Send this submission to internal review</message>
@@ -135,7 +135,7 @@
 	<message key="grid.columns.locale">Locale</message>
 
 	<!-- Sponsors Grid -->
-	<message key="grid.sponsor.title">Sponsors</message>
+	<message key="grid.sponsor.title">Sponsoring Organizations</message>
 	<message key="grid.action.addSponsor">Add Sponsor</message>
 	<message key="grid.action.deleteSponsor">Delete Sponsor</message>
 	<message key="grid.action.editSponsor">Edit Sponsor</message>
@@ -151,7 +151,7 @@
 	<message key="grid.action.deleteCategory">Delete Category</message>
 
 	<!-- Contributor Grid -->
-	<message key="grid.contributor.title">Contributors</message>
+	<message key="grid.contributor.title">Sources of Support</message>
 	<message key="grid.action.addContributor">Add Contributor</message>
 	<message key="grid.action.editContributor">Edit Contributor</message>
 	<message key="grid.action.deleteContributor">Delete Contributor</message>
@@ -244,8 +244,6 @@
 	<message key="grid.plugin.allCategories">All Categories</message>
 	<message key="grid.plugin.disable">Are you sure you want to disable this plugin?</message>
 
-	<!-- signoffs -->
-	<message key="grid.action.viewSignoffNotes">View signoff notes</message>
 	<message key="grid.action.fileUnconsider">Proofing corrections made. You may unconsider this task</message>
 
 	<!-- Artwork Files Grid -->

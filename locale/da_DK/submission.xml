@@ -279,7 +279,6 @@
 	<message key="submission.citations.editor.details.citationImprovementResultsInactive">Resultater af intern ekspertcitationstjeneste (klik for at åbne)</message>
 	<message key="submission.citations.editor.details.citationServices">Citationstjenester</message>
 	<message key="submission.citations.editor.details.clickToDismissMessage">Du kan klikke på teksten i en besked for at fjerne den.</message>
-	<message key="submission.citations.editor.details.databaseQueryExplanation">Herunder kan du se en liste over citationstjenester, der er konfigureret for dit tidsskrift. De tjenester, som din tidsskriftschef anser for at være mest relevante for dit tidsskrift, er forvalgt. Du kan inkludere yderligere tjenester i din forespørgsel eller fravælge tjenester, som du har lyst.</message>
 	<message key="submission.citations.editor.details.dataSaved">Dine ændringer er blevet gemt.</message>
 	<message key="submission.citations.editor.details.editRawCitationDatabaseServices">Vælg citationsdatabasetjenester:</message>
 	<message key="submission.citations.editor.details.editRawCitationExpertSettingsActive">Indstillinger for ekspertcitationsredigering (klik for at lukke)</message>
@@ -294,16 +293,6 @@
 	<message key="submission.citations.editor.details.newFieldInfo">… klik her for at tilføje et nyt felt …</message>
 	<message key="submission.citations.editor.details.queryCitation">Citationstjenester til gentaget forespørgsel</message>
 	<message key="submission.citations.editor.details.queryGoogleScholar">Søg i Google Scholar</message>
-	<message key="submission.citations.editor.details.pleaseClickOnCitationToStartEditing"><![CDATA[<p>Velkommen til citationsredigeringsprocessen. Hvis du klikker på en reference i listen til venstre, bliver referencen vist i dette vindue, hvor du kan kontrollere citationsprocessens nøjagtighed. Du kan også kontrollere referencen i forhold til de citationsdatabase-tjenester, som tidsskriftschefen har konfigureret, og selv redigere referencen manuelt.</p>
-		<h4>Navigation i brugerfladen</h4>
-		<p>Klik på en af referencerne i listen til venstre for at gå i gang med at redigere.</p>
-		<p>Denne lyseblå separatorlinje mellem dette vindue og kolonnen til venstre kan flyttes. Hvis du har brug for mere plads til at se referencelisten eller til at redigere en reference, kan separatoren flyttes i den ene eller den anden retning.</p>
-		<p>Hvis du vil forstørre citationsbrugerfladen, skal du klikke på knappen <strong>Fuldskærm</strong>. Hvis du vil gå tilbage til normal visning fra den forstørrede citationsbrugerflade, skal du klikke på knappen <strong>Deaktiver fuldskærm</strong>.</p>
-		<h4>Sådan tilføjer og sletter du referencer</h4>
-		<p>Du kan tilføje referencer ved at klikke på ikonet <strong>Ny reference</strong> i øverste højre hjørne af kolonnen med referencelisten. Du kan slette referencer ved at klikke på det røde ikon <strong>Slet</strong> til venstre for referencen.</p>
-		<h4>Sådan redigerer du referencer</h4>
-		<p>Hvis du vil redigere en reference i listen til venstre, kan du åbne det i dette vindue ved at klikke på det. Du får vist den originale reference, som det er skrevet af forfatteren, efterfulgt af assistentens automatiske udtrækningsforsøg. Du kan redigere den originale reference manuelt, redigere dele af eller hele den nye reference, kontrollere referencen i forhold til konfigurerede citationsdatabase-tjenester, sende en forespørgsel til Google Scholar og bede forfatteren om yderligere information om referencen.</p>
-		<p>Når du er færdig med at redigere referencen og klikker på knappen <strong>Gem og godkend</strong>, bliver du automatisk flyttet til den næste ikke-godkendte reference på listen. På den måde kan du hurtigt arbejde dig igennem en lang liste med referencer. Når alle referencer er blevet godkendt, vil du blive sendt til siden <strong>Eksporter referencer</strong>.</p>]]></message>
 	<message key="submission.citations.editor.details.processRawCitation">Behandl</message>
 	<message key="submission.citations.editor.details.processRawCitationGoAhead">Fortsæt</message>
 	<message key="submission.citations.editor.details.processRawCitationTitle">Ret i original reference</message>
@@ -347,18 +336,14 @@
 		<p>Eksperimentelle eksportalternativer for tekst omfatter ABNT, APA, MLA samt Vancouver output styles. Disse alternativer giver et tekst-output, som kan kopieres og indsættes i en tekstbaseret artikelsatsskib (for eksempel i Microsoft Word eller OpenOffice, Adobe InDesign etc.). Hver reference indeholder et indlejret link til en automatisk søgning efter den pågældende reference i Google Scholar.</p></li>
 	</ul>]]></message>
 	<message key="submission.citations.editor.loadMessage">Vent, til citationsredigeringsværktøjet er indlæst.</message>
-	<message key="submission.citations.editor.pleaseAddParserFilter"><![CDATA[Please ask your journal manager to <a href="{$citationSetupUrl}">add at least one citation extraction service</a> before you can use the citation markup assistant.]]></message>
-	<message key="submission.citations.editor.pleaseConfigureOutputStyle"><![CDATA[Din tidsskriftschef skal <a href="{$citationSetupUrl}">konfigurere en citationseksportstil</a>, inden du kan begynde at anvende citationsmarkeringsværktøjet.]]></message>
 	<message key="submission.citations.editor.pleaseImportCitationsFirst"><![CDATA[<p>Der er ingen referencer til denne artikel.</p><p>Gå til artiklens <a href="{$articleMetadataUrl}">metadataside</a>, og indtast en litteraturhenvisning, eller tilføj referencer manuelt ved hjælp af knappen "Tilføj element" i redigeringsprogrammet.</p>]]></message>
 	<message key="submission.citations.editor.pleaseSelect">Vælg …</message>
-	<message key="submission.citations.editor.pleaseSetup"><![CDATA[Din tidsskriftschef skal <a href="{$citationSetupUrl}">aktivere citationsredigering</a>, inden du kan få adgang til citationsredigeringsværktøjet.]]></message>
 	<message key="submission.citations.editor.unprocessedCitations">Referencerne i denne artikel er stadig ved at blive behandlet på serveren. Den aktuelle litteraturliste indeholder kun referencer, der allerede er behandlet. Klik på opdater-knappen for at se referencer, der er blevet behandlet i mellemtiden.</message>
 	<message key="submission.citations.editor.unprocessedCitationsButton">Opdater litteraturliste</message>
 	<message key="submission.citations.editor.unprocessedCitationsButtonTitle">Klik for at opdatere litteraturlisten.</message>
 	<message key="submission.citations.filter.invalidMetadata">Der opstod en fejl i {$filterName}: Et af de dataelementer, der kom tilbage fra datakilden (dvs. en webtjeneste) stemte ikke overens med det interne metadataformat. Datakildens resultater blev derfor afvist. Rapporter dette som en fejl.</message>
 	<message key="submission.citations.filter.noResultFromFilterError">Flere af citationstjenesterne fandt ingen resultater. Du kan forsøge at redigere referencefelterne manuelt og derefter sende en ny forespørgsel til citationstjenesterne for at få et bedre resultat. Hvis det ikke hjælper, findes referencen ikke i nogen af de databaser, der er opkoblet.</message>
 	<message key="submission.citations.filter.unsupportedPublicationType">Udgivelsestype mangler eller understøttes ikke. Rediger referencen manuelt, og indtast en udgivelsestype (tilladte typer er 'book', 'journal', 'thesis' og 'conf-proc').</message>
-	<message key="submission.citations.filter.webserviceError">Webtjenesteopkaldet fra {$filterName} gav en fejl, når følgende URL blev kaldt: {$webserviceUrl}. Det er muligt, at webtjenesten er midlertidigt utilgængelig. Du kan stadig benytte de øvrige tjenester og gemme dine resultater. Du kan også forsøge igen senere. Hvis fejlen ikke forsvinder, skal du bede tidsskriftschefen om at deaktivere denne tjeneste og oprette en fejlrapport.</message>
 	<message key="submission.citations.filter.webserviceResultTransformationError">Der opstod en fejl i {$filterName}: Transformationen af XML-resultater (dvs. fra en webtjeneste) til feltbaserede metadata mislykkedes. Det skyldes sandsynligvis, at webtjenesten sendte ugyldige eller ufuldstændige data. Angiv dette som en fejl.</message>
 	<message key="submission.citations.metadata.changeWarning">Er du sikker på, at du vil opdatere din litteraturliste? Hvis du klikker på OK, vil alle de ændringer, som redaktørerne har foretaget, blive overskrevet. Hvis du ikke er sikker på, om du skal foretage ændringer i litteraturlisten, skal du kontakte den redaktør, der har ansvaret for dit indleverede manuskript.</message>
 	<message key="submission.page.citations">#{$id} Referencer</message>

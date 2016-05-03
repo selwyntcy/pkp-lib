@@ -8,6 +8,10 @@
  * Indexing management form.
  *
  *}
+
+{* Help Link *}
+{help file="settings.md" section="distribution" class="pkp_help_tab"}
+
 <script type="text/javascript">
 	$(function() {ldelim}
 		// Attach the form handler.
@@ -26,15 +30,16 @@
 	{include file="controllers/tab/settings/wizardMode.tpl" wizardMode=$wizardMode}
 
 	{fbvFormArea id="permissionSettings"}
+		{fbvFormSection label="manager.setup.authorCopyrightNotice" description=$authorCopyrightNoticeDescription}
+			{fbvElement type="textarea" multilingual=true name="copyrightNotice" id="copyrightNotice" value=$copyrightNotice rich=true}
+		{/fbvFormSection}
+
 		{fbvFormSection list=true}
 			{fbvElement type="checkbox" id="copyrightNoticeAgree" value="1" checked=$copyrightNoticeAgree label="manager.setup.authorCopyrightNoticeAgree"}
 			{fbvElement type="checkbox" id="includeCopyrightStatement" value="1" checked=$includeCopyrightStatement label="manager.setup.includeCopyrightStatement"}
 			{fbvElement type="checkbox" id="includeLicense" value="1" checked=$includeLicense label="manager.setup.includeLicense"}
 		{/fbvFormSection}
 
-		{fbvFormSection label="manager.setup.authorCopyrightNotice"|translate description=$authorCopyrightNoticeDescription translate=false}
-			{fbvElement type="textarea" multilingual=true name="copyrightNotice" id="copyrightNotice" value=$copyrightNotice rich=true}
-		{/fbvFormSection}
 
 		{$additionalFormContent}
 	{/fbvFormArea}
@@ -52,15 +57,17 @@
 
 	{fbvFormArea id="licenseSettings"}
 		{fbvFormSection title="submission.license"}
-			{fbvElement type="select" id="licenseURLSelect" from=$ccLicenseOptions selected=$licenseURL label="manager.setup.licenseURLDescription" size=$fbvStyles.size.MEDIUM inline=true}
-			{fbvElement type="text" id="licenseURL" name="licenseURL" value=$licenseURL label="common.url" size=$fbvStyles.size.MEDIUM inline=true}
+			{fbvElement type="select" id="licenseURLSelect" from=$ccLicenseOptions selected=$licenseURL size=$fbvStyles.size.MEDIUM inline=true}
+			{fbvElement type="text" id="licenseURL" name="licenseURL" value=$licenseURL label="manager.setup.licenseURLDescription" size=$fbvStyles.size.MEDIUM inline=true}
 		{/fbvFormSection}
 	{/fbvFormArea}
 
 	{if !$wizardMode}
-		{fbvFormSection class="formButtons"}
+		{fbvFormSection title="manager.setup.resetPermissions"}
 			<p>{translate key="manager.setup.resetPermissions.description"}</p>
-			{fbvElement type="button" class="pkp_helpers_align_left" id="resetPermissionsButton" label="manager.setup.resetPermissions"}
+			{fbvElement type="button" id="resetPermissionsButton" label="manager.setup.resetPermissions"}
+		{/fbvFormSection}
+		{fbvFormSection class="formButtons"}
 			{assign var=buttonId value="submitFormButton"|concat:"-"|uniqid}
 			{fbvElement type="submit" class="submitFormButton" id=$buttonId label="common.save"}
 		{/fbvFormSection}

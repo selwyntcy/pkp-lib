@@ -9,6 +9,9 @@
  *
  *}
 
+{* Help Link *}
+{help file="settings.md" section="distribution" class="pkp_help_tab"}
+
 <script type="text/javascript">
 	$(function() {ldelim}
 		// Attach the form handler.
@@ -43,7 +46,7 @@
 				{fbvElement required="true" type="select" id="currency" from=$currencies selected=$currency translate=false}
 			{/fbvFormSection}
 			<div id="paymentMethodSelector">
-				{fbvFormSection label="manager.paymentMethod.method" description="manager.paymentMethod.description"}
+				{fbvFormSection label="manager.paymentMethod.method"}
 					{fbvElement type="select" id="pluginSelect" from=$pluginNames translate=false}
 				{/fbvFormSection}
 			</div>

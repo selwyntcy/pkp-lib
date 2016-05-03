@@ -35,8 +35,7 @@
 			{fbvElement type="text" label="manager.setup.reviewOptions.numWeeksPerReview" name="numWeeksPerReview" id="numWeeksPerReview" value=$numWeeksPerReview size=$fbvStyles.size.SMALL inline=true}
 		{/fbvFormSection}
 
-		{capture assign="reviewReminderNote"}{translate key="manager.setup.reviewOptions.automatedReminders"} {translate key="manager.setup.reviewOptions.automatedRemindersDisabled"}{/capture}
-		{fbvFormSection label="manager.setup.reviewOptions.reviewerReminders"|translate description=$reviewReminderNote translate=false}{/fbvFormSection}
+		{fbvFormSection label="manager.setup.reviewOptions.automatedReminders" description="manager.setup.reviewOptions.automatedRemindersDisabled"}{/fbvFormSection}
 
 		{translate|assign:"reminderDefault" key="manager.setup.reviewOptions.neverSendReminder"}
 
@@ -73,13 +72,16 @@
 		{fbvFormSection for="reviewerCompetingInterestsRequired" list=true label="manager.setup.reviewerCompetingInterestsRequired.description"}
 			{fbvElement type="checkbox" id="reviewerCompetingInterestsRequired" checked=$reviewerCompetingInterestsRequired label="manager.setup.competingInterests.required" inline=true}
 		{/fbvFormSection}
+
+		{$additionalReviewFormContents}
+
 		{fbvFormSection label="manager.setup.reviewGuidelines" for="reviewGuidelines" description="manager.setup.reviewGuidelinesDescription"}
 			{fbvElement type="textarea" multilingual="true" name="reviewGuidelines" id="reviewGuidelines" value=$reviewGuidelines rich=true}
 		{/fbvFormSection}
 	{/fbvFormArea}
 
 	{fbvFormArea id="reviewOptions" title="manager.setup.reviewOptions"}
-		{fbvFormSection description="manager.setup.reviewOptions.defaultReviewMethod"}
+		{fbvFormSection}
 			{fbvElement type="select" from=$reviewMethodOptions selected=$defaultReviewMode id="defaultReviewMode" size=$fbvStyles.size.SMALL inline=true}
 		{/fbvFormSection}
 

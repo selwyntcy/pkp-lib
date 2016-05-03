@@ -30,15 +30,15 @@ class Representation extends DataObject {
 	 * Get sequence of format in format listings for the submission.
 	 * @return float
 	 */
-	function getSeq() {
+	function getSequence() {
 		return $this->getData('seq');
 	}
 
 	/**
 	 * Set sequence of format in format listings for the submission.
-	 * @param $sequence float
+	 * @param $seq float
 	 */
-	function setSeq($seq) {
+	function setSequence($seq) {
 		$this->setData('seq', $seq);
 	}
 
@@ -120,6 +120,22 @@ class Representation extends DataObject {
 	 */
 	function setStoredPubId($pubIdType, $pubId) {
 		$this->setData('pub-id::'.$pubIdType, $pubId);
+	}
+
+	/**
+	 * Get the remote URL at which this representation is retrievable.
+	 * @return string
+	 */
+	function getRemoteURL() {
+		return $this->getData('remoteUrl');
+	}
+
+	/**
+	 * Set the remote URL for retrieving this representation.
+	 * @param $remoteURL string
+	 */
+	function setRemoteURL($remoteURL) {
+		return $this->setData('remoteUrl', $remoteURL);
 	}
 
 	/**

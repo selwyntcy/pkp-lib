@@ -7,6 +7,10 @@
  *
  * Roles area of user profile form tabset.
  *}
+
+{* Help Link *}
+{help file="user-profile.md" class="pkp_help_tab"}
+
 <script type="text/javascript">
 	$(function() {ldelim}
 		// Attach the form handler.
@@ -15,6 +19,7 @@
 </script>
 
 <form class="pkp_form" id="rolesForm" method="post" action="{url op="saveRoles"}" enctype="multipart/form-data">
+
 	{include file="controllers/notification/inPlaceNotification.tpl" notificationId="rolesFormNotification"}
 
 	{include file="user/userGroups.tpl"}

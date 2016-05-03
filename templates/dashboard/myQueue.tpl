@@ -7,6 +7,11 @@
  *
  * User related submissions tab.
  *}
+
+{* Help File *}
+{help file="submissions.md" section="my-queue" class="pkp_help_tab"}
+
+{if array_intersect(array(ROLE_ID_MANAGER, ROLE_ID_AUTHOR), (array)$userRoles)}
 <script type="text/javascript">
 	$(function() {ldelim}
 		// Attach the form handler.
@@ -18,7 +23,9 @@
 		);
 	{rdelim});
 </script>
+{/if}
 <div class="pkp_context_sidebar">
+	{if array_intersect(array(ROLE_ID_MANAGER, ROLE_ID_AUTHOR), (array)$userRoles)}
 	<div class="pkp_tab_actions">
 		<form id="contextSubmissionForm">
 			<ul>
@@ -28,6 +35,7 @@
 			</ul>
 		</form>
 	</div>
+	{/if}
 </div>
 
 <div class="pkp_content_panel">

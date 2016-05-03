@@ -53,12 +53,16 @@
 
 				{if $reviewAssignment->getReviewFormId()}
 					{include file="reviewer/review/reviewFormResponse.tpl"}
-				{elseif $comment}
+				{elseif $comment || $commentPrivate}
 					<h3>{translate key="editor.review.reviewerComments"}</h3>
-					<h4>{translate key="submission.comments.canShareWithAuthor"}</h4>
-					{include file="controllers/revealMore.tpl" content=$comment|strip_unsafe_html}
-					<h4>{translate key="submission.comments.cannotShareWithAuthor"}</h4>
-					{include file="controllers/revealMore.tpl" content=$commentPrivate|strip_unsafe_html}
+					{if $comment}
+						<h4>{translate key="submission.comments.canShareWithAuthor"}</h4>
+						{include file="controllers/revealMore.tpl" content=$comment|strip_unsafe_html}
+					{/if}
+					{if $commentPrivate}
+						<h4>{translate key="submission.comments.cannotShareWithAuthor"}</h4>
+						{include file="controllers/revealMore.tpl" content=$commentPrivate|strip_unsafe_html}
+					{/if}
 				{/if}
 				{if $reviewAssignment->getCompetingInterests()}
 					<h3>{translate key="reviewer.submission.competingInterests"}</h3>
@@ -89,10 +93,13 @@
 	</div>
 
 	{fbvFormArea id="readReview"}
-		{fbvFormSection}
+		{fbvFormSection title="reviewer.submission.reviewerFiles"}
 			{url|assign:reviewAttachmentsGridUrl router=$smarty.const.ROUTE_COMPONENT component="grid.files.attachment.EditorReviewAttachmentsGridHandler" op="fetchGrid" submissionId=$submission->getId() reviewId=$reviewAssignment->getId() stageId=$reviewAssignment->getStageId() escape=false}
 			{load_url_in_div id="readReviewAttachmentsGridContainer" url=$reviewAttachmentsGridUrl}
 		{/fbvFormSection}
+
+		{$reviewerRecommendations}
+
 		{fbvFormButtons id="closeButton" hideCancel=false submitText="common.confirm"}
 	{/fbvFormArea}
 </form>

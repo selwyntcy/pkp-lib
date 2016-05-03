@@ -33,7 +33,7 @@ abstract class UsersListbuilderHandler extends ListbuilderHandler {
 		parent::initialize($request);
 
 		// Load submission-specific translations
-		AppLocale::requireComponents(LOCALE_COMPONENT_PKP_USER);
+		AppLocale::requireComponents(LOCALE_COMPONENT_PKP_SUBMISSION);
 
 		import('lib.pkp.classes.linkAction.request.NullAction');
 		$this->addAction(
@@ -46,7 +46,7 @@ abstract class UsersListbuilderHandler extends ListbuilderHandler {
 		);
 
 		// Basic configuration.
-		$this->setTitle('email.recipients');
+		$this->setTitle('editor.submission.stageParticipants');
 		$this->setSourceType(LISTBUILDER_SOURCE_TYPE_SELECT);
 		$this->setSaveType(LISTBUILDER_SAVE_TYPE_EXTERNAL);
 		$this->setSaveFieldName('users');
