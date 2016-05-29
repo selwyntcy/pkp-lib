@@ -37,6 +37,8 @@
 		{/if}
 
 		<div class="pkp_brand_footer" role="complementary" aria-label="Links to CUHK and DSCCC">
+{* hack 20160530: hardcoding issn in the footer for show *}
+<p style="color: #666666;"><em>QUEST: Studies on Religion & Culture in Asia</em><br />ISSN: 2415-5993</p>
 			<a href="http://www.cuhk.edu.hk/">
 				<img alt="The Chinese University of Hong Kong" src="{$baseUrl}/templates/images/cuhk_emblem.png">
 			</a>
