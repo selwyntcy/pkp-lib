@@ -53,17 +53,13 @@ class PKPStageParticipantNotifyForm extends Form {
 			$this->addCheck(new FormValidator($this, 'message', 'required', 'stageParticipants.notify.warning'));
 		}
 		$this->addCheck(new FormValidatorPost($this));
+		$this->addCheck(new FormValidatorCSRF($this));
 	}
 
 	/**
 	 * @copydoc Form::fetch()
 	 */
 	function fetch($request) {
-		$templateMgr = TemplateManager::getManager($request);
-
-		$templateMgr->assign('submissionId', $this->_submissionId);
-		$templateMgr->assign('itemId', $this->_itemId);
-
 		$submissionDao = Application::getSubmissionDAO();
 		$submission = $submissionDao->getById($this->_submissionId);
 
@@ -83,15 +79,11 @@ class PKPStageParticipantNotifyForm extends Form {
 			}
 		}
 
-		// template keys indexed by stageId
 		$stageTemplates = $this->_getStageTemplates();
-
 		$currentStageId = $this->getStageId();
-
 		if (array_key_exists($currentStageId, $stageTemplates)) {
 			$templateKeys = array_merge($templateKeys, $stageTemplates[$currentStageId]);
 		}
-
 		foreach ($templateKeys as $templateKey) {
 			$template = $this->_getMailTemplate($submission, $templateKey);
 			$template->assignParams(array());
@@ -99,14 +91,17 @@ class PKPStageParticipantNotifyForm extends Form {
 			$templates[$templateKey] = $template->getSubject();
 		}
 
-		$templateMgr->assign('templates', $templates);
-		$templateMgr->assign('stageId', $currentStageId);
-		$templateMgr->assign('includeNotifyUsersListbuilder', $this->includeNotifyUsersListbuilder());
-
-		// check to see if we were handed a userId from the stage participants grid.  If so,
-		// pass that in so the list builder can pre-populate. The Listbuilder validates this.
-
-		$templateMgr->assign('userId', (int) $request->getUserVar('userId'));
+		$templateMgr = TemplateManager::getManager($request);
+		$templateMgr->assign(array(
+			'templates' => $templates,
+			'stageId' => $currentStageId,
+			'includeNotifyUsersListbuilder' => $this->includeNotifyUsersListbuilder(),
+			'submissionId' => $this->_submissionId,
+			'itemId' => $this->_itemId,
+			// check to see if we were handed a userId from the stage participants grid. If
+			// so, pass that in so the listbuilder can pre-populate. Listbuilder validates.
+			'userId' => (int) $request->getUserVar('userId'),
+		));
 
 		return parent::fetch($request);
 	}
@@ -127,7 +122,7 @@ class PKPStageParticipantNotifyForm extends Form {
 	 * @copydoc Form::execute()
 	 */
 	function execute($request) {
-		$submissionDao = Application::getSubmissionDAO('SubmissionDAO');
+		$submissionDao = Application::getSubmissionDAO();
 		$submission = $submissionDao->getById($this->_submissionId);
 		foreach ((array) $this->getData('userIds') as $userId) {
 			$this->sendMessage($userId, $submission, $request);
@@ -196,13 +191,58 @@ class PKPStageParticipantNotifyForm extends Form {
 			$email->send($request);
 			// remove the INDEX_ and LAYOUT_ tasks if a user has sent the appropriate _COMPLETE email
 			switch ($template) {
-				case 'LAYOUT_COMPLETE':
-					$this->_removeUploadTaskNotification($submission, NOTIFICATION_TYPE_LAYOUT_ASSIGNMENT, $request);
+				case 'COPYEDIT_REQUEST':
+					$this->_addAssignmentTaskNotification($request, NOTIFICATION_TYPE_COPYEDIT_ASSIGNMENT, $user->getId(), $submission->getId());
 					break;
-				case 'INDEX_COMPLETE':
-					$this->_removeUploadTaskNotification($submission, NOTIFICATION_TYPE_INDEX_ASSIGNMENT, $request);
+				case 'LAYOUT_REQUEST':
+					$this->_addAssignmentTaskNotification($request, NOTIFICATION_TYPE_LAYOUT_ASSIGNMENT, $user->getId(), $submission->getId());
+					break;
+				case 'INDEX_REQUEST':
+					$this->_addAssignmentTaskNotification($request, NOTIFICATION_TYPE_INDEX_ASSIGNMENT, $user->getId(), $submission->getId());
 					break;
 			}
+
+			// Create a query
+			$queryDao = DAORegistry::getDAO('QueryDAO');
+			$query = $queryDao->newDataObject();
+			$query->setAssocType(ASSOC_TYPE_SUBMISSION);
+			$query->setAssocId($submission->getId());
+			$query->setStageId($this->_stageId);
+			$query->setSequence(REALLY_BIG_NUMBER);
+			$queryDao->insertObject($query);
+			$queryDao->resequence(ASSOC_TYPE_SUBMISSION, $submission->getId());
+
+			// Add the current user and message recipient as participants.
+			$queryDao->insertParticipant($query->getId(), $user->getId());
+			if ($user->getId() != $request->getUser()->getId()) {
+				$queryDao->insertParticipant($query->getId(), $request->getUser()->getId());
+			}
+
+			// Create a head note
+			$noteDao = DAORegistry::getDAO('NoteDAO');
+			$headNote = $noteDao->newDataObject();
+			$headNote->setUserId($request->getUser()->getId());
+			$headNote->setAssocType(ASSOC_TYPE_QUERY);
+			$headNote->setAssocId($query->getId());
+			$headNote->setDateCreated(Core::getCurrentDate());
+			$headNote->setTitle($email->getSubject());
+			$headNote->setContents($email->getBody());
+			$noteDao->insertObject($headNote);
+
+			$notificationMgr = new NotificationManager();
+			$notificationMgr->updateNotification(
+				$request,
+				array(
+					NOTIFICATION_TYPE_ASSIGN_COPYEDITOR,
+					NOTIFICATION_TYPE_AWAITING_COPYEDITS,
+					NOTIFICATION_TYPE_ASSIGN_PRODUCTIONUSER,
+					NOTIFICATION_TYPE_AWAITING_REPRESENTATIONS,
+				),
+				null,
+				ASSOC_TYPE_SUBMISSION,
+				$submission->getId()
+			);
+
 		}
 	}
 
@@ -215,8 +255,7 @@ class PKPStageParticipantNotifyForm extends Form {
 		switch ($emailKey) {
 			case 'COPYEDIT_REQUEST':
 			case 'LAYOUT_REQUEST':
-			case 'INDEX_REQUEST':
-				return array(
+			case 'INDEX_REQUEST': return array(
 					'participantName' => __('user.name'),
 					'participantUsername' => __('user.username'),
 					'submissionUrl' => __('common.url'),
@@ -243,11 +282,11 @@ class PKPStageParticipantNotifyForm extends Form {
 	/**
 	 * Add upload task notifications.
 	 * @param $request PKPRequest
-	 * @param $type int
-	 * @param $userId int
-	 * @param $submissionId int
+	 * @param $type int NOTIFICATION_TYPE_...
+	 * @param $userId int User ID
+	 * @param $submissionId int Submission ID
 	 */
-	private function _addUploadTaskNotification($request, $type, $userId, $submissionId) {
+	private function _addAssignmentTaskNotification($request, $type, $userId, $submissionId) {
 		$notificationDao = DAORegistry::getDAO('NotificationDAO'); /* @var $notificationDao NotificationDAO */
 		$notificationFactory = $notificationDao->getByAssoc(
 			ASSOC_TYPE_SUBMISSION,
@@ -268,38 +307,6 @@ class PKPStageParticipantNotifyForm extends Form {
 				$submissionId,
 				NOTIFICATION_LEVEL_TASK
 			);
-		}
-	}
-
-	/**
-	 * Clear potential tasks that may have been assigned to certain
-	 * users on certain stages.  Right now, just LAYOUT uploads on the production stage.
-	 * @param Submission $submission
-	 * @param int $task
-	 * @param PKRequest $request
-	 */
-	private function _removeUploadTaskNotification($submission, $task, $request) {
-
-		// if this is a submission by a LAYOUT_EDITOR for a submission in production, check
-		// to see if there is a task notification for that and if so, clear it.
-		$currentStageId = $this->getStageId();
-		$notificationMgr = new NotificationManager();
-
-		if ($currentStageId == WORKFLOW_STAGE_ID_PRODUCTION) {
-
-			$user = $request->getUser();
-			$stageAssignmentDao = DAORegistry::getDAO('StageAssignmentDAO');
-			$userGroupDao = DAORegistry::getDAO('UserGroupDAO');
-			$stageAssignments = $stageAssignmentDao->getBySubmissionAndStageId($submission->getId(), $this->getStageId(), null, $user->getId());
-
-			while ($stageAssignment = $stageAssignments->next()) {
-				$userGroup = $userGroupDao->getById($stageAssignment->getUserGroupId());
-				if (in_array($userGroup->getRoleId(), array(ROLE_ID_MANAGER, ROLE_ID_SUB_EDITOR, ROLE_ID_ASSISTANT))) {
-					$notificationDao = DAORegistry::getDAO('NotificationDAO');
-					$notificationDao->deleteByAssoc(ASSOC_TYPE_SUBMISSION, $submission->getId(), $user->getId(), $task);
-					return;
-				}
-			}
 		}
 	}
 

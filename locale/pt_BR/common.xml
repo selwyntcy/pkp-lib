@@ -31,7 +31,7 @@
 	<message key="announcement.moreAnnouncements">Outras notícias...</message>
 	<message key="announcement.noneExist">Nenhuma notícia publicada.</message>
 	<message key="announcement.posted">Publicado</message>
-	<message key="announcement.postedOn">Postado em {$postDate}</message>	
+	<message key="announcement.postedOn">Postado em {$postDate}</message>
 	<message key="announcement.view">Ler notícia</message>
 	<message key="common.navigation.sidebar">Barra lateral</message>
 	<message key="common.navigation.site">Navegação no Site</message>
@@ -53,7 +53,7 @@
 	<message key="common.name">Nome</message>
 	<message key="common.all">Toda(o)s</message>
 	<message key="common.alphaList">A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</message>
-	<message key="common.titleSmallWords">da um o e um ou nem mas é se então senão quando na de por ligado desligado para em fora sobre ao dentro com</message>
+	<message key="common.titleSmallWords">da um o e um ou nem mas é se então senão quando na de por sobre para em fora sobre ao dentro com</message>
 	<message key="common.alreadyAssigned">Já designado</message>
 	<message key="common.altText">Texto alternativo</message>
 	<message key="common.altTextInstructions">Informe um texto alternativo para a imagem, assegurando acessibilidade a usuários com navegadores de texto ou equipamentos de auxílio a necessidades especiais.</message>
@@ -199,7 +199,7 @@
 	<message key="common.prefixAndTitle.tip">Se o título do livro começar com "Um" ou "O" (ou algo similar na ordem alfabética) coloque a palavra no prefixo.</message>
 	<message key="common.subtitle.tip">O subtítulo da submissão aparecerá depois de dois pontos (:), seguindo o título principal.</message>
 	<message key="common.preview">Visualizar</message>
-	<message key="common.publisher">Editora</message>	
+	<message key="common.publisher">Editora</message>
 	<message key="common.quality">Qualidade</message>
 	<message key="common.queue.long.active">Ativos</message>
 	<message key="common.range">{$min}-{$max}</message>
@@ -210,7 +210,6 @@
 	<message key="common.refresh">Atualizar</message>
 	<message key="common.related">Relacionado</message>
 	<message key="common.reminder">Lembrete</message>
-	<message key="common.rreminded.date">Lembrado em: {$dateReminded}</message>
 	<message key="common.remote">Remoto</message>
 	<message key="common.remoteURL">URL remoto</message>
 	<message key="common.remove">Remover</message>
@@ -242,7 +241,6 @@
 	<message key="common.top">Topo</message>
 	<message key="common.true">Verdadeiro</message>
 	<message key="common.type">Tipo</message>
-	<message key="common.element">Elemento</message>
 	<message key="common.uninitiated">Não iniciado</message>
 	<message key="common.unread">Não lido</message>
 	<message key="common.untitled">Sem título</message>
@@ -452,10 +450,10 @@
 	<message key="notification.unsubscribeSuccess">Cancelamento de assinatura de notificações realizado com sucesso.</message>
 	<message key="notification.savedSubmissionMetadata">Metadados da submissão salvos.</message>
 	<message key="search.abstract">Resumo</message>
-	<message key="search.activeFilters">Filtros avançados</message>
+	<message key="search.author">Autor</message>
+	<message key="search.advancedFilters">Filtros avançados</message>
 	<message key="search.advancedSearchMore">Opções adicionais de pesquisa (clique para exibir)</message>
 	<message key="search.advancedSearchLess">Opções adicionais de pesquisa (clique para ocultar)</message>
-	<message key="search.allFields">Todos</message>
 	<message key="search.searchAgain">Buscar novamente</message>
 	<message key="search.cli.rebuildIndex.clearingIndex">Índice de tiragem</message>
 	<message key="search.cli.rebuildIndex.done">feito</message>
@@ -476,8 +474,6 @@
 	<message key="search.operator.and">and</message>
 	<message key="search.operator.not">not</message>
 	<message key="search.operator.or">or</message>
-	<message key="search.searchAllCategories">Pesquisar termo em todas as categorias</message>
-	<message key="search.searchCategories">Pesquisar nas categorias</message>
 	<message key="search.searchResults">Resultado da pesquisa</message>
 	<message key="search.subject">Assunto</message>
 	<message key="search.titleIndex">Índice de títulos</message>
@@ -522,6 +518,7 @@
 	<message key="notification.type.allRevisionsIn">Um arquivo revisado foi enviado para avaliação editorial no estágio {$stage}.</message>
 	<message key="notification.type.pendingRevisions">Revisões para consideração no estágio {$stage}.</message>
 	<message key="notification.type.pendingRevisions.title">Revisões enviadas ao estágio {$stage}.</message>
+	<message key="notification.type.roundStatusTitle">Situação da rodada {$round}</message>
 
 
 	<message key="notification.signedFile">Arquivo considerado.</message>
@@ -534,4 +531,16 @@
 
 
 
+	<message key="navigation.dashboard">Painel de Controle</message>
+	<message key="notification.type.metadataModified">Metadado de "{$title}" modificado.</message>
+	<message key="notification.type.reviewerComment">Um avaliador comentou em "{$title}".</message>
+	<message key="user.authorization.invalidRepresentation">Representação inválida.</message>
+	<message key="notification.type.queryActivity">Atividade da discussão.</message>
+	<message key="notification.type.queryAdded">Conversa adicionada.</message>
+	<message key="common.allDownloads">Todos os downloads</message>
+	<message key="common.file.namingPattern">{$username}, {$userGroup}, {$originalFilename}</message>
+	<message key="common.file.anonymousNamingPattern">{$userGroup}, {$originalFilename}</message>
+	<message key="common.reminded.date">Lembrado: {$dateReminded}</message>
+	<message key="common.component">Componente</message>
+	<message key="search.SearchFor">Buscar por</message>
 </locale>

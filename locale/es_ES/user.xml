@@ -148,4 +148,5 @@
 	<message key="user.profile.identity">Identidad</message>
 	<message key="user.profile.contact">Contacto</message>
 	<message key="user.profile.public">Público</message>
+	<message key="user.register.form.passwordLengthRestriction">La contraseña debe tener como mínimo {$length} caracteres.</message>
 </locale>

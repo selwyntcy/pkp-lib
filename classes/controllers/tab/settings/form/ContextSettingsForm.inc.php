@@ -34,6 +34,7 @@ class ContextSettingsForm extends Form {
 	 */
 	function ContextSettingsForm($settings, $template, $wizardMode) {
 		$this->addCheck(new FormValidatorPost($this));
+		$this->addCheck(new FormValidatorCSRF($this));
 		$this->setSettings($settings);
 		$this->setWizardMode($wizardMode);
 		parent::Form($template);
@@ -120,6 +121,7 @@ class ContextSettingsForm extends Form {
 	 * @param $request PKPRequest
 	 */
 	function execute($request) {
+		parent::execute($request);
 		$context = $request->getContext();
 		$settingsDao = $context->getSettingsDao();
 		$settings = $this->getSettings();

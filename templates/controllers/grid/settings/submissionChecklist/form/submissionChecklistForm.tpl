@@ -17,6 +17,7 @@
 </script>
 
 <form class="pkp_form" id="editSubmissionChecklistForm" method="post" action="{url router=$smarty.const.ROUTE_COMPONENT component="grid.settings.submissionChecklist.SubmissionChecklistGridHandler" op="updateItem"}">
+{csrf}
 
 {include file="controllers/notification/inPlaceNotification.tpl" notificationId="submissionChecklistFormNotification"}
 
@@ -37,4 +38,3 @@
 {/if}
 {fbvFormButtons submitText="common.save"}
 </form>
-<p><span class="formRequired">{translate key="common.requiredField"}</span></p>

@@ -10,7 +10,7 @@
  *}
 
 {* Help Link *}
-{help file="settings.md" section="workflow" class="pkp_help_tab"}
+{help file="settings.md" section="workflow-submission" class="pkp_help_tab"}
 
 <script type="text/javascript">
 	$(function() {ldelim}
@@ -20,9 +20,10 @@
 </script>
 
 <form class="pkp_form" id="submissionStageForm" method="post" action="{url router=$smarty.const.ROUTE_COMPONENT component="tab.settings.PublicationSettingsTabHandler" op="saveFormData" tab="submissionStage"}">
+	{csrf}
 	{include file="controllers/notification/inPlaceNotification.tpl" notificationId="submissionStageFormNotification"}
 
-	{fbvFormArea}
+	{fbvFormArea id="authorGuidelinesArea"}
 		{fbvFormSection label="manager.setup.authorGuidelines" description="manager.setup.authorGuidelines.description"}
 			{fbvElement type="textarea" multilingual=true name="authorGuidelines" id="authorGuidelines" value=$authorGuidelines rich=true}
 		{/fbvFormSection}

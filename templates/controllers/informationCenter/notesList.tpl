@@ -8,7 +8,7 @@
  * Display submission file note list in information center.
  *}
 
-<div id="{$notesListId}">
+<div id="{$notesListId}" class="pkp_notes_list">
 	{iterate from=notes item=note}
 		{assign var=noteId value=$note->getId()}
 		{if $noteFilesDownloadLink && isset($noteFilesDownloadLink[$noteId])}
@@ -20,6 +20,6 @@
 		{include file="controllers/informationCenter/note.tpl" noteFileDownloadLink=$downloadLink noteViewStatus=$noteViewStatus}
 	{/iterate}
 	{if $notes->wasEmpty()}
-		<p>{translate key="informationCenter.noNotes"}</p>
+		<p class="no_notes">{translate key="informationCenter.noNotes"}</p>
 	{/if}
 </div>

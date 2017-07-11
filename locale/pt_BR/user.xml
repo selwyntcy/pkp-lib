@@ -148,4 +148,5 @@
 	<message key="user.authorization.pluginRequired">Um plugin não foi especificado mas é requerido.</message>
 	<message key="user.register.form.userGroupRequired">Ao menos um papel deve ser selecionado.</message>
 	<message key="user.register.registrationCompleted"><![CDATA[Cadastro realizado com sucesso. <a href="{$profileUrl}">Clique aqui</a> para completar seu perfil.]]></message>
+	<message key="user.register.form.passwordLengthRestriction">A senha deve ter no mínimo {$length} caracteres.</message>
 </locale>

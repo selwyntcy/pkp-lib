@@ -385,6 +385,7 @@ class PKPReviewerGridHandler extends GridHandler {
 	 * @return JSONMessage JSON object
 	 */
 	function unconsiderReview($args, $request) {
+		if (!$request->checkCSRF()) return new JSONMessage(false);
 
 		// This resets the state of the review to 'unread', but does not delete note history.
 		$submission = $this->getSubmission();
@@ -393,7 +394,7 @@ class PKPReviewerGridHandler extends GridHandler {
 		$reviewAssignmentDao = DAORegistry::getDAO('ReviewAssignmentDAO');
 
 		$reviewAssignment->setUnconsidered(REVIEW_ASSIGNMENT_UNCONSIDERED);
-		$result = $reviewAssignmentDao->updateObject($reviewAssignment);
+		$reviewAssignmentDao->updateObject($reviewAssignment);
 		$this->_updateReviewRoundStatus($reviewAssignment);
 
 		// log the unconsider.
@@ -418,12 +419,7 @@ class PKPReviewerGridHandler extends GridHandler {
 			)
 		);
 
-		// Render the result.
-		if ($result) {
-			return DAO::getDataChangedEvent($reviewAssignment->getId());
-		} else {
-			return new JSONMessage(false, __('editor.review.errorUnconsideringReview'));
-		}
+		return DAO::getDataChangedEvent($reviewAssignment->getId());
 	}
 
 	/**
@@ -452,17 +448,27 @@ class PKPReviewerGridHandler extends GridHandler {
 			// Editor completes the review.
 			$reviewAssignment->setDateConfirmed(Core::getCurrentDate());
 			$reviewAssignment->setDateCompleted(Core::getCurrentDate());
-			// Remove the reviewer task.
-			$notificationDao = DAORegistry::getDAO('NotificationDAO');
-			$notificationDao->deleteByAssoc(
-				ASSOC_TYPE_REVIEW_ASSIGNMENT,
-				$reviewAssignment->getId(),
-				$reviewAssignment->getReviewerId(),
-				NOTIFICATION_TYPE_REVIEW_ASSIGNMENT
-			);
 		}
 
 		$this->_updateReviewRoundStatus($reviewAssignment);
+
+		// Remove the reviewer task.
+		$notificationDao = DAORegistry::getDAO('NotificationDAO');
+		$notificationDao->deleteByAssoc(
+			ASSOC_TYPE_REVIEW_ASSIGNMENT,
+			$reviewAssignment->getId(),
+			$reviewAssignment->getReviewerId(),
+			NOTIFICATION_TYPE_REVIEW_ASSIGNMENT
+		);
+		$notificationMgr = new NotificationManager();
+		$reviewRound = $this->getReviewRound();
+		$notificationMgr->updateNotification(
+			$request,
+			array(NOTIFICATION_TYPE_ALL_REVIEWS_IN),
+			null,
+			ASSOC_TYPE_REVIEW_ROUND,
+			$reviewRound->getId()
+		);
 
 		return DAO::getDataChangedEvent($reviewAssignment->getId());
 	}
@@ -495,13 +501,12 @@ class PKPReviewerGridHandler extends GridHandler {
 	 */
 	function readReview($args, $request) {
 		$templateMgr = TemplateManager::getManager($request);
-
-		// Assign submission to template.
-		$templateMgr->assign('submission', $this->getSubmission());
-
-		// Retrieve review assignment.
 		$reviewAssignment = $this->getAuthorizedContextObject(ASSOC_TYPE_REVIEW_ASSIGNMENT);
-		$templateMgr->assign('reviewAssignment', $reviewAssignment);
+		$templateMgr->assign(array(
+			'submission' => $this->getSubmission(),
+			'reviewAssignment' => $reviewAssignment,
+			'reviewerRecommendationOptions' =>ReviewAssignment::getReviewerRecommendationOptions(),
+		));
 
 		if ($reviewAssignment->getReviewFormId()) {
 			// Retrieve review form
@@ -513,25 +518,21 @@ class PKPReviewerGridHandler extends GridHandler {
 			$reviewFormDao = DAORegistry::getDAO('ReviewFormDAO');
 			$reviewformid = $reviewAssignment->getReviewFormId();
 			$reviewForm = $reviewFormDao->getById($reviewAssignment->getReviewFormId(), Application::getContextAssocType(), $context->getId());
-
-			$templateMgr->assign('reviewForm', $reviewForm);
-			$templateMgr->assign('reviewFormElements', $reviewFormElements);
-			$templateMgr->assign('reviewFormResponses', $reviewFormResponses);
-			$templateMgr->assign('disabled', true);
+			$templateMgr->assign(array(
+				'reviewForm' => $reviewForm,
+				'reviewFormElements' => $reviewFormElements,
+				'reviewFormResponses' => $reviewFormResponses,
+				'disabled' => true,
+			));
 		} else {
-			// Retrieve reviewer comment.
+			// Retrieve reviewer comments.
 			$submissionCommentDao = DAORegistry::getDAO('SubmissionCommentDAO');
-
-			$submissionComments = $submissionCommentDao->getReviewerCommentsByReviewerId($reviewAssignment->getReviewerId(), $reviewAssignment->getSubmissionId(), $reviewAssignment->getId(), true);
-			$submissionComment = $submissionComments->next();
-			$templateMgr->assign('comment', $submissionComment?$submissionComment->getComments():'');
-
-			$submissionCommentsPrivate = $submissionCommentDao->getReviewerCommentsByReviewerId($reviewAssignment->getReviewerId(), $reviewAssignment->getSubmissionId(), $reviewAssignment->getId(), false);
-			$submissionCommentPrivate = $submissionCommentsPrivate->next();
-			$templateMgr->assign('commentPrivate', $submissionCommentPrivate?$submissionCommentPrivate->getComments():'');
+			$templateMgr->assign(array(
+				'comments' => $submissionCommentDao->getReviewerCommentsByReviewerId($reviewAssignment->getSubmissionId(), null, $reviewAssignment->getId(), true),
+				'commentsPrivate' => $submissionCommentDao->getReviewerCommentsByReviewerId($reviewAssignment->getSubmissionId(), null, $reviewAssignment->getId(), false),
+			));
 		}
 
-		$templateMgr->assign_by_ref('reviewerRecommendationOptions', ReviewAssignment::getReviewerRecommendationOptions());
 
 		// Render the response.
 		return $templateMgr->fetchJson('controllers/grid/users/reviewer/readReview.tpl');

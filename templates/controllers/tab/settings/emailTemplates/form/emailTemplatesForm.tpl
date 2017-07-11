@@ -20,11 +20,9 @@
 </script>
 
 <form class="pkp_form" id="emailTemplatesForm" method="post" action="{url router=$smarty.const.ROUTE_COMPONENT component="tab.settings.PublicationSettingsTabHandler" op="saveFormData" tab="emailTemplates"}">
+	{csrf}
 	{include file="controllers/notification/inPlaceNotification.tpl" notificationId="emailTemplatesFormNotification"}
 
-	{fbvFormSection label="manager.setup.emailHeader" for="emailHeader" description="manager.setup.emailHeaderDescription"}
-		{fbvElement type="textarea" id="emailHeader" value=$emailHeader size=$fbvStyles.size.LARGE rich=true variables=$emailVariables}
-	{/fbvFormSection}
 	{fbvFormSection label="manager.setup.emailSignature" for="emailSignature" description="manager.setup.emailSignatureDescription"}
 		{fbvElement type="textarea" id="emailSignature" value=$emailSignature size=$fbvStyles.size.LARGE rich=true variables=$emailVariables}
 	{/fbvFormSection}

@@ -38,6 +38,7 @@ import('lib.pkp.classes.form.validation.FormValidatorLength');
 import('lib.pkp.classes.form.validation.FormValidatorListbuilder');
 import('lib.pkp.classes.form.validation.FormValidatorLocale');
 import('lib.pkp.classes.form.validation.FormValidatorLocaleEmail');
+import('lib.pkp.classes.form.validation.FormValidatorCSRF');
 import('lib.pkp.classes.form.validation.FormValidatorPost');
 import('lib.pkp.classes.form.validation.FormValidatorRegExp');
 import('lib.pkp.classes.form.validation.FormValidatorUri');
@@ -159,6 +160,7 @@ class Form {
 	function fetch($request, $template = null, $display = false) {
 		// Set custom template.
 		if (!is_null($template)) $this->_template = $template;
+
 
 		// Call hooks based on the calling entity, assuming
 		// this method is only called by a subclass. Results

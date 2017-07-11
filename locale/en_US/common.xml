@@ -41,7 +41,6 @@
 	<message key="common.tasks">Tasks</message>
 	<message key="common.list">List</message>
 	<message key="common.grid">Grid</message>
-	<message key="common.takeMeThere">Take Me There</message>
 	<message key="common.confirmDelete">Are you sure you wish to delete this item? This action cannot be undone.</message>
 	<message key="common.abstract">Abstract</message>
 	<message key="common.accepted">Accepted</message>
@@ -71,8 +70,11 @@
 	<message key="common.warning">Warning</message>
 	<message key="common.error">Error</message>
 	<message key="common.notice">Notice</message>
-	<message key="common.captchaField.altText">Validation image</message>
-	<message key="common.captchaField.badCaptcha">The characters you entered did not match the characters in the image. Please check the characters and try again.</message>
+	<!-- Captcha error messages. See: https://developers.google.com/recaptcha/docs/verify -->
+	<message key="common.captcha.error.missing-input-secret">The captcha validation for this website is not configured correctly. The secret key is missing.</message>
+	<message key="common.captcha.error.invalid-input-secret">The captcha validation for this website is not configured correctly. The secret key is invalid.</message>
+	<message key="common.captcha.error.missing-input-response">You must complete the validation check used to prevent spam submissions.</message>
+	<message key="common.captcha.error.invalid-input-response">You did not pass the validation check used to prevent spam submissions.</message>
 	<message key="common.captchaField.description">Please enter the letters as they appear in the image above.</message>
 	<message key="common.captchaField">Validation</message>
 	<message key="common.ccLicense"><![CDATA[
@@ -143,6 +145,7 @@
 	<message key="common.false">False</message>
 	<message key="common.file">File</message>
 	<message key="common.file.namingPattern">{$username}, {$userGroup}, {$originalFilename}</message>
+	<message key="common.file.anonymousNamingPattern">{$userGroup}, {$originalFilename}</message>
 	<message key="common.fileName">File Name</message>
 	<message key="common.fileSize">File Size</message>
 	<message key="common.fileType">File Type</message>
@@ -253,7 +256,6 @@
 	<message key="common.uploadedFile">Uploaded file</message>
 	<message key="common.upload">Upload</message>
 	<message key="common.uploadFailed">The file could not be uploaded or revised.</message>
-	<message key="common.fileUpload.maxFileSizeStatus"><![CDATA[This server allows a file size upload maximum of {$fileSize}.  If required, please contact <a href="mailto:{$supportEmail}">{$supportName}</a> for assistance.]]></message>
 	<message key="common.invalidFileType">No file uploaded or invalid file type!</message>
 	<message key="common.homepageImage.altText">Homepage Image</message>
 	<message key="common.up">Up</message>
@@ -322,6 +324,7 @@
 	<message key="form.is">is</message>
 	<message key="form.startsWith">starts with</message>
 	<message key="form.postRequired">The form was not submitted properly.</message>
+	<message key="form.csrfInvalid">The form was not submitted properly.</message>
 	<message key="form.fileRequired">A file upload is required.</message>
 	<message key="form.required">(* Required)</message>
 	<message key="form.resubmit">Resubmit</message>
@@ -351,9 +354,7 @@
 	<!-- Information Center -->
 	<message key="informationCenter.informationCenter">Information Center</message>
 	<message key="informationCenter.editorialHistory">Editorial History</message>
-	<message key="informationCenter.composeNote">Compose Note</message>
-	<message key="informationCenter.addFileNote">Add to File</message>
-	<message key="informationCenter.addSubmissionNote">Add to Submission</message>
+	<message key="informationCenter.addNote">Add Note</message>
 	<message key="informationCenter.noNotes">There are no notes to display.</message>
 	<message key="informationCenter.currentNotes">Current Revision Notes</message>
 	<message key="informationCenter.pastNotes">Earlier Revision Notes</message>
@@ -438,6 +439,7 @@
 	<message key="notification.addedNote">Note posted.</message>
 	<message key="notification.removedNote">Note deleted.</message>
 	<message key="notification.removedFile">Removed file.</message>
+	<message key="notification.removedSubmission">Removed submission.</message>
 	<message key="notification.notification">Notification</message>
 	<message key="notification.notifications">Notifications</message>
 	<message key="notification.notificationsNew">({$numNew} new)</message>
@@ -454,11 +456,11 @@
 	<message key="notification.unsubscribeError">There was an error unsubscribing you.  Please ensure that you are using the correct URL as included in your notification email.</message>
 	<message key="notification.unsubscribeSuccess">You were successfully unsubscribed.</message>
 	<message key="notification.savedSubmissionMetadata">Submission metadata saved.</message>
+	<message key="search.author">By Author</message>
 	<message key="search.abstract">Abstract</message>
-	<message key="search.activeFilters">Advanced filters</message>
+	<message key="search.advancedFilters">Advanced filters</message>
 	<message key="search.advancedSearchMore">More search options</message>
 	<message key="search.advancedSearchLess">Hide more search options</message>
-	<message key="search.allFields">All</message>
 	<message key="search.searchAgain">Search again</message>
 	<message key="search.cli.rebuildIndex.clearingIndex">Clearing index</message>
 	<message key="search.cli.rebuildIndex.done">done</message>
@@ -466,8 +468,8 @@
 	<message key="search.cli.rebuildIndex.result">{$numIndexed} articles indexed</message>
 	<message key="search.coverage">Coverage</message>
 	<message key="search.date">Publication Date</message>
-	<message key="search.dateFrom">From</message>
-	<message key="search.dateTo">Until</message>
+	<message key="search.dateFrom">Published After</message>
+	<message key="search.dateTo">Published Before</message>
 	<message key="search.deleteFilter">Delete</message>
 	<message key="search.discipline">Discipline(s)</message>
 	<message key="search.fullText">Full Text</message>
@@ -495,7 +497,6 @@
 	<message key="grid.action.deleteNotification">Delete Task</message>
 	<message key="grid.action.markNew">Mark New</message>
 	<message key="grid.action.markRead">Mark Read</message>
-	<message key="common.tasks.titleAndTask">{$acronym}: "{$title}": {$task}</message>
 
 	<message key="dashboard.tasks">Tasks</message>
 	<message key="dashboard.myQueue">My Queue</message>
@@ -533,6 +534,9 @@
 	<message key="navigation.archives">Archives</message>
 	<message key="user.authorization.authorRoleMissing">You do not currently have sufficient privileges to view the submission. Please edit your profile to ensure that you have been granted the appropriate roles under "Register As".</message>
 	<message key="user.authorization.submissionAuthor">The current user is not the author of the requested submission. Please verify that you are logged in with the correct user account.</message>
-	<message key="notification.type.queryActivity">Conversation activity.</message>
-	<message key="notification.type.queryAdded">Conversation added.</message>
+	<message key="notification.type.queryActivity">Discussion activity.</message>
+	<message key="notification.type.queryAdded">Discussion added.</message>
+	<message key="notification.type.assignCopyeditors">Assign a copyeditor using the Add link in the Participants list.</message>
+	<message key="notification.type.awaitingCopyedits">Awaiting Copyedits.</message>
+	<message key="notification.type.roundStatusTitle">Round {$round} Status</message>
 </locale>

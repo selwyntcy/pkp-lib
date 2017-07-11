@@ -12,7 +12,7 @@
 .pkp_controllers_informationCenter {
 
 	#notesAccordion {
-		margin-top: @double;
+		margin-bottom: @double;
 	}
 
 	.ui-accordion {
@@ -33,7 +33,7 @@
 		}
 	}
 
-	.ui-accordion-content {
+	.pkp_notes_list {
 		padding: @base;
 
 		p:first-child {
@@ -43,5 +43,40 @@
 		p:last-child {
 			margin-bottom: 0;
 		}
+	}
+
+	.note {
+		padding: @base 0;
+		font-size: @font-sml;
+		line-height: @line-sml;
+
+		.details {
+			.pkp_helpers_clear;
+			margin-bottom: @base;
+			border-bottom: @bg-border;
+			line-height: @double + @base - 1;
+
+			.user {
+				margin-right: 0.5em;
+				font-weight: @bold;
+			}
+
+			.date {
+				color: @text-light;
+			}
+
+			.actions {
+				float: right;
+
+				> * {
+					display: inline-block;
+					margin-left: @base;
+				}
+			}
+		}
+	}
+
+	.no_notes {
+		font-size: @font-sml;
 	}
 }

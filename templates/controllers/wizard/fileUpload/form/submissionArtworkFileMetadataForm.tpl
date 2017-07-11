@@ -21,6 +21,7 @@
 </script>
 
 <form class="pkp_form" id="metadataForm" action="{url component="api.file.ManageFileApiHandler" op="saveMetadata" submissionId=$submissionFile->getSubmissionId() stageId=$stageId reviewRoundId=$reviewRoundId fileStage=$submissionFile->getFileStage() fileId=$submissionFile->getFileId() escape=false}" method="post">
+	{csrf}
 
 	{* Editable metadata *}
 	{fbvFormArea id="fileMetaData"}
@@ -48,5 +49,4 @@
 		{fbvElement type="hidden" id="showButtons" value=$showButtons}
 		{fbvFormButtons submitText="common.save"}
 	{/if}
-	<p><span class="formRequired">{translate key="common.requiredField"}</span></p>
 </form>

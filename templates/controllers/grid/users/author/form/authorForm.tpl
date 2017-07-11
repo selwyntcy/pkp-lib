@@ -19,6 +19,7 @@
 </script>
 
 <form class="pkp_form" id="editAuthor" method="post" action="{url op="updateAuthor" authorId=$authorId}">
+	{csrf}
 	{include file="controllers/notification/inPlaceNotification.tpl" notificationId="authorFormNotification"}
 
 	{include
@@ -62,6 +63,6 @@
 		<input type="hidden" name="rowId" value="{$rowId|escape}" />
 	{/if}
 
-	{fbvFormButtons id="step2Buttons" submitText="common.save"}
 	<p><span class="formRequired">{translate key="common.requiredField"}</span></p>
+	{fbvFormButtons id="step2Buttons" submitText="common.save"}
 </form>

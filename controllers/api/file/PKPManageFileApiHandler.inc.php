@@ -26,8 +26,10 @@ abstract class PKPManageFileApiHandler extends Handler {
 		parent::Handler();
 		$this->addRoleAssignment(
 			array(ROLE_ID_MANAGER, ROLE_ID_SUB_EDITOR, ROLE_ID_ASSISTANT, ROLE_ID_REVIEWER, ROLE_ID_AUTHOR),
-			array('deleteFile', 'editMetadata', 'saveMetadata')
+			array('deleteFile', 'editMetadata', 'editMetadataTab', 'saveMetadata')
 		);
+		// Load submission-specific translations
+		AppLocale::requireComponents(LOCALE_COMPONENT_PKP_SUBMISSION);
 	}
 
 	//
@@ -50,6 +52,8 @@ abstract class PKPManageFileApiHandler extends Handler {
 	 * @return JSONMessage JSON object
 	 */
 	function deleteFile($args, $request) {
+		if (!$request->checkCSRF()) return new JSONMessage(false);
+
 		$submissionFile = $this->getAuthorizedContextObject(ASSOC_TYPE_SUBMISSION_FILE);
 		$submission = $this->getAuthorizedContextObject(ASSOC_TYPE_SUBMISSION);
 		$stageId = $request->getUserVar('stageId');
@@ -72,11 +76,12 @@ abstract class PKPManageFileApiHandler extends Handler {
 		if (!$stageAssignments->wasEmpty()) {
 			$submissionFileDao->deleteReviewRoundAssignment($submission->getId(), $stageId, $submissionFile->getFileId(), $submissionFile->getRevision());
 		}
-		$success = (boolean)$submissionFileDao->deleteRevisionById($submissionFile->getFileId(), $submissionFile->getRevision(), $submissionFile->getFileStage(), $submission->getId());
+
+		if (!$submissionFileDao->deleteRevisionById($submissionFile->getFileId(), $submissionFile->getRevision(), $submissionFile->getFileStage(), $submission->getId())) return new JSONMessage(false);
 
 		$notificationMgr = new NotificationManager();
-		if ($success) {
-			if ($submissionFile->getFileStage() == SUBMISSION_FILE_REVIEW_REVISION) {
+		switch ($submissionFile->getFileStage()) {
+			case SUBMISSION_FILE_REVIEW_REVISION:
 				// Get a list of author user IDs
 				$authorUserIds = array();
 				$stageAssignmentDao = DAORegistry::getDAO('StageAssignmentDAO');
@@ -103,31 +108,56 @@ abstract class PKPManageFileApiHandler extends Handler {
 					ASSOC_TYPE_REVIEW_ROUND,
 					$lastReviewRound->getId()
 				);
-			}
-
-			$this->removeFileIndex($submission, $submissionFile);
-			$fileManager = $this->getFileManager($submission->getContextId(), $submission->getId());
-			$fileManager->deleteFile($submissionFile->getFileId(), $submissionFile->getRevision());
-
-			$this->setupTemplate($request);
-			$user = $request->getUser();
-			if (!$request->getUserVar('suppressNotification')) NotificationManager::createTrivialNotification($user->getId(), NOTIFICATION_TYPE_SUCCESS, array('contents' => __('notification.removedFile')));
-
-			$this->logDeletionEvent($request, $submission, $submissionFile, $user);
-
-			return DAO::getDataChangedEvent();
-		} else {
-			return new JSONMessage(false);
+				break;
+			case SUBMISSION_FILE_COPYEDIT:
+				$notificationMgr->updateNotification(
+					$request,
+					array(NOTIFICATION_TYPE_ASSIGN_COPYEDITOR, NOTIFICATION_TYPE_AWAITING_COPYEDITS),
+					null,
+					ASSOC_TYPE_SUBMISSION,
+					$submission->getId()
+				);
+				break;
 		}
+
+		$this->removeFileIndex($submission, $submissionFile);
+		$fileManager = $this->getFileManager($submission->getContextId(), $submission->getId());
+		$fileManager->deleteFile($submissionFile->getFileId(), $submissionFile->getRevision());
+
+		$this->setupTemplate($request);
+		$user = $request->getUser();
+		if (!$request->getUserVar('suppressNotification')) NotificationManager::createTrivialNotification($user->getId(), NOTIFICATION_TYPE_SUCCESS, array('contents' => __('notification.removedFile')));
+
+		$this->logDeletionEvent($request, $submission, $submissionFile, $user);
+
+		return DAO::getDataChangedEvent();
 	}
 
 	/**
-	 * Edit submission file metadata.
+	 * Edit submission file metadata modal.
 	 * @param $args array
 	 * @param $request Request
 	 * @return JSONMessage JSON object
 	 */
 	function editMetadata($args, $request) {
+		$submissionFile = $this->getAuthorizedContextObject(ASSOC_TYPE_SUBMISSION_FILE);
+		if ($submissionFile->getFileStage() == SUBMISSION_FILE_PROOF) {
+			$templateMgr = TemplateManager::getManager($request);
+			$templateMgr->assign('submissionFile', $submissionFile);
+			$templateMgr->assign('stageId', $request->getUserVar('stageId'));
+			return new JSONMessage(true, $templateMgr->fetch('controllers/api/file/editMetadata.tpl'));
+		} else {
+			return $this->editMetadataTab($args, $request);
+		}
+	}
+
+	/**
+	 * Edit submission file metadata tab.
+	 * @param $args array
+	 * @param $request Request
+	 * @return JSONMessage JSON object
+	 */
+	function editMetadataTab($args, $request) {
 		$submissionFile = $this->getAuthorizedContextObject(ASSOC_TYPE_SUBMISSION_FILE);
 		$reviewRound = $this->getAuthorizedContextObject(ASSOC_TYPE_REVIEW_ROUND);
 		$stageId = $request->getUserVar('stageId');

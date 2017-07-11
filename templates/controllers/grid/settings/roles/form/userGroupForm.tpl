@@ -21,6 +21,7 @@
 </script>
 
 <form class="pkp_form" id="userGroupForm" method="post" action="{url router=$smarty.const.ROUTE_COMPONENT component="grid.settings.roles.UserGroupGridHandler" op="updateUserGroup"}">
+	{csrf}
 	{include file="controllers/notification/inPlaceNotification.tpl" notificationId="userGroupFormNotification"}
 
 	{if $userGroupId}
@@ -54,6 +55,6 @@
 			{/fbvFormSection}
 		{/fbvFormArea}
 	</div>
+	<p><span class="formRequired">{translate key="common.requiredField"}</span></p>
 	{fbvFormButtons}
 </form>
-<p><span class="formRequired">{translate key="common.requiredField"}</span></p>

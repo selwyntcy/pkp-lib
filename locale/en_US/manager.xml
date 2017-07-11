@@ -163,6 +163,7 @@
 	<message key="manager.plugins.sitePlugin">This is a site-wide plugin. Only the Site Administrator may manage this plugin.</message>
 	<message key="manager.plugins">System Plugins</message>
 	<message key="manager.readingTools">Reading Tools</message>
+	<message key="manager.userSearch.searchByName">Search User By Name</message>
 	<message key="manager.reviewerSearch.change">Change</message>
 	<message key="manager.reviewerSearch.searchByName">Search Reviewers By Name</message>
 	<message key="manager.reviewerSearch.searchByName.short">Search By Name</message>
@@ -281,7 +282,7 @@
 	<message key="manager.setup.layout.theme">Theme</message>
 	<message key="manager.setup.layout.themeDescription">New themes may be installed from the Plugins tab at the top of this page.</message>
 	<message key="manager.setup.layout.blockManagement">Sidebar management</message>
-	<message key="manager.setup.layout.leftSidebar">Left Sidebar</message>
+	<message key="manager.setup.layout.leftSidebar">Sidebar</message>
 	<message key="manager.setup.layout.unselected">Unselected</message>
 	<message key="manager.setup.loggingAndAuditing">Logging and Auditing</message>
 	<message key="manager.setup.logo">Logo</message>
@@ -300,7 +301,7 @@
 	<message key="manager.setup.principalContactDescription">Enter contact details, typically for a principal editorship, managing editorship, or administrative staff position, which can be displayed on your publicly accessible website.</message>
 	<message key="manager.setup.privacyStatement">Privacy Statement</message>
 	<message key="manager.setup.privacyStatement.description">This statement will appear during Author Submission and on the publicly available About page.</message>
-	<message key="manager.setup.reviewOptions.numWeeksPerResponse">Weeks allowed for review responses</message>
+	<message key="manager.setup.reviewOptions.numWeeksPerResponse">Weeks allowed to accept or decline a review request</message>
 	<message key="manager.setup.reviewOptions.numWeeksPerReview">Weeks allowed for review completion</message>
 	<message key="manager.setup.reviewOptions.neverSendReminder">Never Remind</message>
 	<message key="manager.setup.reviewOptions.noteOnModification">Defaults can be modified for each review during the editorial process.</message>
@@ -515,9 +516,9 @@
 	<message key="manager.setup.reviewerCompetingInterestsRequired.description">Reviewer Competing Interest statement</message>
 	<message key="manager.setup.competingInterests.required">Request a Competing Interest statement during the peer review.</message>
 
-	<message key="manager.setup.includeCopyrightStatement">Display the copyright statement with content (advisable for asserting an author-held copyright).</message>
-	<message key="manager.setup.includeLicense">Display the license with published work.</message>
 	<message key="manager.setup.licenseURLDescription">URL to a webpage describing the license, if available.</message>
 
 	<message key="manager.setup.metadata.submission">Submission Form</message>
+	<!--  common importexport keys -->
+	<message key="plugins.importexport.common.validationErrors">Validation errors:</message>
 </locale>

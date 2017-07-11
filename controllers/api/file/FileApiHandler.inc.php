@@ -31,7 +31,7 @@ class FileApiHandler extends Handler {
 		parent::Handler();
 		$this->addRoleAssignment(
 			array(ROLE_ID_MANAGER, ROLE_ID_SUB_EDITOR, ROLE_ID_ASSISTANT, ROLE_ID_REVIEWER, ROLE_ID_AUTHOR),
-			array('downloadFile', 'downloadLibraryFile', 'viewFile', 'downloadAllFiles', 'recordDownload', 'enableLinkAction')
+			array('downloadFile', 'downloadLibraryFile', 'downloadAllFiles', 'recordDownload', 'enableLinkAction')
 		);
 	}
 
@@ -86,7 +86,11 @@ class FileApiHandler extends Handler {
 		assert($submissionFile); // Should have been validated already
 		$context = $request->getContext();
 		$fileManager = $this->_getFileManager($context->getId(), $submissionFile->getSubmissionId());
-		$fileManager->downloadFile($submissionFile->getFileId(), $submissionFile->getRevision(), false, $submissionFile->getClientFileName());
+		if (!$fileManager->downloadFile($submissionFile->getFileId(), $submissionFile->getRevision(), false, $submissionFile->getClientFileName())) {
+			error_log('FileApiHandler: File ' . $submissionFile->getFilePath() . ' does not exist or is not readable!');
+			header('HTTP/1.0 500 Internal Server Error');
+			fatalError('500 Internal Server Error');
+		}
 	}
 
 	/**
@@ -134,19 +138,6 @@ class FileApiHandler extends Handler {
 				fatalError('Unauthorized access to library file.');
 			}
 		}
-	}
-
-	/**
-	 * View a file.
-	 * @param $args array
-	 * @param $request Request
-	 */
-	function viewFile($args, $request) {
-		$submissionFile = $this->getAuthorizedContextObject(ASSOC_TYPE_SUBMISSION_FILE);
-		assert($submissionFile); // Should have been validated already
-		$context = $request->getContext();
-		$fileManager = $this->_getFileManager($context->getId(), $submissionFile->getSubmissionId());
-		$fileManager->downloadFile($submissionFile->getFileId(), $submissionFile->getRevision(), true);
 	}
 
 	/**

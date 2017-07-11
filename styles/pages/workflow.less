@@ -113,10 +113,26 @@
 		}
 
 		&.pkp_linkaction_externalReview,
-		&.pkp_linkaction_sendToProduction {
+		&.pkp_linkaction_sendToProduction,
+		&.pkp_linkaction_schedulePublication {
 			&:extend(.pkp_button_primary all);
 		}
 
+	}
+}
+
+.pubids_export_actions {
+	padding-left: @double;
+	padding-right: @double;
+
+	.pubids_export_action {
+		padding-right: @base;
+		display: inline-block;
+
+		.deposit {
+			&:extend(.pkp_button_primary all);
+			&:extend(.pkp_button all);
+		}
 	}
 }
 
@@ -346,7 +362,7 @@
 		height:37px;
 		line-height:12px;
 		width: 19.5%;
-		background-image:url('{$baseUrl}/lib/pkp/templates/images/structure/workflow_inactive.png');
+		background-image:url('@{baseUrl}/lib/pkp/templates/images/structure/workflow_inactive.png');
 		text-align: center;
 		color: #ffffff;
 		float: none;
@@ -364,7 +380,7 @@
 	}
 
 	.submission_progress li.actionNeeded {
-		background-image:url('{$baseUrl}/lib/pkp/templates/images/structure/workflow_actionNeeded.png');
+		background-image:url('@{baseUrl}/lib/pkp/templates/images/structure/workflow_actionNeeded.png');
 	}
 
 	.submission_progress li.stageDisabled {
@@ -377,18 +393,18 @@
 	}
 
 	.submission_progress li.productionReady {
-		background-image:url('{$baseUrl}/lib/pkp/templates/images/structure/workflow_productionReady.png');
+		background-image:url('@{baseUrl}/lib/pkp/templates/images/structure/workflow_productionReady.png');
 	}
 
 	.submission_progress li.current {
- 		background-image:url('{$baseUrl}/lib/pkp/templates/images/structure/workflow_current.png');
+ 		background-image:url('@{baseUrl}/lib/pkp/templates/images/structure/workflow_current.png');
 
  		a {
  			font-size: 13px;
  		}
 
 		&.productionReady {
-			background-image:url('{$baseUrl}/lib/pkp/templates/images/structure/workflow_productionReadyCurrent.png') !important;
+			background-image:url('@{baseUrl}/lib/pkp/templates/images/structure/workflow_productionReadyCurrent.png') !important;
 		}
  	}
 

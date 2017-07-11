@@ -29,15 +29,11 @@ class RegistrationForm extends Form {
 	/** @var boolean whether or not captcha is enabled for this form */
 	var $captchaEnabled;
 
-	/** @var boolean whether or not implicit authentication is used */
-	var $implicitAuth;
-
 	/**
 	 * Constructor.
 	 */
 	function RegistrationForm($site) {
 		parent::Form('frontend/pages/userRegister.tpl');
-		$this->implicitAuth = Config::getVar('security', 'implicit_auth');
 
 		// Validation checks for this form
 		$this->addCheck(new FormValidatorCustom($this, 'username', 'required', 'user.register.form.usernameExists', array(DAORegistry::getDAO('UserDAO'), 'userExistsByUsername'), array(), true));
@@ -57,7 +53,7 @@ class RegistrationForm extends Form {
 
 		$this->captchaEnabled = Config::getVar('captcha', 'captcha_on_register') && Config::getVar('captcha', 'recaptcha');
 		if ($this->captchaEnabled) {
-			$this->addCheck(new FormValidatorReCaptcha($this, 'recaptcha_challenge_field', 'recaptcha_response_field', Request::getRemoteAddr(), 'common.captchaField.badCaptcha'));
+			$this->addCheck(new FormValidatorReCaptcha($this, Request::getRemoteAddr(), 'common.captcha.error.invalid-input-response'));
 		}
 
 		$authDao = DAORegistry::getDAO('AuthSourceDAO');
@@ -67,6 +63,7 @@ class RegistrationForm extends Form {
 		}
 
 		$this->addCheck(new FormValidatorPost($this));
+		$this->addCheck(new FormValidatorCSRF($this));
 	}
 
 	/**
@@ -78,10 +75,8 @@ class RegistrationForm extends Form {
 		$context = $request->getContext();
 
 		if ($this->captchaEnabled) {
-			import('lib.pkp.lib.recaptcha.recaptchalib');
 			$publicKey = Config::getVar('captcha', 'recaptcha_public_key');
-			$useSSL = Config::getVar('security', 'force_ssl')?true:false;
-			$reCaptchaHtml = recaptcha_get_html($publicKey, null, $useSSL);
+			$reCaptchaHtml = '<div class="g-recaptcha" data-sitekey="' . $publicKey . '"></div>';
 			$templateMgr->assign(array(
 				'reCaptchaHtml' => $reCaptchaHtml,
 				'captchaEnabled' => true,
@@ -105,8 +100,6 @@ class RegistrationForm extends Form {
 		$templateMgr->assign(array(
 			'source' =>$request->getUserVar('source'),
 			'minPasswordLength' => $site->getMinPasswordLength(),
-			'privacyStatement' => $context->getLocalizedSetting('privacyStatement'),
-			'includeEntirePage' => $display
 		));
 
 		return parent::fetch($request, $template, $display);
@@ -114,21 +107,36 @@ class RegistrationForm extends Form {
 
 	/**
 	 * @copydoc Form::initData()
-	 * @param $context Context
+	 * @param $request Request
 	 */
-	function initData($context) {
-		$userGroupDao = DAORegistry::getDAO('UserGroupDAO');
+	function initData($request) {
 		$userGroupIds = array();
 
-		// Register the user as a reader by default, if available.
-		$readerUserGroups = $userGroupDao->getByRoleId($context->getId(), ROLE_ID_READER);
-		while ($userGroup = $readerUserGroups->next()) {
-			if ($userGroup->getPermitSelfRegistration()) $userGroupIds[] = $userGroup->getId();
+		// If a context exists, opt the user into reader and author roles in
+		// that context by default.
+		if ($request->getContext()) {
+			$context = $request->getContext();
+			$userGroupDao = DAORegistry::getDAO('UserGroupDAO');
+
+			$readerUserGroups = $userGroupDao->getByRoleId($context->getId(), ROLE_ID_READER);
+			while ($userGroup = $readerUserGroups->next()) {
+				if ($userGroup->getPermitSelfRegistration()) $userGroupIds[] = $userGroup->getId();
+			}
+
+			$authorUserGroups = $userGroupDao->getByRoleId($context->getId(), ROLE_ID_AUTHOR);
+			while ($userGroup = $authorUserGroups->next()) {
+				if ($userGroup->getPermitSelfRegistration()) $userGroupIds[] = $userGroup->getId();
+			}
 		}
+
+		// Return a list of all contexts available in the site
+		$contextDao = Application::getContextDAO();
+		$contexts = $contextDao->getAll(true)->toArray();
 
 		$this->_data = array(
 			'userLocales' => array(),
 			'userGroupIds' => $userGroupIds,
+			'contexts' => $contexts,
 		);
 	}
 
@@ -156,8 +164,7 @@ class RegistrationForm extends Form {
 
 		if ($this->captchaEnabled) {
 			$this->readUserVars(array(
-				'recaptcha_challenge_field',
-				'recaptcha_response_field',
+				'g-recaptcha-response',
 			));
 		}
 
@@ -270,9 +277,6 @@ class RegistrationForm extends Form {
 			$mail->addRecipient($user->getEmail(), $user->getFullName());
 			$mail->send();
 			unset($mail);
-		} else {
-			// Create a notification guiding the user to their profile.
-			NotificationManager::createTrivialNotification($user->getId(), NOTIFICATION_TYPE_SUCCESS, array('contents' => __('user.register.registrationCompleted', array('profileUrl' => $request->url(null, 'user', 'profile')))));
 		}
 		return $userId;
 	}

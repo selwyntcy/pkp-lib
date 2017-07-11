@@ -123,10 +123,10 @@ class SubmissionNativeXmlFilter extends NativeExportFilter {
 		$node->setAttribute('advice', 'ignore');
 
 		// Add public ID
-		if ($pubId = $submission->getPubId('publisher-id')) {
+		if ($pubId = $submission->getStoredPubId('publisher-id')) {
 			$submissionNode->appendChild($node = $doc->createElementNS($deployment->getNamespace(), 'id', $pubId));
 			$node->setAttribute('type', 'public');
-			$node->setAttribute('advice', 'ignore');
+			$node->setAttribute('advice', 'update');
 		}
 
 		// Add pub IDs by plugin
@@ -145,12 +145,12 @@ class SubmissionNativeXmlFilter extends NativeExportFilter {
 	 * @return DOMElement|null
 	 */
 	function addPubIdentifier($doc, $submissionNode, $submission, $pubIdPlugin) {
-		$pubId = $pubIdPlugin->getPubId($submission);
+		$pubId = $submission->getStoredPubId($pubIdPlugin->getPubIdType());
 		if ($pubId) {
 			$deployment = $this->getDeployment();
 			$submissionNode->appendChild($node = $doc->createElementNS($deployment->getNamespace(), 'id', $pubId));
 			$node->setAttribute('type', $pubIdPlugin->getPubIdType());
-			$node->setAttribute('advice', 'ignore');
+			$node->setAttribute('advice', 'update');
 			return $node;
 		}
 		return null;

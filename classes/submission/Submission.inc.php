@@ -109,36 +109,6 @@ abstract class Submission extends DataObject {
 		return $this->_getContextLicenseFieldValue($locale, $field);
 	}
 
-	/**
-	 * Get a public ID for this submission.
-	 * @param @literal $pubIdType string One of the NLM pub-id-type values or
-	 * 'other::something' if not part of the official NLM list
-	 * (see <http://dtd.nlm.nih.gov/publishing/tag-library/n-4zh0.html>). @endliteral
-	 * @param $preview boolean If true, generate a non-persisted preview only.
-	 */
-	function getPubId($pubIdType, $preview = false) {
-		// FIXME: Move publisher-id to PID plug-in.
-		if ($pubIdType === 'publisher-id') {
-			$pubId = $this->getStoredPubId($pubIdType);
-			return ($pubId ? $pubId : null);
-		}
-
-		$pubIdPlugins = PluginRegistry::loadCategory('pubIds', true, $this->getContextId());
-
-		if (is_array($pubIdPlugins)) {
-			foreach ($pubIdPlugins as $pubIdPlugin) {
-				if ($pubIdPlugin->getPubIdType() == $pubIdType) {
-					// If we already have an assigned ID, use it.
-					$storedId = $this->getStoredPubId($pubIdType);
-					if (!empty($storedId)) return $storedId;
-
-					return $pubIdPlugin->getPubId($this, $preview);
-				}
-			}
-		}
-		return null;
-	}
-
 
 	//
 	// Getters / setters
@@ -794,203 +764,35 @@ abstract class Submission extends DataObject {
 	}
 
 	/**
-	 * Get the localized cover filename
-	 * @return string
-	 */
-	function getLocalizedFileName() {
-		return $this->getLocalizedData('fileName');
-	}
-
-	/**
 	 * get cover page server-side file name
-	 * @param $locale string
 	 * @return string
 	 */
-	function getFileName($locale) {
-		return $this->getData('fileName', $locale);
+	function getCoverImage() {
+		return $this->getData('coverImage');
 	}
 
 	/**
 	 * set cover page server-side file name
-	 * @param $fileName string
-	 * @param $locale string
+	 * @param $coverImage string
 	 */
-	function setFileName($fileName, $locale) {
-		$this->setData('fileName', $fileName, $locale);
-	}
-
-	/**
-	 * Get the localized submission cover width
-	 * @return string
-	 */
-	function getLocalizedWidth() {
-		return $this->getLocalizedData('width');
-	}
-
-	/**
-	 * get width of cover page image
-	 * @param $locale string
-	 * @return string
-	 */
-	function getWidth($locale) {
-		return $this->getData('width', $locale);
-	}
-
-	/**
-	 * set width of cover page image
-	 * @param $locale string
-	 * @param $width int
-	 */
-	function setWidth($width, $locale) {
-		$this->setData('width', $width, $locale);
-	}
-
-	/**
-	 * Get the localized submission cover height
-	 * @return string
-	 */
-	function getLocalizedHeight() {
-		return $this->getLocalizedData('height');
-	}
-
-	/**
-	 * get height of cover page image
-	 * @param $locale string
-	 * @return string
-	 */
-	function getHeight($locale) {
-		return $this->getData('height', $locale);
-	}
-
-	/**
-	 * set height of cover page image
-	 * @param $locale string
-	 * @param $height int
-	 */
-	function setHeight($height, $locale) {
-		$this->setData('height', $height, $locale);
-	}
-
-	/**
-	 * Get the localized cover filename on the uploader's computer
-	 * @return string
-	 */
-	function getLocalizedOriginalFileName() {
-		return $this->getLocalizedData('originalFileName');
-	}
-
-	/**
-	 * get original file name
-	 * @param $locale string
-	 * @return string
-	 */
-	function getOriginalFileName($locale) {
-		return $this->getData('originalFileName', $locale);
-	}
-
-	/**
-	 * set original file name
-	 * @param $originalFileName string
-	 * @param $locale string
-	 */
-	function setOriginalFileName($originalFileName, $locale) {
-		$this->setData('originalFileName', $originalFileName, $locale);
-	}
-
-	/**
-	 * Get the localized cover alternate text
-	 * @return string
-	 */
-	function getLocalizedCoverPageAltText() {
-		return $this->getLocalizedData('coverPageAltText');
+	function setCoverImage($coverImage) {
+		$this->setData('coverImage', $coverImage);
 	}
 
 	/**
 	 * get cover page alternate text
-	 * @param $locale string
 	 * @return string
 	 */
-	function getCoverPageAltText($locale) {
-		return $this->getData('coverPageAltText', $locale);
+	function getCoverImageAltText() {
+		return $this->getData('coverImageAltText');
 	}
 
 	/**
 	 * set cover page alternate text
-	 * @param $coverPageAltText string
-	 * @param $locale string
+	 * @param $coverImageAltText string
 	 */
-	function setCoverPageAltText($coverPageAltText, $locale) {
-		$this->setData('coverPageAltText', $coverPageAltText, $locale);
-	}
-
-	/**
-	 * Get the flag indicating whether or not to show
-	 * a cover page.
-	 * @return string
-	 */
-	function getLocalizedShowCoverPage() {
-		return $this->getLocalizedData('showCoverPage');
-	}
-
-	/**
-	 * get show cover page
-	 * @param $locale string
-	 * @return int
-	 */
-	function getShowCoverPage($locale) {
-		return $this->getData('showCoverPage', $locale);
-	}
-
-	/**
-	 * set show cover page
-	 * @param $showCoverPage int
-	 * @param $locale string
-	 */
-	function setShowCoverPage($showCoverPage, $locale) {
-		$this->setData('showCoverPage', $showCoverPage, $locale);
-	}
-
-	/**
-	 * get hide cover page thumbnail in Toc
-	 * @param $locale string
-	 * @return int
-	 */
-	function getHideCoverPageToc($locale) {
-		return $this->getData('hideCoverPageToc', $locale);
-	}
-
-	/**
-	 * set hide cover page thumbnail in Toc
-	 * @param $hideCoverPageToc int
-	 * @param $locale string
-	 */
-	function setHideCoverPageToc($hideCoverPageToc, $locale) {
-		$this->setData('hideCoverPageToc', $hideCoverPageToc, $locale);
-	}
-
-	/**
-	 * get hide cover page in abstract view
-	 * @param $locale string
-	 * @return int
-	 */
-	function getHideCoverPageAbstract($locale) {
-		return $this->getData('hideCoverPageAbstract', $locale);
-	}
-
-	/**
-	 * set hide cover page in abstract view
-	 * @param $hideCoverPageAbstract int
-	 * @param $locale string
-	 */
-	function setHideCoverPageAbstract($hideCoverPageAbstract, $locale) {
-		$this->setData('hideCoverPageAbstract', $hideCoverPageAbstract, $locale);
-	}
-
-	/**
-	 * Get localized hide cover page in abstract view
-	 */
-	function getLocalizedHideCoverPageAbstract() {
-		return $this->getLocalizedData('hideCoverPageAbstract');
+	function setCoverImageAltText($coverImageAltText) {
+		$this->setData('coverImageAltText', $coverImageAltText);
 	}
 
 	/**
@@ -1187,6 +989,12 @@ abstract class Submission extends DataObject {
 		return preg_match('/creativecommons\.org/i', $this->getLicenseURL());
 	}
 
+	/**
+	 * @copydoc DataObject::getDAO()
+	 */
+	function getDAO() {
+		return Application::getSubmissionDAO();
+	}
 
 	//
 	// Abstract methods.

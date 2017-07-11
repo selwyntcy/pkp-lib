@@ -52,6 +52,8 @@
 
 </div><!-- pkp_structure_page -->
 
+{load_script context="frontend" scripts=$scripts}
+
 {call_hook name="Templates::Common::Footer::PageFooter"}
 {* 20160128: hack: using cdn version of slick.js as upstream has removed it *}
 {* todo: should move to theme *}

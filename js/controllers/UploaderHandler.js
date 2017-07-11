@@ -35,8 +35,10 @@
 				' to a div!'].join(''));
 		}
 
+		var uploaderOptions, pluploaderId;
+
 		// Set up options to pass to plupload
-		var uploaderOptions = {
+		uploaderOptions = {
 			url: options.uploadUrl,
 			// Flash settings
 			flash_swf_url: options.baseUrl +
@@ -50,6 +52,12 @@
 		}
 		if (typeof options.resize) {
 			uploaderOptions.resize = options.resize;
+		}
+		if (typeof options.browse_button) {
+			uploaderOptions.browse_button = options.browse_button;
+		}
+		if (typeof options.multipart_params) {
+			uploaderOptions.multipart_params = options.multipart_params;
 		}
 		uploaderOptions = $.extend(
 				{},
@@ -80,6 +88,15 @@
 		this.pluploader.bind('QueueChanged',
 				this.callbackWrapper(this.refreshUploader));
 
+		// Pass clicks from the visual button to plupload's file input
+		pluploaderId = this.pluploader.id;
+		this.getHtmlElement().find('#' + uploaderOptions.browse_button)
+				.click(function(e) {
+					e.preventDefault();
+					$(this).siblings('.moxie-shim').find('input').click();
+				});
+
+		this.pluploader.refresh();
 	};
 	$.pkp.classes.Helper.inherits(
 			$.pkp.controllers.UploaderHandler, $.pkp.classes.Handler);
@@ -209,7 +226,7 @@
 	$.pkp.controllers.UploaderHandler.prototype.
 			updateStatus = function(status) {
 		this.getHtmlElement().removeClass('loading waiting uploading error complete')
-			.addClass(status);
+				.addClass(status);
 	};
 
 

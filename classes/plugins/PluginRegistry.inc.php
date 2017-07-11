@@ -74,7 +74,7 @@ class PluginRegistry {
 	 * @param $category String category name
 	 * @param $name String plugin name
 	 */
-	static function &getPlugin ($category, $name) {
+	static function &getPlugin($category, $name) {
 		$plugins =& PluginRegistry::getPlugins();
 		$plugin = @$plugins[$category][$name];
 		return $plugin;
@@ -139,6 +139,11 @@ class PluginRegistry {
 
 		// Return the list of successfully-registered plugins.
 		$plugins =& PluginRegistry::getPlugins($category);
+
+		// Fire a hook after all plugins of a category have been loaded, so they
+		// are able to interact if required
+		HookRegistry::call('PluginRegistry::categoryLoaded::' . $category, array(&$plugins));
+
 		return $plugins;
 	}
 

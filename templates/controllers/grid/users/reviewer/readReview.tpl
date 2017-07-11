@@ -9,21 +9,10 @@
  *
  *}
 
-{if $reviewAssignment->getDateCompleted()}
-	{assign var="reviewCompleted" value=true}
-{else}
-	{assign var="reviewCompleted" value=false}
-{/if}
-<script type="text/javascript">
-	$(function() {ldelim}
-		// Attach the form handler.
-		$('#readReviewForm').pkpHandler('$.pkp.controllers.grid.users.reviewer.ReadReviewHandler', {ldelim}
-				reviewCompleted: {$reviewCompleted|json_encode}
-		{rdelim});
-	{rdelim});
-</script>
+{* Form handler attachment implemented in application-specific versions of this template. *}
 
 <form class="pkp_form" id="readReviewForm" method="post" action="{url op="reviewRead"}">
+	{csrf}
 	<input type="hidden" name="reviewAssignmentId" value="{$reviewAssignment->getId()|escape}" />
 	<input type="hidden" name="submissionId" value="{$reviewAssignment->getSubmissionId()|escape}" />
 	<input type="hidden" name="stageId" value="{$reviewAssignment->getStageId()|escape}" />
@@ -53,16 +42,16 @@
 
 				{if $reviewAssignment->getReviewFormId()}
 					{include file="reviewer/review/reviewFormResponse.tpl"}
-				{elseif $comment || $commentPrivate}
+				{elseif $comments->getCount() || $commentsPrivate->getCount()}
 					<h3>{translate key="editor.review.reviewerComments"}</h3>
-					{if $comment}
+					{iterate from=comments item=comment}
 						<h4>{translate key="submission.comments.canShareWithAuthor"}</h4>
-						{include file="controllers/revealMore.tpl" content=$comment|strip_unsafe_html}
-					{/if}
-					{if $commentPrivate}
+						{include file="controllers/revealMore.tpl" content=$comment->getComments()|strip_unsafe_html}
+					{/iterate}
+					{iterate from=commentsPrivate item=comment}
 						<h4>{translate key="submission.comments.cannotShareWithAuthor"}</h4>
-						{include file="controllers/revealMore.tpl" content=$commentPrivate|strip_unsafe_html}
-					{/if}
+						{include file="controllers/revealMore.tpl" content=$comment->getComments()|strip_unsafe_html}
+					{/iterate}
 				{/if}
 				{if $reviewAssignment->getCompetingInterests()}
 					<h3>{translate key="reviewer.submission.competingInterests"}</h3>

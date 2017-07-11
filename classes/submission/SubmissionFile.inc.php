@@ -114,6 +114,28 @@ class SubmissionFile extends PKPFile {
 	}
 
 	/**
+	 * Get stored public ID of the file.
+	 * @param @literal $pubIdType string One of the NLM pub-id-type values or
+	 * 'other::something' if not part of the official NLM list
+	 * (see <http://dtd.nlm.nih.gov/publishing/tag-library/n-4zh0.html>). @endliteral
+	 * @return int
+	 */
+	function getStoredPubId($pubIdType) {
+		return $this->getData('pub-id::'.$pubIdType);
+	}
+
+	/**
+	 * Set the stored public ID of the file.
+	 * @param $pubIdType string One of the NLM pub-id-type values or
+	 * 'other::something' if not part of the official NLM list
+	 * (see <http://dtd.nlm.nih.gov/publishing/tag-library/n-4zh0.html>).
+	 * @param $pubId string
+	 */
+	function setStoredPubId($pubIdType, $pubId) {
+		$this->setData('pub-id::'.$pubIdType, $pubId);
+	}
+
+	/**
 	 * Get price of submission file.
 	 * A null return indicates "not available"; 0 is free.
 	 * @return numeric|null
@@ -217,6 +239,17 @@ class SubmissionFile extends PKPFile {
 	 */
 	function getRevision() {
 		return $this->getData('revision');
+	}
+
+	/**
+	 * Return the "best" file ID -- If a public ID is set,
+	 * use it; otherwise use the internal ID and revision.
+	 * @return string
+	 */
+	function getBestId() {
+		$publicFileId = $this->getStoredPubId('publisher-id');
+		if (!empty($publicFileId)) return $publicFileId;
+		return $this->getFileIdAndRevision();
 	}
 
 	/**
@@ -393,6 +426,22 @@ class SubmissionFile extends PKPFile {
 	}
 
 	/**
+	 * Get the submission chapter id.
+	 * @return int
+	 */
+	function getChapterId() {
+		return $this->getData('chapterId');
+	}
+
+	/**
+	 * Set the submission chapter id.
+	 * @param $chapterId int
+	 */
+	function setChapterId($chapterId) {
+		$this->setData('chapterId', $chapterId);
+	}
+
+	/**
 	 * Return a context-aware file path.
 	 */
 	function getFilePath() {
@@ -439,6 +488,7 @@ class SubmissionFile extends PKPFile {
 	function copyEditableMetadataFrom($submissionFile) {
 		assert(is_a($submissionFile, 'SubmissionFile'));
 		$this->setName($submissionFile->getName(null), null);
+		$this->setChapterId($submissionFile->getChapterId());
 	}
 
 	/**
@@ -520,9 +570,10 @@ class SubmissionFile extends PKPFile {
 
 	/**
 	 * Generate a user-facing name for the file
+	 * @param $anonymous boolean Whether the user name should be excluded
 	 * @return string
 	 */
-	function _generateName() {
+	function _generateName($anonymous = false) {
 		$genreDao = DAORegistry::getDAO('GenreDAO');
 		$genre = $genreDao->getById($this->getGenreId());
 		$userGroupDAO = DAORegistry::getDAO('UserGroupDAO');
@@ -530,7 +581,8 @@ class SubmissionFile extends PKPFile {
 		$userDAO = DAORegistry::getDAO('UserDAO');
 		$user = $userDAO->getById($this->getUploaderUserId());
 
-		return __('common.file.namingPattern',
+		$localeKey = $anonymous ? 'common.file.anonymousNamingPattern' : 'common.file.namingPattern';
+		return __($localeKey,
 			array(
 				'genre'            => $genre?$genre->getLocalizedName():'',
 				'docType'          => $this->getDocumentType(),
@@ -593,6 +645,13 @@ class SubmissionFile extends PKPFile {
 	function getMetadataForm($stageId, $reviewRound) {
 		import('lib.pkp.controllers.wizard.fileUpload.form.SubmissionFilesMetadataForm');
 		return new SubmissionFilesMetadataForm($this, $stageId, $reviewRound);
+	}
+
+	/**
+	 * @copydoc DataObject::getDAO()
+	 */
+	function getDAO() {
+		return DAORegistry::getDAO('SubmissionFileDAO');
 	}
 }
 

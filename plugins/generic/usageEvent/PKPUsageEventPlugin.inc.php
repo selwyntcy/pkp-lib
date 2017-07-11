@@ -22,6 +22,12 @@ define('USAGE_EVENT_PLUGIN_CLASSIFICATION_BOT', 'bot');
 define('USAGE_EVENT_PLUGIN_CLASSIFICATION_ADMIN', 'administrative');
 
 abstract class PKPUsageEventPlugin extends GenericPlugin {
+	/**
+	 * Constructor
+	 */
+	function PKPUsageEventPlugin() {
+		parent::GenericPlugin();
+	}
 
 	//
 	// Implement methods from PKPPlugin.
@@ -228,7 +234,7 @@ abstract class PKPUsageEventPlugin extends GenericPlugin {
 			if (is_array($pubIdPlugins)) {
 				foreach ($pubIdPlugins as $pubIdPlugin) {
 					if (!$pubIdPlugin->getEnabled()) continue;
-					$pubId = $pubIdPlugin->getPubId($pubObject);
+					$pubId = $pubObject->getStoredPubId($pubIdPlugin->getPubIdType());
 					if ($pubId) {
 						$identifiers[$pubIdPlugin->getPubIdType()] = $pubId;
 					}
