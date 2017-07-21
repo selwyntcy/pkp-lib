@@ -3,8 +3,8 @@
 /**
  * @file controllers/grid/admin/context/ContextGridHandler.inc.php
  *
- * Copyright (c) 2014-2016 Simon Fraser University Library
- * Copyright (c) 2000-2016 John Willinsky
+ * Copyright (c) 2014-2017 Simon Fraser University
+ * Copyright (c) 2000-2017 John Willinsky
  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
  *
  * @class ContextGridHandler
@@ -20,8 +20,8 @@ class ContextGridHandler extends GridHandler {
 	/**
 	 * Constructor
 	 */
-	function ContextGridHandler() {
-		parent::GridHandler();
+	function __construct() {
+		parent::__construct();
 		$this->addRoleAssignment(array(
 			ROLE_ID_SITE_ADMIN),
 			array('fetchGrid', 'fetchRow', 'createContext', 'editContext', 'updateContext',

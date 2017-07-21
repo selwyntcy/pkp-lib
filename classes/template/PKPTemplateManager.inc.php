@@ -8,8 +8,8 @@
 /**
  * @file classes/template/PKPTemplateManager.inc.php
  *
- * Copyright (c) 2014-2016 Simon Fraser University Library
- * Copyright (c) 2000-2016 John Willinsky
+ * Copyright (c) 2014-2017 Simon Fraser University
+ * Copyright (c) 2000-2017 John Willinsky
  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
  *
  * @class TemplateManager
@@ -67,11 +67,11 @@ class PKPTemplateManager extends Smarty {
 	 * Initialize template engine and assign basic template variables.
 	 * @param $request PKPRequest
 	 */
-	function PKPTemplateManager($request) {
+	function __construct($request) {
 		assert(is_a($request, 'PKPRequest'));
 		$this->_request = $request;
 
-		parent::Smarty();
+		parent::__construct();
 
 		// Set up Smarty configuration
 		$baseDir = Core::getBaseDir();
@@ -181,13 +181,16 @@ class PKPTemplateManager extends Smarty {
 				);
 			}
 
+			// Add reading language flag based on locale
+			$this->assign('currentLocaleLangDir', AppLocale::getLocaleDirection($locale) );
+
 			// If there's a locale-specific stylesheet, add it.
 			if (($localeStyleSheet = AppLocale::getLocaleStyleSheet($locale)) != null) {
 				$this->addStyleSheet(
 					'pkpLibLocale',
 					$this->_request->getBaseUrl() . '/' . $localeStyleSheet,
 					array(
-						'contexts' => 'backend',
+						'contexts' => array('frontend', 'backend'),
 					)
 				);
 			}
@@ -197,14 +200,14 @@ class PKPTemplateManager extends Smarty {
 				'spectrum',
 				$this->_request->getBaseUrl() . '/lib/pkp/js/lib/jquery/plugins/spectrum/spectrum.js',
 				array(
-					'contexts' => array('backend-management-settings', 'backend-admin-settings'),
+					'contexts' => array('backend-management-settings', 'backend-admin-settings', 'backend-admin-contexts'),
 				)
 			);
 			$this->addStyleSheet(
 				'spectrum',
 				$this->_request->getBaseUrl() . '/lib/pkp/js/lib/jquery/plugins/spectrum/spectrum.css',
 				array(
-					'contexts' => array('backend-management-settings', 'backend-admin-settings'),
+					'contexts' => array('backend-management-settings', 'backend-admin-settings', 'backend-admin-contexts'),
 				)
 			);
 
@@ -256,6 +259,7 @@ class PKPTemplateManager extends Smarty {
 		$this->register_modifier('translate', array('AppLocale', 'translate'));
 		$this->register_modifier('strip_unsafe_html', array('PKPString', 'stripUnsafeHtml'));
 		$this->register_modifier('String_substr', array('PKPString', 'substr'));
+		$this->register_modifier('dateformatPHP2JQueryDatepicker', array('PKPString', 'dateformatPHP2JQueryDatepicker'));
 		$this->register_modifier('to_array', array($this, 'smartyToArray'));
 		$this->register_modifier('compare', array($this, 'smartyCompare'));
 		$this->register_modifier('concat', array($this, 'smartyConcat'));
@@ -343,9 +347,9 @@ class PKPTemplateManager extends Smarty {
 
 		// Load enabled block plugins and setup active sidebar variables
 		PluginRegistry::loadCategory('blocks', true);
-		$leftSidebarHooks = HookRegistry::getHooks('Templates::Common::LeftSidebar');
+		$sidebarHooks = HookRegistry::getHooks('Templates::Common::Sidebar');
 		$this->assign(array(
-			'hasLeftSidebar' => !empty($leftSidebarHooks),
+			'hasSidebar' => !empty($sidebarHooks),
 		));
 	}
 
@@ -606,16 +610,11 @@ class PKPTemplateManager extends Smarty {
 		}
 
 		// Otherwise retrieve and register all script files
-		$minifiedScriptsTemplate = $this->fetch('common/minifiedScripts.tpl');
-		preg_match_all('/<script src=\"' . preg_quote($baseUrl, '/') . '([^"]*)\"><\/script>/', $minifiedScriptsTemplate, $scripts);
-		if (empty($scripts[1])) {
-			return;
-		}
-
-		$scripts = $scripts[1];
-
-		foreach ($scripts as $key => $script) {
-			$this->addJavaScript( 'pkpLib' . $key, $baseUrl . $script, $args );
+		$minifiedScripts = array_filter(array_map('trim', file('registry/minifiedScripts.txt')), function($s) {
+			return strlen($s) && $s[0] != '#'; // Exclude empty and commented (#) lines
+		});
+		foreach ($minifiedScripts as $key => $script) {
+			$this->addJavaScript( 'pkpLib' . $key, "$baseUrl/$script", $args);
 		}
 	}
 
@@ -689,21 +688,6 @@ class PKPTemplateManager extends Smarty {
 	 */
 	function fetch($resource_name, $cache_id = null, $compile_id = null, $display = false) {
 
-		foreach( $this->_styleSheets as &$list ) {
-			ksort( $list );
-		}
-		$this->assign('stylesheets', $this->_styleSheets);
-
-		foreach( $this->_javaScripts as &$list ) {
-			ksort( $list );
-		}
-		$this->assign('scripts', $this->_javaScripts);
-
-		foreach( $this->_htmlHeaders as &$list ) {
-			ksort( $list );
-		}
-		$this->assign('headers', $this->_htmlHeaders);
-
 		// If no compile ID was assigned, get one.
 		if (!$compile_id) $compile_id = $this->getCompileId($resource_name);
 
@@ -736,6 +720,14 @@ class PKPTemplateManager extends Smarty {
 	 * @return string
 	 */
 	function getCompileId($resourceName) {
+
+		if ( Config::getVar('general', 'installed' ) ) {
+			$context = $this->_request->getContext();
+			if (is_a($context, 'Context')) {
+				$resourceName .= $context->getSetting('themePluginPath');
+			}
+		}
+
 		return sha1($resourceName);
 	}
 
@@ -1354,15 +1346,11 @@ class PKPTemplateManager extends Smarty {
 	 */
 	function smartyLoadStylesheet($params, $smarty) {
 
-		if (empty($params['stylesheets'])) {
-			return;
-		}
-
 		if (empty($params['context'])) {
 			$context = 'frontend';
 		}
 
-		$stylesheets = $this->getResourcesByContext($params['stylesheets'], $params['context']);
+		$stylesheets = $this->getResourcesByContext($this->_styleSheets, $params['context']);
 
 		$output = '';
 		foreach($stylesheets as $priorityList) {
@@ -1388,15 +1376,11 @@ class PKPTemplateManager extends Smarty {
 	 */
 	function smartyLoadScript($params, $smarty) {
 
-		if (empty($params['scripts'])) {
-			return;
-		}
-
 		if (empty($params['context'])) {
 			$params['context'] = 'frontend';
 		}
 
-		$scripts = $this->getResourcesByContext($params['scripts'], $params['context']);
+		$scripts = $this->getResourcesByContext($this->_javaScripts, $params['context']);
 
 		$output = '';
 		foreach($scripts as $priorityList) {
@@ -1422,15 +1406,11 @@ class PKPTemplateManager extends Smarty {
 	 */
 	function smartyLoadHeader($params, $smarty) {
 
-		if (empty($params['headers'])) {
-			return;
-		}
-
 		if (empty($params['context'])) {
 			$params['context'] = 'frontend';
 		}
 
-		$headers = $this->getResourcesByContext($params['headers'], $params['context']);
+		$headers = $this->getResourcesByContext($this->_htmlHeaders, $params['context']);
 
 		$output = '';
 		foreach($headers as $priorityList) {

@@ -4,15 +4,15 @@
 <!--
   * locale/nl_NL/user.xml
   *
-  * Copyright (c) 2014-2016 Simon Fraser University Library
-  * Copyright (c) 2000-2016 John Willinsky
+  * Copyright (c) 2014-2017 Simon Fraser University
+  * Copyright (c) 2000-2017 John Willinsky
   * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
   *
   * Localization strings for the nl_NL (Nederlands) locale.
   *
   -->
 
-<locale name="nl_NL" full_name = "Nederlands">
+<locale name="nl_NL" full_name="Nederlands">
 	<message key="user.affiliation">Affiliatie</message>
 	<message key="user.affiliations">Affiliaties</message>
 	<message key="user.biography">Biografie</message>
@@ -44,7 +44,6 @@
 	<message key="user.login.lostPassword.invalidUser">Er is geen gebruiker met dit e-mail adres.</message>
 	<message key="user.login.lostPassword.passwordSent">Er is een nieuw wachtwoord verstuurd naar uw e-mail adres. U kunt nu inloggen met uw nieuwe wachtwoord.</message>
 	<message key="user.login.registeredEmail">E-mail van geregistreerde gebruiker</message>
-	<message key="user.login.rememberUsernameAndPassword">Onthou mijn gebruikersnaam en wachtwoord</message>
 	<message key="user.login.resetPassword">Wachtwoord terugzetten</message>
 	<message key="user.logOut">Uitloggen</message>
 	<message key="user.mailingAddress">Postadres</message>
@@ -77,7 +76,6 @@
 	<message key="user.register.completeForm">Vul dit formulier in om u te registreren bij dit tijdschrift.</message>
 	<message key="user.register.form.emailExists">Het gekozen e-mailadres is al in gebruik bij een andere gebruiker.</message>
 	<message key="user.register.form.passwordsDoNotMatch">De wachtwoorden komen niet overeen.</message>
-	<message key="user.register.form.usernameAlphaNumeric">De gebruikersnaam mag alleen alfanumerieke tekens, liggende en koppelstreepjes bevatten en moet beginnen en eindigen met een alfanumeriek teken.</message>
 	<message key="user.register.form.usernameExists">De gekozen gebruikersnaam is al in gebruik bij een andere gebruiker.</message>
 	<message key="user.register.passwordLengthRestriction">Het wachtwoord moet minimaal {$length} tekens zijn.</message>
 	<message key="user.register.registerAs">Registreer als</message>

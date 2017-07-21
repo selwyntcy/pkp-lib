@@ -1,8 +1,8 @@
 {**
  * controllers/grid/plugins/viewPlugin.tpl
  *
- * Copyright (c) 2014-2016 Simon Fraser University Library
- * Copyright (c) 2000-2016 John Willinsky
+ * Copyright (c) 2014-2017 Simon Fraser University
+ * Copyright (c) 2000-2017 John Willinsky
  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
  *
  * View a plugin gallery plugin's details.
@@ -62,11 +62,11 @@
 
 			<div class="pluginStatus {$statusClass|escape}">{translate key=$statusKey}</div>
 		</div>
-		<p class="pluginActions pkp_linkActions pkp_helpers_align_right">
+		<div class="actions">
 			{if $installAction}
 				{include file="linkAction/linkAction.tpl" action=$installAction contextId="pluginGallery"}
 			{/if}
-		</p>
+		</div>
 	</div>
 	<div id="pluginDescriptionContainer">
 		<div class="pluginDescription">{$plugin->getLocalizedDescription()|strip_unsafe_html}</div>

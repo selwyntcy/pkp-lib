@@ -3,8 +3,8 @@
 /**
  * @file plugins/importexport/native/filter/NativeXmlPKPAuthorFilter.inc.php
  *
- * Copyright (c) 2014-2016 Simon Fraser University Library
- * Copyright (c) 2000-2016 John Willinsky
+ * Copyright (c) 2014-2017 Simon Fraser University
+ * Copyright (c) 2000-2017 John Willinsky
  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
  *
  * @class NativeXmlPKPAuthorFilter
@@ -20,9 +20,9 @@ class NativeXmlPKPAuthorFilter extends NativeImportFilter {
 	 * Constructor
 	 * @param $filterGroup FilterGroup
 	 */
-	function NativeXmlPKPAuthorFilter($filterGroup) {
+	function __construct($filterGroup) {
 		$this->setDisplayName('Native XML author import');
-		parent::NativeImportFilter($filterGroup);
+		parent::__construct($filterGroup);
 	}
 
 	//
@@ -81,10 +81,11 @@ class NativeXmlPKPAuthorFilter extends NativeImportFilter {
 			if (in_array($userGroupName, $userGroup->getName(null))) {
 				// Found a candidate; stash it.
 				$author->setUserGroupId($userGroup->getId());
+				break;
 			}
 		}
 		if (!$author->getUserGroupId()) {
-			fatalError("Could not identify a matching user group \"$userGroupName\".");
+			$deployment->addError(ASSOC_TYPE_SUBMISSION, $submission->getId(), __('plugins.importexport.common.error.unknownUserGroup', array('param' => $userGroupName)));
 		}
 
 		// Handle metadata in subelements
@@ -92,11 +93,19 @@ class NativeXmlPKPAuthorFilter extends NativeImportFilter {
 			case 'firstname': $author->setFirstName($n->textContent); break;
 			case 'middlename': $author->setMiddleName($n->textContent); break;
 			case 'lastname': $author->setLastName($n->textContent); break;
-			case 'affiliation': $author->setAffiliation($n->textContent, $n->getAttribute('locale')); break;
+			case 'affiliation':
+				$locale = $n->getAttribute('locale');
+				if (empty($locale)) $locale = $submission->getLocale();
+				$author->setAffiliation($n->textContent, $locale);
+				break;
 			case 'country': $author->setCountry($n->textContent); break;
 			case 'email': $author->setEmail($n->textContent); break;
 			case 'url': $author->setUrl($n->textContent); break;
-			case 'biography': $author->setBiography($n->textContent, $n->getAttribute('locale')); break;
+			case 'biography':
+				$locale = $n->getAttribute('locale');
+				if (empty($locale)) $locale = $submission->getLocale();
+				$author->setBiography($n->textContent, $locale);
+				break;
 		}
 
 		$authorDao->insertObject($author);

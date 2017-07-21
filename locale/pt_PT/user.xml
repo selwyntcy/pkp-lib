@@ -4,15 +4,15 @@
 <!--
   * locale/pt_PT/user.xml
   *
-  * Copyright (c) 2014-2016 Simon Fraser University Library
-  * Copyright (c) 2000-2016 John Willinsky
+  * Copyright (c) 2014-2017 Simon Fraser University
+  * Copyright (c) 2000-2017 John Willinsky
   * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
   *
   * Localization strings for the pt_PT (Português (Portugal)) locale.
   *
   -->
 
-<locale name="pt_PT" full_name = "Português">
+<locale name="pt_PT" full_name="Português (Portugal)">
 	<message key="user.affiliation">Afiliação</message>
 	<message key="user.affiliations">Outras Afiliações</message>
 	<message key="user.biography">Resumo da Biografia Pessoal</message>
@@ -44,7 +44,6 @@
 	<message key="user.login.lostPassword.invalidUser">Nenhum utilizador registado com o e-mail especificado.</message>
 	<message key="user.login.lostPassword.passwordSent">Foi enviada uma nova senha. Aceda ao sistema com a nova senha.</message>
 	<message key="user.login.registeredEmail">E-mail de utilizador registado</message>
-	<message key="user.login.rememberUsernameAndPassword">Lembrete com nome de utilizador e senha</message>
 	<message key="user.login.resetPassword">Nova Senha</message>
 	<message key="user.logOut">Sair do Sistema</message>
 	<message key="user.mailingAddress">Endereço Postal</message>
@@ -77,7 +76,6 @@
 	<message key="user.register.completeForm">Preencha o formulário para se registar no sistema.</message>
 	<message key="user.register.form.emailExists">O endereço de e-mail inserido já se encontra registado.</message>
 	<message key="user.register.form.passwordsDoNotMatch">As senhas inseridas não são iguais.</message>
-	<message key="user.register.form.usernameAlphaNumeric">O nome de utilizador deve conter apenas letras minúsculas (a-z), números(0-9), sublinhados(_) e hífens(-), e deve começar por um caractere alfanumérico (a-z, 0-9).</message>
 	<message key="user.register.form.usernameExists">O nome de utilizador inserido já se encontra registado.</message>
 	<message key="user.register.passwordLengthRestriction">A senha deve ter no mínimo {$length} caracteres.</message>
 	<message key="user.register.registerAs">Registar-se como</message>

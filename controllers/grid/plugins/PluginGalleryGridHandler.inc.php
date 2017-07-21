@@ -3,8 +3,8 @@
 /**
  * @file controllers/grid/settings/pluginGallery/PluginGalleryGridHandler.inc.php
  *
- * Copyright (c) 2014-2016 Simon Fraser University Library
- * Copyright (c) 2000-2016 John Willinsky
+ * Copyright (c) 2014-2017 Simon Fraser University
+ * Copyright (c) 2000-2017 John Willinsky
  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
  *
  * @class PluginGalleryGridHandler
@@ -14,13 +14,14 @@
  */
 
 import('lib.pkp.classes.controllers.grid.GridHandler');
+import('lib.pkp.classes.linkAction.request.RemoteActionConfirmationModal');
 
 class PluginGalleryGridHandler extends GridHandler {
 	/**
 	 * Constructor
 	 */
-	function PluginGalleryGridHandler() {
-		parent::GridHandler();
+	function __construct() {
+		parent::__construct();
 		$this->addRoleAssignment(
 			array(ROLE_ID_MANAGER, ROLE_ID_SITE_ADMIN),
 			array('fetchGrid', 'fetchRow', 'viewPlugin')
@@ -269,7 +270,7 @@ class PluginGalleryGridHandler extends GridHandler {
 			$notificationMgr->createTrivialNotification($user->getId(), NOTIFICATION_TYPE_SUCCESS, array('contents' => __('manager.plugins.upgradeSuccessful', array('versionString' => $pluginVersion->getVersionString(false)))));
 		}
 
-		return $request->redirectUrlJson($dispatcher->url($request, ROUTE_PAGE, null, 'management', 'settings', array('website'), null, 'plugins'));
+		return $request->redirectUrlJson($dispatcher->url($request, ROUTE_PAGE, null, 'management', 'settings', array('website'), array('r' => uniqid()), 'plugins'));
 	}
 
 	/**

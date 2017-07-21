@@ -1,8 +1,8 @@
 {**
  * templates/frontend/components/headerHead.tpl
  *
- * Copyright (c) 2014-2016 Simon Fraser University Library
- * Copyright (c) 2000-2016 John Willinsky
+ * Copyright (c) 2014-2017 Simon Fraser University
+ * Copyright (c) 2000-2017 John Willinsky
  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
  *
  * Common site header <head> tag and contents.
@@ -18,13 +18,12 @@
 		{/if}
 	</title>
 
-	{load_header context="frontend" headers=$headers}
-	{load_stylesheet context="frontend" stylesheets=$stylesheets}
+	{load_header context="frontend"}
+	{load_stylesheet context="frontend"}
 
 	{* 20160125: hack: slick.js *}
 	{* 20160128: hack: changed to cdn version of slick.js as upstream has removed it *}
 	{* todo: should move to theme *}
 	<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css">
 	<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css">
-
 </head>

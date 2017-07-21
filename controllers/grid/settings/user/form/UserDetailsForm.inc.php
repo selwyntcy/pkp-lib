@@ -3,8 +3,8 @@
 /**
  * @file controllers/grid/settings/user/form/UserDetailsForm.inc.php
  *
- * Copyright (c) 2014-2016 Simon Fraser University Library
- * Copyright (c) 2003-2016 John Willinsky
+ * Copyright (c) 2014-2017 Simon Fraser University
+ * Copyright (c) 2003-2017 John Willinsky
  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
  *
  * @class UserDetailsForm
@@ -26,8 +26,8 @@ class UserDetailsForm extends UserForm {
 	 * @param $userId int optional
 	 * @param $author Author optional
 	 */
-	function UserDetailsForm($request, $userId = null, $author = null) {
-		parent::UserForm('controllers/grid/settings/user/form/userDetailsForm.tpl', $userId);
+	function __construct($request, $userId = null, $author = null) {
+		parent::__construct('controllers/grid/settings/user/form/userDetailsForm.tpl', $userId);
 
 		if (isset($author)) {
 			$this->author =& $author;
@@ -41,7 +41,7 @@ class UserDetailsForm extends UserForm {
 		if ($userId == null) {
 			$this->addCheck(new FormValidator($this, 'username', 'required', 'user.profile.form.usernameRequired'));
 			$this->addCheck(new FormValidatorCustom($this, 'username', 'required', 'user.register.form.usernameExists', array(DAORegistry::getDAO('UserDAO'), 'userExistsByUsername'), array($this->userId, true), true));
-			$this->addCheck(new FormValidatorAlphaNum($this, 'username', 'required', 'user.register.form.usernameAlphaNumeric'));
+			$this->addCheck(new FormValidatorUsername($this, 'username', 'required', 'user.register.form.usernameAlphaNumeric'));
 
 			if (!Config::getVar('security', 'implicit_auth')) {
 				$this->addCheck(new FormValidator($this, 'password', 'required', 'user.profile.form.passwordRequired'));
@@ -134,10 +134,12 @@ class UserDetailsForm extends UserForm {
 		$templateMgr = TemplateManager::getManager($request);
 		$userDao = DAORegistry::getDAO('UserDAO');
 
-		$templateMgr->assign('genderOptions', $userDao->getGenderOptions());
-		$templateMgr->assign('minPasswordLength', $site->getMinPasswordLength());
-		$templateMgr->assign('source', $request->getUserVar('source'));
-		$templateMgr->assign('userId', $this->userId);
+		$templateMgr->assign(array(
+			'genderOptions' => $userDao->getGenderOptions(),
+			'minPasswordLength' => $site->getMinPasswordLength(),
+			'source' => $request->getUserVar('source'),
+			'userId' => $this->userId,
+		));
 
 		if (isset($this->userId)) {
 			$user = $userDao->getById($this->userId);
@@ -202,11 +204,6 @@ class UserDetailsForm extends UserForm {
 
 		if ($this->getData('userLocales') == null || !is_array($this->getData('userLocales'))) {
 			$this->setData('userLocales', array());
-		}
-
-		if ($this->getData('username') != null) {
-			// Usernames must be lowercase
-			$this->setData('username', strtolower($this->getData('username')));
 		}
 	}
 

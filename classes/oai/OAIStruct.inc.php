@@ -3,8 +3,8 @@
 /**
  * @file classes/oai/OAIStruct.inc.php
  *
- * Copyright (c) 2014-2016 Simon Fraser University Library
- * Copyright (c) 2000-2016 John Willinsky
+ * Copyright (c) 2014-2017 Simon Fraser University
+ * Copyright (c) 2000-2017 John Willinsky
  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
  *
  * @class OAIConfig
@@ -214,7 +214,10 @@ class OAIIdentifier {
 	/** @var string if this record is deleted */
 	var $status;
 
-	function OAIIdentifier() {
+	/**
+	 * Constructor
+	 */
+	function __construct() {
 	}
 }
 
@@ -226,8 +229,11 @@ class OAIIdentifier {
 class OAIRecord extends OAIIdentifier {
 	var $data;
 
-	function OAIRecord() {
-		parent::OAIIdentifier();
+	/**
+	 * Constructor
+	 */
+	function __construct() {
+		parent::__construct();
 		$this->data = array();
 	}
 

@@ -3,8 +3,8 @@
 /**
  * @file controllers/grid/admin/systemInfo/VersionInfoGridHandler.inc.php
  *
- * Copyright (c) 2014-2016 Simon Fraser University Library
- * Copyright (c) 2000-2016 John Willinsky
+ * Copyright (c) 2014-2017 Simon Fraser University
+ * Copyright (c) 2000-2017 John Willinsky
  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
  *
  * @class VersionInfoGridHandler
@@ -21,8 +21,8 @@ class VersionInfoGridHandler extends GridHandler {
 	/**
 	 * Constructor
 	 */
-	function VersionInfoGridHandler() {
-		parent::GridHandler();
+	function __construct() {
+		parent::__construct();
 		$this->addRoleAssignment(array(
 			ROLE_ID_SITE_ADMIN),
 			array('fetchGrid', 'fetchRow')

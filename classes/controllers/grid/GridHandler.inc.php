@@ -3,8 +3,8 @@
 /**
  * @file classes/controllers/grid/GridHandler.inc.php
  *
- * Copyright (c) 2014-2016 Simon Fraser University Library
- * Copyright (c) 2000-2016 John Willinsky
+ * Copyright (c) 2014-2017 Simon Fraser University
+ * Copyright (c) 2000-2017 John Willinsky
  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
  *
  * @class GridHandler
@@ -102,9 +102,9 @@ class GridHandler extends PKPHandler {
 	 *  assumes that child classes will override default method
 	 *  implementations.
 	 */
-	function GridHandler($dataProvider = null) {
+	function __construct($dataProvider = null) {
 		$this->_dataProvider = $dataProvider;
-		parent::PKPHandler();
+		parent::__construct();
 	}
 
 
@@ -1011,10 +1011,12 @@ class GridHandler extends PKPHandler {
 
 		// Pass control to the view to render the row
 		$templateMgr = TemplateManager::getManager($request);
-		$templateMgr->assign('grid', $this);
-		$templateMgr->assign('columns', $columns);
-		$templateMgr->assign('cells', $renderedCells);
-		$templateMgr->assign('row', $row);
+		$templateMgr->assign(array(
+			'grid' => $this,
+			'columns' => $columns,
+			'cells' => $renderedCells,
+			'row' => $row,
+		));
 		return $templateMgr->fetch($row->getTemplate());
 	}
 

@@ -3,8 +3,8 @@
 /**
  * @file controllers/grid/plugins/PluginGridHandler.inc.php
  *
- * Copyright (c) 2014-2016 Simon Fraser University Library
- * Copyright (c) 2003-2016 John Willinsky
+ * Copyright (c) 2014-2017 Simon Fraser University
+ * Copyright (c) 2003-2017 John Willinsky
  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
  *
  * @class PluginGridHandler
@@ -21,14 +21,14 @@ abstract class PluginGridHandler extends CategoryGridHandler {
 	 * Constructor
 	 * @param $roles array
 	 */
-	function PluginGridHandler($roles) {
+	function __construct($roles) {
 		$this->addRoleAssignment($roles,
 			array('enable', 'disable', 'manage', 'fetchGrid, fetchCategory', 'fetchRow'));
 
 		$this->addRoleAssignment(ROLE_ID_SITE_ADMIN,
-			array('uploadPlugin', 'upgradePlugin', 'deletePlugin'));
+			array('uploadPlugin', 'upgradePlugin', 'deletePlugin', 'saveUploadPlugin'));
 
-		parent::CategoryGridHandler();
+		parent::__construct();
 	}
 
 

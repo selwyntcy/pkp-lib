@@ -3,8 +3,8 @@
 /**
  * @file classes/controllers/listbuilder/ListbuilderHandler.inc.php
  *
- * Copyright (c) 2014-2016 Simon Fraser University Library
- * Copyright (c) 2000-2016 John Willinsky
+ * Copyright (c) 2014-2017 Simon Fraser University
+ * Copyright (c) 2000-2017 John Willinsky
  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
  *
  * @class ListbuilderHandler
@@ -45,8 +45,8 @@ class ListbuilderHandler extends GridHandler {
 	/**
 	 * Constructor.
 	 */
-	function ListbuilderHandler() {
-		parent::GridHandler();
+	function __construct() {
+		parent::__construct();
 	}
 
 	/**
@@ -242,19 +242,7 @@ class ListbuilderHandler extends GridHandler {
 	 * @param $insertionCallback array callback to be used for each updated element
 	 * @param $updateCallback array callback to be used for each updated element
 	 */
-	function unpack($request, $data, $deletionCallback = null, $insertionCallback = null, $updateCallback = null) {
-		// Set some defaults
-		// N.B. if this class is called statically, then $this is not set to Listbuilder, but to your calling class.
-		if ( !$deletionCallback ) {
-			$deletionCallback = array($this, 'deleteEntry');
-		}
-		if ( !$insertionCallback ) {
-			$insertionCallback = array($this, 'insertEntry');
-		}
-		if ( !$updateCallback ) {
-			$updateCallback = array($this, 'updateEntry');
-		}
-
+	static function unpack($request, $data, $deletionCallback, $insertionCallback, $updateCallback) {
 		$data = json_decode($data);
 		$status = true;
 
@@ -317,7 +305,7 @@ class ListbuilderHandler extends GridHandler {
 		// and reconcile the data against this list, adding/
 		// updating/deleting as needed.
 		$data = $request->getUserVar('data');
-		$this->unpack(
+		self::unpack(
 			$request, $data,
 			array($this, 'deleteEntry'),
 			array($this, 'insertEntry'),

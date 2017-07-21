@@ -3,8 +3,8 @@
 /**
  * @file pages/install/InstallHandler.inc.php
  *
- * Copyright (c) 2014-2016 Simon Fraser University Library
- * Copyright (c) 2000-2016 John Willinsky
+ * Copyright (c) 2014-2017 Simon Fraser University
+ * Copyright (c) 2000-2017 John Willinsky
  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
  *
  * @class InstallHandler
@@ -21,8 +21,8 @@ class InstallHandler extends Handler {
 	/**
 	 * Constructor
 	 */
-	function InstallHandler() {
-		parent::Handler();
+	function __construct() {
+		parent::__construct();
 	}
 
 	/**
@@ -44,7 +44,7 @@ class InstallHandler extends Handler {
 
 		$installForm = new InstallForm($request);
 		$installForm->initData();
-		$installForm->display();
+		$installForm->display($request);
 	}
 
 	/**
@@ -72,7 +72,7 @@ class InstallHandler extends Handler {
 		if ($installForm->validate()) {
 			$installForm->execute();
 		} else {
-			$installForm->display();
+			$installForm->display($request);
 		}
 	}
 
@@ -91,7 +91,7 @@ class InstallHandler extends Handler {
 
 		$installForm = new UpgradeForm($request);
 		$installForm->initData();
-		$installForm->display();
+		$installForm->display($request);
 	}
 
 	/**
@@ -109,7 +109,7 @@ class InstallHandler extends Handler {
 		if ($installForm->validate()) {
 			$installForm->execute();
 		} else {
-			$installForm->display();
+			$installForm->display($request);
 		}
 	}
 

@@ -3,8 +3,8 @@
 /**
  * @file classes/security/UserGroupDAO.inc.php
  *
- * Copyright (c) 2014-2016 Simon Fraser University Library
- * Copyright (c) 2003-2016 John Willinsky
+ * Copyright (c) 2014-2017 Simon Fraser University
+ * Copyright (c) 2003-2017 John Willinsky
  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
  *
  * @class UserGroupDAO
@@ -28,8 +28,8 @@ class UserGroupDAO extends DAO {
 	/**
 	 * Constructor.
 	 */
-	function UserGroupDAO() {
-		parent::DAO();
+	function __construct() {
+		parent::__construct();
 		$this->userDao = DAORegistry::getDAO('UserDAO');
 		$this->userGroupAssignmentDao = DAORegistry::getDAO('UserGroupAssignmentDAO');
 	}
@@ -85,7 +85,7 @@ class UserGroupDAO extends DAO {
 
 		$userGroup->setId($this->getInsertId());
 		$this->updateLocaleFields($userGroup);
-		return $this->getInsertId();
+		return $userGroup->getId();
 	}
 
 	/**
@@ -686,6 +686,10 @@ class UserGroupDAO extends DAO {
 		$xmlParser = new XMLParser();
 		$tree = $xmlParser->parse($filename);
 
+		$siteDao = DAORegistry::getDAO('SiteDAO');
+		$site = $siteDao->getSite();
+		$installedLocales = $site->getInstalledLocales();
+
 		if (!$tree) {
 			$xmlParser->destroy();
 			return false;
@@ -724,7 +728,9 @@ class UserGroupDAO extends DAO {
 			$this->updateSetting($userGroup->getId(), 'abbrevLocaleKey', $abbrevKey);
 
 			// install the settings in the current locale for this context
-			$this->installLocale(AppLocale::getLocale(), $contextId);
+			foreach ($installedLocales as $locale) {
+				$this->installLocale($locale, $contextId);
+			}
 		}
 
 		return true;

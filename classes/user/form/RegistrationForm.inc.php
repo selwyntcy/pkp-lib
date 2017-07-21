@@ -6,8 +6,8 @@
 /**
  * @file classes/user/form/RegistrationForm.inc.php
  *
- * Copyright (c) 2014-2016 Simon Fraser University Library
- * Copyright (c) 2003-2016 John Willinsky
+ * Copyright (c) 2014-2017 Simon Fraser University
+ * Copyright (c) 2003-2017 John Willinsky
  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
  *
  * @class RegistrationForm
@@ -32,14 +32,14 @@ class RegistrationForm extends Form {
 	/**
 	 * Constructor.
 	 */
-	function RegistrationForm($site) {
-		parent::Form('frontend/pages/userRegister.tpl');
+	function __construct($site) {
+		parent::__construct('frontend/pages/userRegister.tpl');
 
 		// Validation checks for this form
 		$this->addCheck(new FormValidatorCustom($this, 'username', 'required', 'user.register.form.usernameExists', array(DAORegistry::getDAO('UserDAO'), 'userExistsByUsername'), array(), true));
 		$this->addCheck(new FormValidator($this, 'username', 'required', 'user.profile.form.usernameRequired'));
 		$this->addCheck(new FormValidator($this, 'password', 'required', 'user.profile.form.passwordRequired'));
-		$this->addCheck(new FormValidatorAlphaNum($this, 'username', 'required', 'user.register.form.usernameAlphaNumeric'));
+		$this->addCheck(new FormValidatorUsername($this, 'username', 'required', 'user.register.form.usernameAlphaNumeric'));
 		$this->addCheck(new FormValidatorLength($this, 'password', 'required', 'user.register.form.passwordLengthRestriction', '>=', $site->getMinPasswordLength()));
 		$this->addCheck(new FormValidatorCustom($this, 'password', 'required', 'user.register.form.passwordsDoNotMatch', create_function('$password,$form', 'return $password == $form->getData(\'password2\');'), array(&$this)));
 
@@ -129,14 +129,9 @@ class RegistrationForm extends Form {
 			}
 		}
 
-		// Return a list of all contexts available in the site
-		$contextDao = Application::getContextDAO();
-		$contexts = $contextDao->getAll(true)->toArray();
-
 		$this->_data = array(
 			'userLocales' => array(),
 			'userGroupIds' => $userGroupIds,
-			'contexts' => $contexts,
 		);
 	}
 
@@ -166,11 +161,6 @@ class RegistrationForm extends Form {
 			$this->readUserVars(array(
 				'g-recaptcha-response',
 			));
-		}
-
-		if ($this->getData('username') != null) {
-			// Usernames must be lowercase
-			$this->setData('username', strtolower($this->getData('username')));
 		}
 
 		// Collect the specified user group IDs into a single piece of data
@@ -233,7 +223,7 @@ class RegistrationForm extends Form {
 			// The account should be created in a disabled
 			// state.
 			$user->setDisabled(true);
-			$user->setDisabledReason(__('user.login.accountNotValidated'));
+			$user->setDisabledReason(__('user.login.accountNotValidated', array('email' => $this->getData('email'))));
 		}
 
 		parent::execute($user);

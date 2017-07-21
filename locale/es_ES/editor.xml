@@ -4,8 +4,8 @@
 <!--
   * locale/es_ES/editor.xml
   *
-  * Copyright (c) 2014-2016 Simon Fraser University Library
-  * Copyright (c) 2003-2016 John Willinsky
+  * Copyright (c) 2014-2017 Simon Fraser University
+  * Copyright (c) 2003-2017 John Willinsky
   * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
   * Credits: https://pkp.sfu.ca/wiki/index.php?title=OMP:_Spanish_(es_ES)
   * Localization strings.
@@ -51,7 +51,7 @@
 	<message key="editor.review.thankReviewer">Dar las gracias al revisor</message>
 	<message key="editor.review.reminderError">Error al enviar recordatorio de revisión</message>
 	<message key="editor.review.thankReviewerError">Error al enviar las gracias al revisor</message>
-	<message key="editor.review.skipEmail">No enviar correo electróncio de revisor</message>
+	<message key="editor.review.skipEmail">No enviar correo electrónico de revisor</message>
 	<message key="editor.review.sendReminder">Enviar recordatorio</message>
 	<message key="editor.review.reviewDueDate">Fecha límite de la revisión</message>
 	<message key="editor.review.reviewCompleted">Revisión completa</message>

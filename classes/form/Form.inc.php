@@ -10,8 +10,8 @@
 /**
  * @file classes/form/Form.inc.php
  *
- * Copyright (c) 2014-2016 Simon Fraser University Library
- * Copyright (c) 2000-2016 John Willinsky
+ * Copyright (c) 2014-2017 Simon Fraser University
+ * Copyright (c) 2000-2017 John Willinsky
  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
  *
  * @class Form
@@ -24,7 +24,7 @@ import('lib.pkp.classes.form.FormError');
 import('lib.pkp.classes.form.FormBuilderVocabulary');
 
 // Import all form validators for convenient use in sub-classes
-import('lib.pkp.classes.form.validation.FormValidatorAlphaNum');
+import('lib.pkp.classes.form.validation.FormValidatorUsername');
 import('lib.pkp.classes.form.validation.FormValidatorArray');
 import('lib.pkp.classes.form.validation.FormValidatorArrayCustom');
 import('lib.pkp.classes.form.validation.FormValidatorBoolean');
@@ -83,7 +83,7 @@ class Form {
 	 * Constructor.
 	 * @param $template string the path to the form template file
 	 */
-	function Form($template = null, $callHooks = true, $requiredLocale = null, $supportedLocales = null) {
+	function __construct($template = null, $callHooks = true, $requiredLocale = null, $supportedLocales = null) {
 
 		if ($requiredLocale === null) $requiredLocale = AppLocale::getPrimaryLocale();
 		$this->requiredLocale = $requiredLocale;

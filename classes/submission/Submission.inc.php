@@ -10,8 +10,8 @@
 /**
  * @file classes/submission/Submission.inc.php
  *
- * Copyright (c) 2014-2016 Simon Fraser University Library
- * Copyright (c) 2000-2016 John Willinsky
+ * Copyright (c) 2014-2017 Simon Fraser University
+ * Copyright (c) 2000-2017 John Willinsky
  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
  *
  * @class Submission
@@ -36,11 +36,11 @@ abstract class Submission extends DataObject {
 	/**
 	 * Constructor.
 	 */
-	function Submission() {
+	function __construct() {
 		// Switch on meta-data adapter support.
 		$this->setHasLoadableAdapters(true);
 
-		parent::DataObject();
+		parent::__construct();
 	}
 
 	/**
@@ -233,14 +233,6 @@ abstract class Submission extends DataObject {
 	}
 
 	/**
-	 * Get comments to editor.
-	 * @return string
-	 */
-	function getCommentsToEditor() {
-		return $this->getData('commentsToEditor');
-	}
-
-	/**
 	 * Return option selection indicating if author should be hidden in issue ToC.
 	 * @return int AUTHOR_TOC_...
 	 */
@@ -254,14 +246,6 @@ abstract class Submission extends DataObject {
 	 */
 	function setHideAuthor($hideAuthor) {
 		$this->setData('hideAuthor', $hideAuthor);
-	}
-
-	/**
-	 * Set comments to editor.
-	 * @param $commentsToEditor string
-	 */
-	function setCommentsToEditor($commentsToEditor) {
-		$this->setData('commentsToEditor', $commentsToEditor);
 	}
 
 	/**
@@ -392,19 +376,35 @@ abstract class Submission extends DataObject {
 	/**
 	 * Get "localized" submission title (if applicable).
 	 * @param $preferredLocale string
+	 * @param $includePrefix bool
 	 * @return string
 	 */
-	function getLocalizedTitle($preferredLocale = null) {
-		return $this->getLocalizedData('title', $preferredLocale);
+	function getLocalizedTitle($preferredLocale = null, $includePrefix = true) {
+		$title = $this->getLocalizedData('title', $preferredLocale);
+		if ($includePrefix) {
+			$title = $this->getLocalizedPrefix() . ' ' . $title;
+		}
+		return $title;
 	}
 
 	/**
 	 * Get title.
 	 * @param $locale
+	 * @param $includePrefix bool
 	 * @return string
 	 */
-	function getTitle($locale) {
-		return $this->getData('title', $locale);
+	function getTitle($locale, $includePrefix = true) {
+		$title = $this->getData('title', $locale);
+		if ($includePrefix) {
+			if (is_array($title)) {
+				foreach($title as $locale => $currentTitle) {
+					$title[$locale] = $this->getPrefix($locale) . ' ' . $currentTitle;
+				}
+			} else {
+				$title = $this->getPrefix($locale) . ' ' . $title;
+			}
+		}
+		return $title;
 	}
 
 	/**
@@ -460,12 +460,7 @@ abstract class Submission extends DataObject {
 	 * @return string
 	 */
 	function getLocalizedFullTitle() {
-		$fullTitle = null;
-		if ($prefix = $this->getLocalizedPrefix()) {
-			$fullTitle = $prefix . ' ';
-		}
-
-		$fullTitle .= $this->getLocalizedTitle();
+		$fullTitle = $this->getLocalizedTitle();
 
 		if ($subtitle = $this->getLocalizedSubtitle()) {
 			$fullTitle = PKPString::concatTitleFields(array($fullTitle, $subtitle));
@@ -481,12 +476,7 @@ abstract class Submission extends DataObject {
 	 * @return string
 	 */
 	function getFullTitle($locale) {
-		$fullTitle = null;
-		if ($prefix = $this->getPrefix($locale)) {
-			$fullTitle = $prefix . ' ';
-		}
-
-		$fullTitle .= $this->getTitle($locale);
+		$fullTitle = $this->getTitle($locale);
 
 		if ($subtitle = $this->getSubtitle($locale)) {
 			$fullTitle = PKPString::concatTitleFields(array($fullTitle, $subtitle));
@@ -764,38 +754,6 @@ abstract class Submission extends DataObject {
 	}
 
 	/**
-	 * get cover page server-side file name
-	 * @return string
-	 */
-	function getCoverImage() {
-		return $this->getData('coverImage');
-	}
-
-	/**
-	 * set cover page server-side file name
-	 * @param $coverImage string
-	 */
-	function setCoverImage($coverImage) {
-		$this->setData('coverImage', $coverImage);
-	}
-
-	/**
-	 * get cover page alternate text
-	 * @return string
-	 */
-	function getCoverImageAltText() {
-		return $this->getData('coverImageAltText');
-	}
-
-	/**
-	 * set cover page alternate text
-	 * @param $coverImageAltText string
-	 */
-	function setCoverImageAltText($coverImageAltText) {
-		$this->setData('coverImageAltText', $coverImageAltText);
-	}
-
-	/**
 	 * Get submission date.
 	 * @return date
 	 */
@@ -921,6 +879,59 @@ abstract class Submission extends DataObject {
 	 */
 	function getPages() {
 		return $this->getData('pages');
+	}
+
+	/**
+	 * Get starting page of a submission.  Note the return type of string - this is not to be used for page counting.
+	 * @return string
+	 */
+	function getStartingPage() {
+		$ranges = $this->getPageArray();
+		$firstRange = array_pop(array_reverse($ranges));
+		$firstPage = is_array($firstRange) ? array_pop(array_reverse($firstRange)) : "";
+		return isset($firstPage) ? $firstPage : "";
+	}
+
+	/**
+	 * Get ending page of a submission.  Note the return type of string - this is not to be used for page counting.
+	 * @return string
+	 */
+	function getEndingPage() {
+		$ranges = $this->getPageArray();
+		$lastRange = array_pop($ranges);
+		$lastPage = is_array($lastRange) ? array_pop($lastRange) : "";
+		return isset($lastPage) ? $lastPage : "";
+	}
+
+	/**
+	 * get pages as a nested array of page ranges
+	 * for example, pages of "pp. ii-ix, 9,15-18,a2,b2-b6" will return array( array(0 => 'ii', 1, => 'ix'), array(0 => '9'), array(0 => '15', 1 => '18'), array(0 => 'a2'), array(0 => 'b2', 1 => 'b6') )
+	 * @return array
+	 */
+	function getPageArray() {
+		$pages = $this->getData('pages');
+		// Strip any leading word
+		if (preg_match('/^[[:alpha:]]+\W/', $pages)) {
+			// but don't strip a leading roman numeral
+			if (!preg_match('/^[MDCLXVUI]+\W/i', $pages)) {
+				// strip the word or abbreviation, including the period or colon
+				$pages = preg_replace('/^[[:alpha:]]+[:.]?/', '', $pages);
+			}
+		}
+		// strip leading and trailing space
+		$pages = trim($pages);
+		// shortcut the explode/foreach if the remainder is an empty value
+		if ($pages === '') {
+			return array();
+		}
+		// commas indicate distinct ranges
+		$ranges = explode(',', $pages);
+		$pageArray = array();
+		foreach ($ranges as $range) {
+			// hyphens (or double-hyphens) indicate range spans
+			$pageArray[] = array_map('trim', explode('-', str_replace('--', '-', $range), 2));
+		}
+		return $pageArray;
 	}
 
 	/**

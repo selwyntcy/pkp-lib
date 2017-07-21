@@ -4,8 +4,8 @@
 <!--
   * locale/es_ES/submission.xml
   *
-  * Copyright (c) 2014-2016 Simon Fraser University Library
-  * Copyright (c) 2000-2016 John Willinsky
+  * Copyright (c) 2014-2017 Simon Fraser University
+  * Copyright (c) 2000-2017 John Willinsky
   * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
   * Credits: https://pkp.sfu.ca/wiki/index.php?title=OMP:_Spanish_(es_ES)
   * Localization strings.
@@ -407,7 +407,6 @@
 	<message key="submission.submit.metadataForm">Mejoras adicionales</message>
 	<message key="submission.submit.metadataForm.tip">Añada más información al envío.  Pulse "Intro" después de cada término.</message>
 	<message key="submission.submit.submissionLocale">Idioma del envío</message>
-	<message key="submission.submit.submissionLocaleDescription">Esta publicación acepta envíos en varios idiomas. Elija el idioma principal del envío en el menú desplegable que aparece a continuación.</message>
 	<message key="submission.submit.submissionFiles">Archivos de envío</message>
 	<message key="submission.submit.dependentFiles">Archivos dependientes</message>
 	<message key="submission.manageDependentFiles">Gestionar los archivos dependientes</message>

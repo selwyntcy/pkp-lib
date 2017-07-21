@@ -2,8 +2,8 @@
 
 # @file tools/buildjs.sh
 #
-# Copyright (c) 2014-2016 Simon Fraser University Library
-# Copyright (c) 2010-2016 John Willinsky
+# Copyright (c) 2014-2017 Simon Fraser University Library
+# Copyright (c) 2010-2017 John Willinsky
 # Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
 #
 # Script to check and minimize JavaScript for distribution.
@@ -67,8 +67,8 @@ shift $((OPTIND-1))
 ### Start Processing ###
 echo >&2
 echo "Starting PKP JavaScript builder." >&2
-echo "Copyright (c) 2014-2016 Simon Fraser University Library" >&2
-echo "Copyright (c) 2010-2016 John Willinsky" >&2
+echo "Copyright (c) 2014-2017 Simon Fraser University Library" >&2
+echo "Copyright (c) 2010-2017 John Willinsky" >&2
 
 
 ### Checking Requirements ###
@@ -107,8 +107,8 @@ fi
 echo >&2
 
 # A list with all files to be compiled and minified. Expects
-# a complete list of script files in minifiedScripts.tpl.
-COMPILE_FILES=$(sed -n -$EXTENDED_REGEX_FLAG '/<script /s%^.*src="\{\$baseUrl\}/([^"]+)".*$%\1%p' templates/common/minifiedScripts.tpl)
+# a complete list of script files in registry/minifiedScripts.txt.
+COMPILE_FILES=$(sed -n '/^[^#]/p' registry/minifiedScripts.txt)
 
 # FIXME: For now we only check classes as the other
 # files contain too many errors to be fixed right now.

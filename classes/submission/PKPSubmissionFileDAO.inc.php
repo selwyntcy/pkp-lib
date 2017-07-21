@@ -3,8 +3,8 @@
 /**
  * @file classes/submission/PKPSubmissionFileDAO.inc.php
  *
- * Copyright (c) 2014-2016 Simon Fraser University Library
- * Copyright (c) 2003-2016 John Willinsky
+ * Copyright (c) 2014-2017 Simon Fraser University
+ * Copyright (c) 2003-2017 John Willinsky
  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
  *
  * @class PKPSubmissionFileDAO
@@ -44,8 +44,8 @@ abstract class PKPSubmissionFileDAO extends PKPFileDAO implements PKPPubIdPlugin
 	/**
 	 * Constructor
 	 */
-	function PKPSubmissionFileDAO() {
-		parent::DAO();
+	function __construct() {
+		parent::__construct();
 	}
 
 
@@ -959,7 +959,7 @@ abstract class PKPSubmissionFileDAO extends PKPFileDAO implements PKPPubIdPlugin
 			$fileId, $revision, $assocType, $assocId, $stageId, $uploaderUserId, $uploaderUserGroupId, $reviewRoundId) {
 
 		// Make sure that at least one entity filter has been set.
-		assert((int)$submissionId || (int)$uploaderUserId || (int)$fileId || (int)$assocId);
+		assert($submissionId>0 || (int)$uploaderUserId || (int)$fileId || (int)$assocId);
 
 		// Both, assoc type and id, must be set (or unset) together.
 		assert(((int)$assocType && (int)$assocId) || !((int)$assocType || (int)$assocId));

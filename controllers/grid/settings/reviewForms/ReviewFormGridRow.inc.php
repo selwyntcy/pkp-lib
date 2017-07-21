@@ -3,8 +3,8 @@
 /**
  * @file controllers/grid/settings/reviewForms/ReviewFormGridRow.inc.php
  *
- * Copyright (c) 2014-2016 Simon Fraser University Library
- * Copyright (c) 2000-2016 John Willinsky
+ * Copyright (c) 2014-2017 Simon Fraser University
+ * Copyright (c) 2000-2017 John Willinsky
  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
  *
  * @class ReviewFormGridRow
@@ -20,8 +20,8 @@ class ReviewFormGridRow extends GridRow {
 	/**
 	 * Constructor
 	 */
-	function ReviewFormGridRow() {
-		parent::GridRow();
+	function __construct() {
+		parent::__construct();
 	}
 
 	//
@@ -63,21 +63,19 @@ class ReviewFormGridRow extends GridRow {
 			}
 
 			// if review form is not editable, add 'copy' grid row action
-			if(!$canEdit) {
-				$this->addAction(
-					new LinkAction(
-						'copy',
-						new RemoteActionConfirmationModal(
-							$request->getSession(),
-							__('manager.reviewForms.confirmCopy'),
-							null,
-							$router->url($request, null, null, 'copyReviewForm', null, array('rowId' => $rowId))
-							),
-						__('grid.action.copy'),
-						'copy'
-						)
-				);
-			}
+			$this->addAction(
+				new LinkAction(
+					'copy',
+					new RemoteActionConfirmationModal(
+						$request->getSession(),
+						__('manager.reviewForms.confirmCopy'),
+						null,
+						$router->url($request, null, null, 'copyReviewForm', null, array('rowId' => $rowId))
+						),
+					__('grid.action.copy'),
+					'copy'
+					)
+			);
 
 			// add 'preview' grid row action
 			$this->addAction(

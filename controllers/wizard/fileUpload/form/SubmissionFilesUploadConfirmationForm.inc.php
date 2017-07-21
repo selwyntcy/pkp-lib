@@ -3,8 +3,8 @@
 /**
  * @file controllers/wizard/fileUpload/form/SubmissionFilesUploadConfirmationForm.inc.php
  *
- * Copyright (c) 2014-2016 Simon Fraser University Library
- * Copyright (c) 2003-2016 John Willinsky
+ * Copyright (c) 2014-2017 Simon Fraser University
+ * Copyright (c) 2003-2017 John Willinsky
  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
  *
  * @class SubmissionFilesUploadConfirmationForm
@@ -26,11 +26,11 @@ class SubmissionFilesUploadConfirmationForm extends SubmissionFilesUploadBaseFor
 	 * @param $revisedFileId integer
 	 * @param $uploadedFile integer
 	 */
-	function SubmissionFilesUploadConfirmationForm($request, $submissionId, $stageId, $fileStage,
+	function __construct($request, $submissionId, $stageId, $fileStage,
 			&$reviewRound, $revisedFileId = null, $assocType = null, $assocId = null, $uploadedFile = null) {
 
 		// Initialize class.
-		parent::SubmissionFilesUploadBaseForm(
+		parent::__construct(
 			$request, 'controllers/wizard/fileUpload/form/fileUploadConfirmationForm.tpl',
 			$submissionId, $stageId, $fileStage, false, $reviewRound, $revisedFileId, $assocType, $assocId
 		);

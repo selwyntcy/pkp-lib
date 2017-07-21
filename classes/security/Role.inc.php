@@ -3,8 +3,8 @@
 /**
  * @file classes/security/Role.inc.php
  *
- * Copyright (c) 2014-2016 Simon Fraser University Library
- * Copyright (c) 2003-2016 John Willinsky
+ * Copyright (c) 2014-2017 Simon Fraser University
+ * Copyright (c) 2003-2017 John Willinsky
  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
  *
  * @class Role
@@ -28,8 +28,8 @@ class Role extends DataObject {
 	 * @param $roleId for this role.  Default to null for backwards
 	 * 	compatibility
 	 */
-	function Role($roleId = null) {
-		parent::DataObject();
+	function __construct($roleId = null) {
+		parent::__construct();
 		$this->setId($roleId);
 	}
 

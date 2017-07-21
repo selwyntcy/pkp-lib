@@ -1,8 +1,8 @@
 {**
  * templates/frontend/components/footer.tpl
  *
- * Copyright (c) 2014-2016 Simon Fraser University Library
- * Copyright (c) 2003-2016 John Willinsky
+ * Copyright (c) 2014-2017 Simon Fraser University
+ * Copyright (c) 2003-2017 John Willinsky
  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
  *
  * @brief Common site frontend footer.
@@ -16,17 +16,17 @@
 
 	{* Sidebars *}
 	{if empty($isFullWidth)}
-		{call_hook|assign:"leftSidebarCode" name="Templates::Common::LeftSidebar"}
-		{if $leftSidebarCode}
+		{call_hook|assign:"sidebarCode" name="Templates::Common::Sidebar"}
+		{if $sidebarCode}
 			<div class="pkp_structure_sidebar left" role="complementary" aria-label="{translate|escape key="common.navigation.sidebar"}">
-				{$leftSidebarCode}
+				{$sidebarCode}
 			</div><!-- pkp_sidebar.left -->
 		{/if}
 	{/if}
 </div><!-- pkp_structure_content -->
 
 {* 20160211: hack: brand it as CUHK and DSCCC *}
-<div class="pkp_structure_footer_wrapper" role="contentinfo">
+<div id="pkp_content_footer" class="pkp_structure_footer_wrapper" role="contentinfo">
 
 	<div class="pkp_structure_footer">
 
@@ -52,7 +52,7 @@
 
 </div><!-- pkp_structure_page -->
 
-{load_script context="frontend" scripts=$scripts}
+{load_script context="frontend"}
 
 {call_hook name="Templates::Common::Footer::PageFooter"}
 {* 20160128: hack: using cdn version of slick.js as upstream has removed it *}

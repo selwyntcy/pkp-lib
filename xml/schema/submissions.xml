@@ -4,8 +4,8 @@
 <!--
   * xml/schema/submissions.xml
   *
-  * Copyright (c) 2014-2016 Simon Fraser University Library
-  * Copyright (c) 2000-2016 John Willinsky
+  * Copyright (c) 2014-2017 Simon Fraser University
+  * Copyright (c) 2000-2017 John Willinsky
   * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
   *
   * Submission-related schema (e.g. authors) in XML.
@@ -104,7 +104,7 @@
 			<NOTNULL/>
 		</field>
 		<field name="review_round_id" type="I8">
-			<NOTNULL/>
+			<!-- NOTNULL/ --><!-- For upgrades -->
 		</field>
 		<field name="stage_id" type="I8" />
 		<field name="round" type="I1">
@@ -151,7 +151,7 @@
 		<field name="author_id" type="I8">
 			<NOTNULL/>
 		</field>
-		<field name="comment_title" type="C2" size="90">
+		<field name="comment_title" type="X">
 			<NOTNULL/>
 		</field>
 		<field name="comments" type="X"/>

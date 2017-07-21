@@ -3,8 +3,8 @@
 /**
  * @file controllers/grid/settings/genre/form/GenreForm.inc.php
  *
- * Copyright (c) 2014-2016 Simon Fraser University Library
- * Copyright (c) 2003-2016 John Willinsky
+ * Copyright (c) 2014-2017 Simon Fraser University
+ * Copyright (c) 2003-2017 John Willinsky
  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
  *
  * @class GenreForm
@@ -39,9 +39,9 @@ class GenreForm extends Form {
 	/**
 	 * Constructor.
 	 */
-	function GenreForm($genreId = null) {
+	function __construct($genreId = null) {
 		$this->setGenreId($genreId);
-		parent::Form('controllers/grid/settings/genre/form/genreForm.tpl');
+		parent::__construct('controllers/grid/settings/genre/form/genreForm.tpl');
 
 		// Validation checks for this form
 		$this->addCheck(new FormValidatorLocale($this, 'name', 'required', 'manager.setup.form.genre.nameRequired'));
